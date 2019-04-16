@@ -1,0 +1,2938 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="zty.dao.ProManagePropertyMapper">
+  <resultMap id="BaseResultMap" type="zty.entity.ProManageProperty">
+    <result column="id" jdbcType="VARCHAR" property="id" />
+    <result column="pro_manage_id" jdbcType="VARCHAR" property="proManageId" />
+    <result column="price" jdbcType="VARCHAR" property="price" />
+    <result column="volume" jdbcType="VARCHAR" property="volume" />
+    <result column="min_price" jdbcType="VARCHAR" property="minPrice" />
+    <result column="top_price" jdbcType="VARCHAR" property="topPrice" />
+    <result column="min_order" jdbcType="VARCHAR" property="minOrder" />
+    <result column="pro_unit" jdbcType="VARCHAR" property="proUnit" />
+    <result column="title" jdbcType="VARCHAR" property="title" />
+    <result column="attr_id" jdbcType="VARCHAR" property="attrId" />
+    <result column="stock" jdbcType="VARCHAR" property="stock" />
+    <result column="brand_name" jdbcType="VARCHAR" property="brandName" />
+    <result column="size_long" jdbcType="VARCHAR" property="sizeLong" />
+    <result column="size_wide" jdbcType="VARCHAR" property="sizeWide" />
+    <result column="size_high" jdbcType="VARCHAR" property="sizeHigh" />
+    <result column="unit_size" jdbcType="VARCHAR" property="unitSize" />
+    <result column="weight_num" jdbcType="VARCHAR" property="weightNum" />
+    <result column="unit_weight" jdbcType="VARCHAR" property="unitWeight" />
+    <result column="origin_country" jdbcType="VARCHAR" property="originCountry" />
+    <result column="certifications" jdbcType="VARCHAR" property="certifications" />
+    <result column="port" jdbcType="VARCHAR" property="port" />
+    <result column="payway" jdbcType="VARCHAR" property="payway" />
+    <result column="market" jdbcType="VARCHAR" property="market" />
+    <result column="hot_period" jdbcType="VARCHAR" property="hotPeriod" />
+    <result column="low_period" jdbcType="VARCHAR" property="lowPeriod" />
+    <result column="productive" jdbcType="VARCHAR" property="productive" />
+    <result column="create_by" jdbcType="VARCHAR" property="createBy" />
+    <result column="update_by" jdbcType="VARCHAR" property="updateBy" />
+    <result column="create_date" jdbcType="DATE" property="createDate" />
+    <result column="update_date" jdbcType="DATE" property="updateDate" />
+    <result column="del_flag" jdbcType="VARCHAR" property="delFlag" />
+    <result column="remarks" jdbcType="VARCHAR" property="remarks" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, pro_manage_id, price, volume, min_price, top_price, min_order, pro_unit, title, 
+    attr_id, stock, brand_name, size_long, size_wide, size_high, unit_size, weight_num, 
+    unit_weight, origin_country, certifications, port, payway, market, hot_period, low_period, 
+    productive, create_by, update_by, create_date, update_date, del_flag, remarks
+  </sql>
+  <select id="selectByExample" parameterType="zty.entity.ProManagePropertyExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from pro_manage_property
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="zty.entity.ProManagePropertyExample">
+    delete from pro_manage_property
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="zty.entity.ProManageProperty">
+    insert into pro_manage_property (id, pro_manage_id, price, 
+      volume, min_price, top_price, 
+      min_order, pro_unit, title, 
+      attr_id, stock, brand_name, 
+      size_long, size_wide, size_high, 
+      unit_size, weight_num, unit_weight, 
+      origin_country, certifications, port, 
+      payway, market, hot_period, 
+      low_period, productive, create_by, 
+      update_by, create_date, update_date, 
+      del_flag, remarks)
+    values (#{id,jdbcType=VARCHAR}, #{proManageId,jdbcType=VARCHAR}, #{price,jdbcType=VARCHAR}, 
+      #{volume,jdbcType=VARCHAR}, #{minPrice,jdbcType=VARCHAR}, #{topPrice,jdbcType=VARCHAR}, 
+      #{minOrder,jdbcType=VARCHAR}, #{proUnit,jdbcType=VARCHAR}, #{title,jdbcType=VARCHAR}, 
+      #{attrId,jdbcType=VARCHAR}, #{stock,jdbcType=VARCHAR}, #{brandName,jdbcType=VARCHAR}, 
+      #{sizeLong,jdbcType=VARCHAR}, #{sizeWide,jdbcType=VARCHAR}, #{sizeHigh,jdbcType=VARCHAR}, 
+      #{unitSize,jdbcType=VARCHAR}, #{weightNum,jdbcType=VARCHAR}, #{unitWeight,jdbcType=VARCHAR}, 
+      #{originCountry,jdbcType=VARCHAR}, #{certifications,jdbcType=VARCHAR}, #{port,jdbcType=VARCHAR}, 
+      #{payway,jdbcType=VARCHAR}, #{market,jdbcType=VARCHAR}, #{hotPeriod,jdbcType=VARCHAR}, 
+      #{lowPeriod,jdbcType=VARCHAR}, #{productive,jdbcType=VARCHAR}, #{createBy,jdbcType=VARCHAR}, 
+      #{updateBy,jdbcType=VARCHAR}, #{createDate,jdbcType=DATE}, #{updateDate,jdbcType=DATE}, 
+      #{delFlag,jdbcType=VARCHAR}, #{remarks,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="zty.entity.ProManageProperty">
+    insert into pro_manage_property
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="proManageId != null">
+        pro_manage_id,
+      </if>
+      <if test="price != null">
+        price,
+      </if>
+      <if test="volume != null">
+        volume,
+      </if>
+      <if test="minPrice != null">
+        min_price,
+      </if>
+      <if test="topPrice != null">
+        top_price,
+      </if>
+      <if test="minOrder != null">
+        min_order,
+      </if>
+      <if test="proUnit != null">
+        pro_unit,
+      </if>
+      <if test="title != null">
+        title,
+      </if>
+      <if test="attrId != null">
+        attr_id,
+      </if>
+      <if test="stock != null">
+        stock,
+      </if>
+      <if test="brandName != null">
+        brand_name,
+      </if>
+      <if test="sizeLong != null">
+        size_long,
+      </if>
+      <if test="sizeWide != null">
+        size_wide,
+      </if>
+      <if test="sizeHigh != null">
+        size_high,
+      </if>
+      <if test="unitSize != null">
+        unit_size,
+      </if>
+      <if test="weightNum != null">
+        weight_num,
+      </if>
+      <if test="unitWeight != null">
+        unit_weight,
+      </if>
+      <if test="originCountry != null">
+        origin_country,
+      </if>
+      <if test="certifications != null">
+        certifications,
+      </if>
+      <if test="port != null">
+        port,
+      </if>
+      <if test="payway != null">
+        payway,
+      </if>
+      <if test="market != null">
+        market,
+      </if>
+      <if test="hotPeriod != null">
+        hot_period,
+      </if>
+      <if test="lowPeriod != null">
+        low_period,
+      </if>
+      <if test="productive != null">
+        productive,
+      </if>
+      <if test="createBy != null">
+        create_by,
+      </if>
+      <if test="updateBy != null">
+        update_by,
+      </if>
+      <if test="createDate != null">
+        create_date,
+      </if>
+      <if test="updateDate != null">
+        update_date,
+      </if>
+      <if test="delFlag != null">
+        del_flag,
+      </if>
+      <if test="remarks != null">
+        remarks,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="proManageId != null">
+        #{proManageId,jdbcType=VARCHAR},
+      </if>
+      <if test="price != null">
+        #{price,jdbcType=VARCHAR},
+      </if>
+      <if test="volume != null">
+        #{volume,jdbcType=VARCHAR},
+      </if>
+      <if test="minPrice != null">
+        #{minPrice,jdbcType=VARCHAR},
+      </if>
+      <if test="topPrice != null">
+        #{topPrice,jdbcType=VARCHAR},
+      </if>
+      <if test="minOrder != null">
+        #{minOrder,jdbcType=VARCHAR},
+      </if>
+      <if test="proUnit != null">
+        #{proUnit,jdbcType=VARCHAR},
+      </if>
+      <if test="title != null">
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="attrId != null">
+        #{attrId,jdbcType=VARCHAR},
+      </if>
+      <if test="stock != null">
+        #{stock,jdbcType=VARCHAR},
+      </if>
+      <if test="brandName != null">
+        #{brandName,jdbcType=VARCHAR},
+      </if>
+      <if test="sizeLong != null">
+        #{sizeLong,jdbcType=VARCHAR},
+      </if>
+      <if test="sizeWide != null">
+        #{sizeWide,jdbcType=VARCHAR},
+      </if>
+      <if test="sizeHigh != null">
+        #{sizeHigh,jdbcType=VARCHAR},
+      </if>
+      <if test="unitSize != null">
+        #{unitSize,jdbcType=VARCHAR},
+      </if>
+      <if test="weightNum != null">
+        #{weightNum,jdbcType=VARCHAR},
+      </if>
+      <if test="unitWeight != null">
+        #{unitWeight,jdbcType=VARCHAR},
+      </if>
+      <if test="originCountry != null">
+        #{originCountry,jdbcType=VARCHAR},
+      </if>
+      <if test="certifications != null">
+        #{certifications,jdbcType=VARCHAR},
+      </if>
+      <if test="port != null">
+        #{port,jdbcType=VARCHAR},
+      </if>
+      <if test="payway != null">
+        #{payway,jdbcType=VARCHAR},
+      </if>
+      <if test="market != null">
+        #{market,jdbcType=VARCHAR},
+      </if>
+      <if test="hotPeriod != null">
+        #{hotPeriod,jdbcType=VARCHAR},
+      </if>
+      <if test="lowPeriod != null">
+        #{lowPeriod,jdbcType=VARCHAR},
+      </if>
+      <if test="productive != null">
+        #{productive,jdbcType=VARCHAR},
+      </if>
+      <if test="createBy != null">
+        #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="updateBy != null">
+        #{updateBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null">
+        #{createDate,jdbcType=DATE},
+      </if>
+      <if test="updateDate != null">
+        #{updateDate,jdbcType=DATE},
+      </if>
+      <if test="delFlag != null">
+        #{delFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="remarks != null">
+        #{remarks,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="zty.entity.ProManagePropertyExample" resultType="java.lang.Long">
+    select count(*) from pro_manage_property
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update pro_manage_property
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.proManageId != null">
+        pro_manage_id = #{record.proManageId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.price != null">
+        price = #{record.price,jdbcType=VARCHAR},
+      </if>
+      <if test="record.volume != null">
+        volume = #{record.volume,jdbcType=VARCHAR},
+      </if>
+      <if test="record.minPrice != null">
+        min_price = #{record.minPrice,jdbcType=VARCHAR},
+      </if>
+      <if test="record.topPrice != null">
+        top_price = #{record.topPrice,jdbcType=VARCHAR},
+      </if>
+      <if test="record.minOrder != null">
+        min_order = #{record.minOrder,jdbcType=VARCHAR},
+      </if>
+      <if test="record.proUnit != null">
+        pro_unit = #{record.proUnit,jdbcType=VARCHAR},
+      </if>
+      <if test="record.title != null">
+        title = #{record.title,jdbcType=VARCHAR},
+      </if>
+      <if test="record.attrId != null">
+        attr_id = #{record.attrId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.stock != null">
+        stock = #{record.stock,jdbcType=VARCHAR},
+      </if>
+      <if test="record.brandName != null">
+        brand_name = #{record.brandName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sizeLong != null">
+        size_long = #{record.sizeLong,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sizeWide != null">
+        size_wide = #{record.sizeWide,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sizeHigh != null">
+        size_high = #{record.sizeHigh,jdbcType=VARCHAR},
+      </if>
+      <if test="record.unitSize != null">
+        unit_size = #{record.unitSize,jdbcType=VARCHAR},
+      </if>
+      <if test="record.weightNum != null">
+        weight_num = #{record.weightNum,jdbcType=VARCHAR},
+      </if>
+      <if test="record.unitWeight != null">
+        unit_weight = #{record.unitWeight,jdbcType=VARCHAR},
+      </if>
+      <if test="record.originCountry != null">
+        origin_country = #{record.originCountry,jdbcType=VARCHAR},
+      </if>
+      <if test="record.certifications != null">
+        certifications = #{record.certifications,jdbcType=VARCHAR},
+      </if>
+      <if test="record.port != null">
+        port = #{record.port,jdbcType=VARCHAR},
+      </if>
+      <if test="record.payway != null">
+        payway = #{record.payway,jdbcType=VARCHAR},
+      </if>
+      <if test="record.market != null">
+        market = #{record.market,jdbcType=VARCHAR},
+      </if>
+      <if test="record.hotPeriod != null">
+        hot_period = #{record.hotPeriod,jdbcType=VARCHAR},
+      </if>
+      <if test="record.lowPeriod != null">
+        low_period = #{record.lowPeriod,jdbcType=VARCHAR},
+      </if>
+      <if test="record.productive != null">
+        productive = #{record.productive,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createBy != null">
+        create_by = #{record.createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="record.updateBy != null">
+        update_by = #{record.updateBy,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createDate != null">
+        create_date = #{record.createDate,jdbcType=DATE},
+      </if>
+      <if test="record.updateDate != null">
+        update_date = #{record.updateDate,jdbcType=DATE},
+      </if>
+      <if test="record.delFlag != null">
+        del_flag = #{record.delFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="record.remarks != null">
+        remarks = #{record.remarks,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update pro_manage_property
+    set id = #{record.id,jdbcType=VARCHAR},
+      pro_manage_id = #{record.proManageId,jdbcType=VARCHAR},
+      price = #{record.price,jdbcType=VARCHAR},
+      volume = #{record.volume,jdbcType=VARCHAR},
+      min_price = #{record.minPrice,jdbcType=VARCHAR},
+      top_price = #{record.topPrice,jdbcType=VARCHAR},
+      min_order = #{record.minOrder,jdbcType=VARCHAR},
+      pro_unit = #{record.proUnit,jdbcType=VARCHAR},
+      title = #{record.title,jdbcType=VARCHAR},
+      attr_id = #{record.attrId,jdbcType=VARCHAR},
+      stock = #{record.stock,jdbcType=VARCHAR},
+      brand_name = #{record.brandName,jdbcType=VARCHAR},
+      size_long = #{record.sizeLong,jdbcType=VARCHAR},
+      size_wide = #{record.sizeWide,jdbcType=VARCHAR},
+      size_high = #{record.sizeHigh,jdbcType=VARCHAR},
+      unit_size = #{record.unitSize,jdbcType=VARCHAR},
+      weight_num = #{record.weightNum,jdbcType=VARCHAR},
+      unit_weight = #{record.unitWeight,jdbcType=VARCHAR},
+      origin_country = #{record.originCountry,jdbcType=VARCHAR},
+      certifications = #{record.certifications,jdbcType=VARCHAR},
+      port = #{record.port,jdbcType=VARCHAR},
+      payway = #{record.payway,jdbcType=VARCHAR},
+      market = #{record.market,jdbcType=VARCHAR},
+      hot_period = #{record.hotPeriod,jdbcType=VARCHAR},
+      low_period = #{record.lowPeriod,jdbcType=VARCHAR},
+      productive = #{record.productive,jdbcType=VARCHAR},
+      create_by = #{record.createBy,jdbcType=VARCHAR},
+      update_by = #{record.updateBy,jdbcType=VARCHAR},
+      create_date = #{record.createDate,jdbcType=DATE},
+      update_date = #{record.updateDate,jdbcType=DATE},
+      del_flag = #{record.delFlag,jdbcType=VARCHAR},
+      remarks = #{record.remarks,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <resultMap id="BaseResultMap" type="zty.entity.ProManageProperty">
+    <result column="id" jdbcType="VARCHAR" property="id" />
+    <result column="pro_manage_id" jdbcType="VARCHAR" property="proManageId" />
+    <result column="price" jdbcType="VARCHAR" property="price" />
+    <result column="volume" jdbcType="VARCHAR" property="volume" />
+    <result column="min_price" jdbcType="VARCHAR" property="minPrice" />
+    <result column="top_price" jdbcType="VARCHAR" property="topPrice" />
+    <result column="min_order" jdbcType="VARCHAR" property="minOrder" />
+    <result column="pro_unit" jdbcType="VARCHAR" property="proUnit" />
+    <result column="title" jdbcType="VARCHAR" property="title" />
+    <result column="attr_id" jdbcType="VARCHAR" property="attrId" />
+    <result column="stock" jdbcType="VARCHAR" property="stock" />
+    <result column="brand_name" jdbcType="VARCHAR" property="brandName" />
+    <result column="size_long" jdbcType="VARCHAR" property="sizeLong" />
+    <result column="size_wide" jdbcType="VARCHAR" property="sizeWide" />
+    <result column="size_high" jdbcType="VARCHAR" property="sizeHigh" />
+    <result column="unit_size" jdbcType="VARCHAR" property="unitSize" />
+    <result column="weight_num" jdbcType="VARCHAR" property="weightNum" />
+    <result column="unit_weight" jdbcType="VARCHAR" property="unitWeight" />
+    <result column="origin_country" jdbcType="VARCHAR" property="originCountry" />
+    <result column="certifications" jdbcType="VARCHAR" property="certifications" />
+    <result column="port" jdbcType="VARCHAR" property="port" />
+    <result column="payway" jdbcType="VARCHAR" property="payway" />
+    <result column="market" jdbcType="VARCHAR" property="market" />
+    <result column="hot_period" jdbcType="VARCHAR" property="hotPeriod" />
+    <result column="low_period" jdbcType="VARCHAR" property="lowPeriod" />
+    <result column="productive" jdbcType="VARCHAR" property="productive" />
+    <result column="create_by" jdbcType="VARCHAR" property="createBy" />
+    <result column="update_by" jdbcType="VARCHAR" property="updateBy" />
+    <result column="create_date" jdbcType="DATE" property="createDate" />
+    <result column="update_date" jdbcType="DATE" property="updateDate" />
+    <result column="del_flag" jdbcType="VARCHAR" property="delFlag" />
+    <result column="remarks" jdbcType="VARCHAR" property="remarks" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, pro_manage_id, price, volume, min_price, top_price, min_order, pro_unit, title, 
+    attr_id, stock, brand_name, size_long, size_wide, size_high, unit_size, weight_num, 
+    unit_weight, origin_country, certifications, port, payway, market, hot_period, low_period, 
+    productive, create_by, update_by, create_date, update_date, del_flag, remarks
+  </sql>
+  <select id="selectByExample" parameterType="zty.entity.ProManagePropertyExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from pro_manage_property
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="zty.entity.ProManagePropertyExample">
+    delete from pro_manage_property
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="zty.entity.ProManageProperty">
+    insert into pro_manage_property (id, pro_manage_id, price, 
+      volume, min_price, top_price, 
+      min_order, pro_unit, title, 
+      attr_id, stock, brand_name, 
+      size_long, size_wide, size_high, 
+      unit_size, weight_num, unit_weight, 
+      origin_country, certifications, port, 
+      payway, market, hot_period, 
+      low_period, productive, create_by, 
+      update_by, create_date, update_date, 
+      del_flag, remarks)
+    values (#{id,jdbcType=VARCHAR}, #{proManageId,jdbcType=VARCHAR}, #{price,jdbcType=VARCHAR}, 
+      #{volume,jdbcType=VARCHAR}, #{minPrice,jdbcType=VARCHAR}, #{topPrice,jdbcType=VARCHAR}, 
+      #{minOrder,jdbcType=VARCHAR}, #{proUnit,jdbcType=VARCHAR}, #{title,jdbcType=VARCHAR}, 
+      #{attrId,jdbcType=VARCHAR}, #{stock,jdbcType=VARCHAR}, #{brandName,jdbcType=VARCHAR}, 
+      #{sizeLong,jdbcType=VARCHAR}, #{sizeWide,jdbcType=VARCHAR}, #{sizeHigh,jdbcType=VARCHAR}, 
+      #{unitSize,jdbcType=VARCHAR}, #{weightNum,jdbcType=VARCHAR}, #{unitWeight,jdbcType=VARCHAR}, 
+      #{originCountry,jdbcType=VARCHAR}, #{certifications,jdbcType=VARCHAR}, #{port,jdbcType=VARCHAR}, 
+      #{payway,jdbcType=VARCHAR}, #{market,jdbcType=VARCHAR}, #{hotPeriod,jdbcType=VARCHAR}, 
+      #{lowPeriod,jdbcType=VARCHAR}, #{productive,jdbcType=VARCHAR}, #{createBy,jdbcType=VARCHAR}, 
+      #{updateBy,jdbcType=VARCHAR}, #{createDate,jdbcType=DATE}, #{updateDate,jdbcType=DATE}, 
+      #{delFlag,jdbcType=VARCHAR}, #{remarks,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="zty.entity.ProManageProperty">
+    insert into pro_manage_property
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="proManageId != null">
+        pro_manage_id,
+      </if>
+      <if test="price != null">
+        price,
+      </if>
+      <if test="volume != null">
+        volume,
+      </if>
+      <if test="minPrice != null">
+        min_price,
+      </if>
+      <if test="topPrice != null">
+        top_price,
+      </if>
+      <if test="minOrder != null">
+        min_order,
+      </if>
+      <if test="proUnit != null">
+        pro_unit,
+      </if>
+      <if test="title != null">
+        title,
+      </if>
+      <if test="attrId != null">
+        attr_id,
+      </if>
+      <if test="stock != null">
+        stock,
+      </if>
+      <if test="brandName != null">
+        brand_name,
+      </if>
+      <if test="sizeLong != null">
+        size_long,
+      </if>
+      <if test="sizeWide != null">
+        size_wide,
+      </if>
+      <if test="sizeHigh != null">
+        size_high,
+      </if>
+      <if test="unitSize != null">
+        unit_size,
+      </if>
+      <if test="weightNum != null">
+        weight_num,
+      </if>
+      <if test="unitWeight != null">
+        unit_weight,
+      </if>
+      <if test="originCountry != null">
+        origin_country,
+      </if>
+      <if test="certifications != null">
+        certifications,
+      </if>
+      <if test="port != null">
+        port,
+      </if>
+      <if test="payway != null">
+        payway,
+      </if>
+      <if test="market != null">
+        market,
+      </if>
+      <if test="hotPeriod != null">
+        hot_period,
+      </if>
+      <if test="lowPeriod != null">
+        low_period,
+      </if>
+      <if test="productive != null">
+        productive,
+      </if>
+      <if test="createBy != null">
+        create_by,
+      </if>
+      <if test="updateBy != null">
+        update_by,
+      </if>
+      <if test="createDate != null">
+        create_date,
+      </if>
+      <if test="updateDate != null">
+        update_date,
+      </if>
+      <if test="delFlag != null">
+        del_flag,
+      </if>
+      <if test="remarks != null">
+        remarks,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="proManageId != null">
+        #{proManageId,jdbcType=VARCHAR},
+      </if>
+      <if test="price != null">
+        #{price,jdbcType=VARCHAR},
+      </if>
+      <if test="volume != null">
+        #{volume,jdbcType=VARCHAR},
+      </if>
+      <if test="minPrice != null">
+        #{minPrice,jdbcType=VARCHAR},
+      </if>
+      <if test="topPrice != null">
+        #{topPrice,jdbcType=VARCHAR},
+      </if>
+      <if test="minOrder != null">
+        #{minOrder,jdbcType=VARCHAR},
+      </if>
+      <if test="proUnit != null">
+        #{proUnit,jdbcType=VARCHAR},
+      </if>
+      <if test="title != null">
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="attrId != null">
+        #{attrId,jdbcType=VARCHAR},
+      </if>
+      <if test="stock != null">
+        #{stock,jdbcType=VARCHAR},
+      </if>
+      <if test="brandName != null">
+        #{brandName,jdbcType=VARCHAR},
+      </if>
+      <if test="sizeLong != null">
+        #{sizeLong,jdbcType=VARCHAR},
+      </if>
+      <if test="sizeWide != null">
+        #{sizeWide,jdbcType=VARCHAR},
+      </if>
+      <if test="sizeHigh != null">
+        #{sizeHigh,jdbcType=VARCHAR},
+      </if>
+      <if test="unitSize != null">
+        #{unitSize,jdbcType=VARCHAR},
+      </if>
+      <if test="weightNum != null">
+        #{weightNum,jdbcType=VARCHAR},
+      </if>
+      <if test="unitWeight != null">
+        #{unitWeight,jdbcType=VARCHAR},
+      </if>
+      <if test="originCountry != null">
+        #{originCountry,jdbcType=VARCHAR},
+      </if>
+      <if test="certifications != null">
+        #{certifications,jdbcType=VARCHAR},
+      </if>
+      <if test="port != null">
+        #{port,jdbcType=VARCHAR},
+      </if>
+      <if test="payway != null">
+        #{payway,jdbcType=VARCHAR},
+      </if>
+      <if test="market != null">
+        #{market,jdbcType=VARCHAR},
+      </if>
+      <if test="hotPeriod != null">
+        #{hotPeriod,jdbcType=VARCHAR},
+      </if>
+      <if test="lowPeriod != null">
+        #{lowPeriod,jdbcType=VARCHAR},
+      </if>
+      <if test="productive != null">
+        #{productive,jdbcType=VARCHAR},
+      </if>
+      <if test="createBy != null">
+        #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="updateBy != null">
+        #{updateBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null">
+        #{createDate,jdbcType=DATE},
+      </if>
+      <if test="updateDate != null">
+        #{updateDate,jdbcType=DATE},
+      </if>
+      <if test="delFlag != null">
+        #{delFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="remarks != null">
+        #{remarks,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="zty.entity.ProManagePropertyExample" resultType="java.lang.Long">
+    select count(*) from pro_manage_property
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update pro_manage_property
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.proManageId != null">
+        pro_manage_id = #{record.proManageId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.price != null">
+        price = #{record.price,jdbcType=VARCHAR},
+      </if>
+      <if test="record.volume != null">
+        volume = #{record.volume,jdbcType=VARCHAR},
+      </if>
+      <if test="record.minPrice != null">
+        min_price = #{record.minPrice,jdbcType=VARCHAR},
+      </if>
+      <if test="record.topPrice != null">
+        top_price = #{record.topPrice,jdbcType=VARCHAR},
+      </if>
+      <if test="record.minOrder != null">
+        min_order = #{record.minOrder,jdbcType=VARCHAR},
+      </if>
+      <if test="record.proUnit != null">
+        pro_unit = #{record.proUnit,jdbcType=VARCHAR},
+      </if>
+      <if test="record.title != null">
+        title = #{record.title,jdbcType=VARCHAR},
+      </if>
+      <if test="record.attrId != null">
+        attr_id = #{record.attrId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.stock != null">
+        stock = #{record.stock,jdbcType=VARCHAR},
+      </if>
+      <if test="record.brandName != null">
+        brand_name = #{record.brandName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sizeLong != null">
+        size_long = #{record.sizeLong,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sizeWide != null">
+        size_wide = #{record.sizeWide,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sizeHigh != null">
+        size_high = #{record.sizeHigh,jdbcType=VARCHAR},
+      </if>
+      <if test="record.unitSize != null">
+        unit_size = #{record.unitSize,jdbcType=VARCHAR},
+      </if>
+      <if test="record.weightNum != null">
+        weight_num = #{record.weightNum,jdbcType=VARCHAR},
+      </if>
+      <if test="record.unitWeight != null">
+        unit_weight = #{record.unitWeight,jdbcType=VARCHAR},
+      </if>
+      <if test="record.originCountry != null">
+        origin_country = #{record.originCountry,jdbcType=VARCHAR},
+      </if>
+      <if test="record.certifications != null">
+        certifications = #{record.certifications,jdbcType=VARCHAR},
+      </if>
+      <if test="record.port != null">
+        port = #{record.port,jdbcType=VARCHAR},
+      </if>
+      <if test="record.payway != null">
+        payway = #{record.payway,jdbcType=VARCHAR},
+      </if>
+      <if test="record.market != null">
+        market = #{record.market,jdbcType=VARCHAR},
+      </if>
+      <if test="record.hotPeriod != null">
+        hot_period = #{record.hotPeriod,jdbcType=VARCHAR},
+      </if>
+      <if test="record.lowPeriod != null">
+        low_period = #{record.lowPeriod,jdbcType=VARCHAR},
+      </if>
+      <if test="record.productive != null">
+        productive = #{record.productive,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createBy != null">
+        create_by = #{record.createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="record.updateBy != null">
+        update_by = #{record.updateBy,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createDate != null">
+        create_date = #{record.createDate,jdbcType=DATE},
+      </if>
+      <if test="record.updateDate != null">
+        update_date = #{record.updateDate,jdbcType=DATE},
+      </if>
+      <if test="record.delFlag != null">
+        del_flag = #{record.delFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="record.remarks != null">
+        remarks = #{record.remarks,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update pro_manage_property
+    set id = #{record.id,jdbcType=VARCHAR},
+      pro_manage_id = #{record.proManageId,jdbcType=VARCHAR},
+      price = #{record.price,jdbcType=VARCHAR},
+      volume = #{record.volume,jdbcType=VARCHAR},
+      min_price = #{record.minPrice,jdbcType=VARCHAR},
+      top_price = #{record.topPrice,jdbcType=VARCHAR},
+      min_order = #{record.minOrder,jdbcType=VARCHAR},
+      pro_unit = #{record.proUnit,jdbcType=VARCHAR},
+      title = #{record.title,jdbcType=VARCHAR},
+      attr_id = #{record.attrId,jdbcType=VARCHAR},
+      stock = #{record.stock,jdbcType=VARCHAR},
+      brand_name = #{record.brandName,jdbcType=VARCHAR},
+      size_long = #{record.sizeLong,jdbcType=VARCHAR},
+      size_wide = #{record.sizeWide,jdbcType=VARCHAR},
+      size_high = #{record.sizeHigh,jdbcType=VARCHAR},
+      unit_size = #{record.unitSize,jdbcType=VARCHAR},
+      weight_num = #{record.weightNum,jdbcType=VARCHAR},
+      unit_weight = #{record.unitWeight,jdbcType=VARCHAR},
+      origin_country = #{record.originCountry,jdbcType=VARCHAR},
+      certifications = #{record.certifications,jdbcType=VARCHAR},
+      port = #{record.port,jdbcType=VARCHAR},
+      payway = #{record.payway,jdbcType=VARCHAR},
+      market = #{record.market,jdbcType=VARCHAR},
+      hot_period = #{record.hotPeriod,jdbcType=VARCHAR},
+      low_period = #{record.lowPeriod,jdbcType=VARCHAR},
+      productive = #{record.productive,jdbcType=VARCHAR},
+      create_by = #{record.createBy,jdbcType=VARCHAR},
+      update_by = #{record.updateBy,jdbcType=VARCHAR},
+      create_date = #{record.createDate,jdbcType=DATE},
+      update_date = #{record.updateDate,jdbcType=DATE},
+      del_flag = #{record.delFlag,jdbcType=VARCHAR},
+      remarks = #{record.remarks,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <resultMap id="BaseResultMap" type="zty.entity.ProManageProperty">
+    <result column="id" jdbcType="VARCHAR" property="id" />
+    <result column="pro_manage_id" jdbcType="VARCHAR" property="proManageId" />
+    <result column="price" jdbcType="VARCHAR" property="price" />
+    <result column="volume" jdbcType="VARCHAR" property="volume" />
+    <result column="min_price" jdbcType="VARCHAR" property="minPrice" />
+    <result column="top_price" jdbcType="VARCHAR" property="topPrice" />
+    <result column="min_order" jdbcType="VARCHAR" property="minOrder" />
+    <result column="pro_unit" jdbcType="VARCHAR" property="proUnit" />
+    <result column="title" jdbcType="VARCHAR" property="title" />
+    <result column="attr_id" jdbcType="VARCHAR" property="attrId" />
+    <result column="stock" jdbcType="VARCHAR" property="stock" />
+    <result column="brand_name" jdbcType="VARCHAR" property="brandName" />
+    <result column="size_long" jdbcType="VARCHAR" property="sizeLong" />
+    <result column="size_wide" jdbcType="VARCHAR" property="sizeWide" />
+    <result column="size_high" jdbcType="VARCHAR" property="sizeHigh" />
+    <result column="unit_size" jdbcType="VARCHAR" property="unitSize" />
+    <result column="weight_num" jdbcType="VARCHAR" property="weightNum" />
+    <result column="unit_weight" jdbcType="VARCHAR" property="unitWeight" />
+    <result column="origin_country" jdbcType="VARCHAR" property="originCountry" />
+    <result column="certifications" jdbcType="VARCHAR" property="certifications" />
+    <result column="port" jdbcType="VARCHAR" property="port" />
+    <result column="payway" jdbcType="VARCHAR" property="payway" />
+    <result column="market" jdbcType="VARCHAR" property="market" />
+    <result column="hot_period" jdbcType="VARCHAR" property="hotPeriod" />
+    <result column="low_period" jdbcType="VARCHAR" property="lowPeriod" />
+    <result column="productive" jdbcType="VARCHAR" property="productive" />
+    <result column="create_by" jdbcType="VARCHAR" property="createBy" />
+    <result column="update_by" jdbcType="VARCHAR" property="updateBy" />
+    <result column="create_date" jdbcType="DATE" property="createDate" />
+    <result column="update_date" jdbcType="DATE" property="updateDate" />
+    <result column="del_flag" jdbcType="VARCHAR" property="delFlag" />
+    <result column="remarks" jdbcType="VARCHAR" property="remarks" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, pro_manage_id, price, volume, min_price, top_price, min_order, pro_unit, title, 
+    attr_id, stock, brand_name, size_long, size_wide, size_high, unit_size, weight_num, 
+    unit_weight, origin_country, certifications, port, payway, market, hot_period, low_period, 
+    productive, create_by, update_by, create_date, update_date, del_flag, remarks
+  </sql>
+  <select id="selectByExample" parameterType="zty.entity.ProManagePropertyExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from pro_manage_property
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="zty.entity.ProManagePropertyExample">
+    delete from pro_manage_property
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="zty.entity.ProManageProperty">
+    insert into pro_manage_property (id, pro_manage_id, price, 
+      volume, min_price, top_price, 
+      min_order, pro_unit, title, 
+      attr_id, stock, brand_name, 
+      size_long, size_wide, size_high, 
+      unit_size, weight_num, unit_weight, 
+      origin_country, certifications, port, 
+      payway, market, hot_period, 
+      low_period, productive, create_by, 
+      update_by, create_date, update_date, 
+      del_flag, remarks)
+    values (#{id,jdbcType=VARCHAR}, #{proManageId,jdbcType=VARCHAR}, #{price,jdbcType=VARCHAR}, 
+      #{volume,jdbcType=VARCHAR}, #{minPrice,jdbcType=VARCHAR}, #{topPrice,jdbcType=VARCHAR}, 
+      #{minOrder,jdbcType=VARCHAR}, #{proUnit,jdbcType=VARCHAR}, #{title,jdbcType=VARCHAR}, 
+      #{attrId,jdbcType=VARCHAR}, #{stock,jdbcType=VARCHAR}, #{brandName,jdbcType=VARCHAR}, 
+      #{sizeLong,jdbcType=VARCHAR}, #{sizeWide,jdbcType=VARCHAR}, #{sizeHigh,jdbcType=VARCHAR}, 
+      #{unitSize,jdbcType=VARCHAR}, #{weightNum,jdbcType=VARCHAR}, #{unitWeight,jdbcType=VARCHAR}, 
+      #{originCountry,jdbcType=VARCHAR}, #{certifications,jdbcType=VARCHAR}, #{port,jdbcType=VARCHAR}, 
+      #{payway,jdbcType=VARCHAR}, #{market,jdbcType=VARCHAR}, #{hotPeriod,jdbcType=VARCHAR}, 
+      #{lowPeriod,jdbcType=VARCHAR}, #{productive,jdbcType=VARCHAR}, #{createBy,jdbcType=VARCHAR}, 
+      #{updateBy,jdbcType=VARCHAR}, #{createDate,jdbcType=DATE}, #{updateDate,jdbcType=DATE}, 
+      #{delFlag,jdbcType=VARCHAR}, #{remarks,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="zty.entity.ProManageProperty">
+    insert into pro_manage_property
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="proManageId != null">
+        pro_manage_id,
+      </if>
+      <if test="price != null">
+        price,
+      </if>
+      <if test="volume != null">
+        volume,
+      </if>
+      <if test="minPrice != null">
+        min_price,
+      </if>
+      <if test="topPrice != null">
+        top_price,
+      </if>
+      <if test="minOrder != null">
+        min_order,
+      </if>
+      <if test="proUnit != null">
+        pro_unit,
+      </if>
+      <if test="title != null">
+        title,
+      </if>
+      <if test="attrId != null">
+        attr_id,
+      </if>
+      <if test="stock != null">
+        stock,
+      </if>
+      <if test="brandName != null">
+        brand_name,
+      </if>
+      <if test="sizeLong != null">
+        size_long,
+      </if>
+      <if test="sizeWide != null">
+        size_wide,
+      </if>
+      <if test="sizeHigh != null">
+        size_high,
+      </if>
+      <if test="unitSize != null">
+        unit_size,
+      </if>
+      <if test="weightNum != null">
+        weight_num,
+      </if>
+      <if test="unitWeight != null">
+        unit_weight,
+      </if>
+      <if test="originCountry != null">
+        origin_country,
+      </if>
+      <if test="certifications != null">
+        certifications,
+      </if>
+      <if test="port != null">
+        port,
+      </if>
+      <if test="payway != null">
+        payway,
+      </if>
+      <if test="market != null">
+        market,
+      </if>
+      <if test="hotPeriod != null">
+        hot_period,
+      </if>
+      <if test="lowPeriod != null">
+        low_period,
+      </if>
+      <if test="productive != null">
+        productive,
+      </if>
+      <if test="createBy != null">
+        create_by,
+      </if>
+      <if test="updateBy != null">
+        update_by,
+      </if>
+      <if test="createDate != null">
+        create_date,
+      </if>
+      <if test="updateDate != null">
+        update_date,
+      </if>
+      <if test="delFlag != null">
+        del_flag,
+      </if>
+      <if test="remarks != null">
+        remarks,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="proManageId != null">
+        #{proManageId,jdbcType=VARCHAR},
+      </if>
+      <if test="price != null">
+        #{price,jdbcType=VARCHAR},
+      </if>
+      <if test="volume != null">
+        #{volume,jdbcType=VARCHAR},
+      </if>
+      <if test="minPrice != null">
+        #{minPrice,jdbcType=VARCHAR},
+      </if>
+      <if test="topPrice != null">
+        #{topPrice,jdbcType=VARCHAR},
+      </if>
+      <if test="minOrder != null">
+        #{minOrder,jdbcType=VARCHAR},
+      </if>
+      <if test="proUnit != null">
+        #{proUnit,jdbcType=VARCHAR},
+      </if>
+      <if test="title != null">
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="attrId != null">
+        #{attrId,jdbcType=VARCHAR},
+      </if>
+      <if test="stock != null">
+        #{stock,jdbcType=VARCHAR},
+      </if>
+      <if test="brandName != null">
+        #{brandName,jdbcType=VARCHAR},
+      </if>
+      <if test="sizeLong != null">
+        #{sizeLong,jdbcType=VARCHAR},
+      </if>
+      <if test="sizeWide != null">
+        #{sizeWide,jdbcType=VARCHAR},
+      </if>
+      <if test="sizeHigh != null">
+        #{sizeHigh,jdbcType=VARCHAR},
+      </if>
+      <if test="unitSize != null">
+        #{unitSize,jdbcType=VARCHAR},
+      </if>
+      <if test="weightNum != null">
+        #{weightNum,jdbcType=VARCHAR},
+      </if>
+      <if test="unitWeight != null">
+        #{unitWeight,jdbcType=VARCHAR},
+      </if>
+      <if test="originCountry != null">
+        #{originCountry,jdbcType=VARCHAR},
+      </if>
+      <if test="certifications != null">
+        #{certifications,jdbcType=VARCHAR},
+      </if>
+      <if test="port != null">
+        #{port,jdbcType=VARCHAR},
+      </if>
+      <if test="payway != null">
+        #{payway,jdbcType=VARCHAR},
+      </if>
+      <if test="market != null">
+        #{market,jdbcType=VARCHAR},
+      </if>
+      <if test="hotPeriod != null">
+        #{hotPeriod,jdbcType=VARCHAR},
+      </if>
+      <if test="lowPeriod != null">
+        #{lowPeriod,jdbcType=VARCHAR},
+      </if>
+      <if test="productive != null">
+        #{productive,jdbcType=VARCHAR},
+      </if>
+      <if test="createBy != null">
+        #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="updateBy != null">
+        #{updateBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null">
+        #{createDate,jdbcType=DATE},
+      </if>
+      <if test="updateDate != null">
+        #{updateDate,jdbcType=DATE},
+      </if>
+      <if test="delFlag != null">
+        #{delFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="remarks != null">
+        #{remarks,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="zty.entity.ProManagePropertyExample" resultType="java.lang.Long">
+    select count(*) from pro_manage_property
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update pro_manage_property
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.proManageId != null">
+        pro_manage_id = #{record.proManageId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.price != null">
+        price = #{record.price,jdbcType=VARCHAR},
+      </if>
+      <if test="record.volume != null">
+        volume = #{record.volume,jdbcType=VARCHAR},
+      </if>
+      <if test="record.minPrice != null">
+        min_price = #{record.minPrice,jdbcType=VARCHAR},
+      </if>
+      <if test="record.topPrice != null">
+        top_price = #{record.topPrice,jdbcType=VARCHAR},
+      </if>
+      <if test="record.minOrder != null">
+        min_order = #{record.minOrder,jdbcType=VARCHAR},
+      </if>
+      <if test="record.proUnit != null">
+        pro_unit = #{record.proUnit,jdbcType=VARCHAR},
+      </if>
+      <if test="record.title != null">
+        title = #{record.title,jdbcType=VARCHAR},
+      </if>
+      <if test="record.attrId != null">
+        attr_id = #{record.attrId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.stock != null">
+        stock = #{record.stock,jdbcType=VARCHAR},
+      </if>
+      <if test="record.brandName != null">
+        brand_name = #{record.brandName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sizeLong != null">
+        size_long = #{record.sizeLong,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sizeWide != null">
+        size_wide = #{record.sizeWide,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sizeHigh != null">
+        size_high = #{record.sizeHigh,jdbcType=VARCHAR},
+      </if>
+      <if test="record.unitSize != null">
+        unit_size = #{record.unitSize,jdbcType=VARCHAR},
+      </if>
+      <if test="record.weightNum != null">
+        weight_num = #{record.weightNum,jdbcType=VARCHAR},
+      </if>
+      <if test="record.unitWeight != null">
+        unit_weight = #{record.unitWeight,jdbcType=VARCHAR},
+      </if>
+      <if test="record.originCountry != null">
+        origin_country = #{record.originCountry,jdbcType=VARCHAR},
+      </if>
+      <if test="record.certifications != null">
+        certifications = #{record.certifications,jdbcType=VARCHAR},
+      </if>
+      <if test="record.port != null">
+        port = #{record.port,jdbcType=VARCHAR},
+      </if>
+      <if test="record.payway != null">
+        payway = #{record.payway,jdbcType=VARCHAR},
+      </if>
+      <if test="record.market != null">
+        market = #{record.market,jdbcType=VARCHAR},
+      </if>
+      <if test="record.hotPeriod != null">
+        hot_period = #{record.hotPeriod,jdbcType=VARCHAR},
+      </if>
+      <if test="record.lowPeriod != null">
+        low_period = #{record.lowPeriod,jdbcType=VARCHAR},
+      </if>
+      <if test="record.productive != null">
+        productive = #{record.productive,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createBy != null">
+        create_by = #{record.createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="record.updateBy != null">
+        update_by = #{record.updateBy,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createDate != null">
+        create_date = #{record.createDate,jdbcType=DATE},
+      </if>
+      <if test="record.updateDate != null">
+        update_date = #{record.updateDate,jdbcType=DATE},
+      </if>
+      <if test="record.delFlag != null">
+        del_flag = #{record.delFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="record.remarks != null">
+        remarks = #{record.remarks,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update pro_manage_property
+    set id = #{record.id,jdbcType=VARCHAR},
+      pro_manage_id = #{record.proManageId,jdbcType=VARCHAR},
+      price = #{record.price,jdbcType=VARCHAR},
+      volume = #{record.volume,jdbcType=VARCHAR},
+      min_price = #{record.minPrice,jdbcType=VARCHAR},
+      top_price = #{record.topPrice,jdbcType=VARCHAR},
+      min_order = #{record.minOrder,jdbcType=VARCHAR},
+      pro_unit = #{record.proUnit,jdbcType=VARCHAR},
+      title = #{record.title,jdbcType=VARCHAR},
+      attr_id = #{record.attrId,jdbcType=VARCHAR},
+      stock = #{record.stock,jdbcType=VARCHAR},
+      brand_name = #{record.brandName,jdbcType=VARCHAR},
+      size_long = #{record.sizeLong,jdbcType=VARCHAR},
+      size_wide = #{record.sizeWide,jdbcType=VARCHAR},
+      size_high = #{record.sizeHigh,jdbcType=VARCHAR},
+      unit_size = #{record.unitSize,jdbcType=VARCHAR},
+      weight_num = #{record.weightNum,jdbcType=VARCHAR},
+      unit_weight = #{record.unitWeight,jdbcType=VARCHAR},
+      origin_country = #{record.originCountry,jdbcType=VARCHAR},
+      certifications = #{record.certifications,jdbcType=VARCHAR},
+      port = #{record.port,jdbcType=VARCHAR},
+      payway = #{record.payway,jdbcType=VARCHAR},
+      market = #{record.market,jdbcType=VARCHAR},
+      hot_period = #{record.hotPeriod,jdbcType=VARCHAR},
+      low_period = #{record.lowPeriod,jdbcType=VARCHAR},
+      productive = #{record.productive,jdbcType=VARCHAR},
+      create_by = #{record.createBy,jdbcType=VARCHAR},
+      update_by = #{record.updateBy,jdbcType=VARCHAR},
+      create_date = #{record.createDate,jdbcType=DATE},
+      update_date = #{record.updateDate,jdbcType=DATE},
+      del_flag = #{record.delFlag,jdbcType=VARCHAR},
+      remarks = #{record.remarks,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <resultMap id="BaseResultMap" type="zty.entity.ProManageProperty">
+    <result column="id" jdbcType="VARCHAR" property="id" />
+    <result column="pro_manage_id" jdbcType="VARCHAR" property="proManageId" />
+    <result column="price" jdbcType="VARCHAR" property="price" />
+    <result column="volume" jdbcType="VARCHAR" property="volume" />
+    <result column="min_price" jdbcType="VARCHAR" property="minPrice" />
+    <result column="top_price" jdbcType="VARCHAR" property="topPrice" />
+    <result column="min_order" jdbcType="VARCHAR" property="minOrder" />
+    <result column="pro_unit" jdbcType="VARCHAR" property="proUnit" />
+    <result column="title" jdbcType="VARCHAR" property="title" />
+    <result column="attr_id" jdbcType="VARCHAR" property="attrId" />
+    <result column="stock" jdbcType="VARCHAR" property="stock" />
+    <result column="brand_name" jdbcType="VARCHAR" property="brandName" />
+    <result column="size_long" jdbcType="VARCHAR" property="sizeLong" />
+    <result column="size_wide" jdbcType="VARCHAR" property="sizeWide" />
+    <result column="size_high" jdbcType="VARCHAR" property="sizeHigh" />
+    <result column="unit_size" jdbcType="VARCHAR" property="unitSize" />
+    <result column="weight_num" jdbcType="VARCHAR" property="weightNum" />
+    <result column="unit_weight" jdbcType="VARCHAR" property="unitWeight" />
+    <result column="origin_country" jdbcType="VARCHAR" property="originCountry" />
+    <result column="certifications" jdbcType="VARCHAR" property="certifications" />
+    <result column="port" jdbcType="VARCHAR" property="port" />
+    <result column="payway" jdbcType="VARCHAR" property="payway" />
+    <result column="market" jdbcType="VARCHAR" property="market" />
+    <result column="hot_period" jdbcType="VARCHAR" property="hotPeriod" />
+    <result column="low_period" jdbcType="VARCHAR" property="lowPeriod" />
+    <result column="productive" jdbcType="VARCHAR" property="productive" />
+    <result column="create_by" jdbcType="VARCHAR" property="createBy" />
+    <result column="update_by" jdbcType="VARCHAR" property="updateBy" />
+    <result column="create_date" jdbcType="DATE" property="createDate" />
+    <result column="update_date" jdbcType="DATE" property="updateDate" />
+    <result column="del_flag" jdbcType="VARCHAR" property="delFlag" />
+    <result column="remarks" jdbcType="VARCHAR" property="remarks" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, pro_manage_id, price, volume, min_price, top_price, min_order, pro_unit, title, 
+    attr_id, stock, brand_name, size_long, size_wide, size_high, unit_size, weight_num, 
+    unit_weight, origin_country, certifications, port, payway, market, hot_period, low_period, 
+    productive, create_by, update_by, create_date, update_date, del_flag, remarks
+  </sql>
+  <select id="selectByExample" parameterType="zty.entity.ProManagePropertyExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from pro_manage_property
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="zty.entity.ProManagePropertyExample">
+    delete from pro_manage_property
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="zty.entity.ProManageProperty">
+    insert into pro_manage_property (id, pro_manage_id, price, 
+      volume, min_price, top_price, 
+      min_order, pro_unit, title, 
+      attr_id, stock, brand_name, 
+      size_long, size_wide, size_high, 
+      unit_size, weight_num, unit_weight, 
+      origin_country, certifications, port, 
+      payway, market, hot_period, 
+      low_period, productive, create_by, 
+      update_by, create_date, update_date, 
+      del_flag, remarks)
+    values (#{id,jdbcType=VARCHAR}, #{proManageId,jdbcType=VARCHAR}, #{price,jdbcType=VARCHAR}, 
+      #{volume,jdbcType=VARCHAR}, #{minPrice,jdbcType=VARCHAR}, #{topPrice,jdbcType=VARCHAR}, 
+      #{minOrder,jdbcType=VARCHAR}, #{proUnit,jdbcType=VARCHAR}, #{title,jdbcType=VARCHAR}, 
+      #{attrId,jdbcType=VARCHAR}, #{stock,jdbcType=VARCHAR}, #{brandName,jdbcType=VARCHAR}, 
+      #{sizeLong,jdbcType=VARCHAR}, #{sizeWide,jdbcType=VARCHAR}, #{sizeHigh,jdbcType=VARCHAR}, 
+      #{unitSize,jdbcType=VARCHAR}, #{weightNum,jdbcType=VARCHAR}, #{unitWeight,jdbcType=VARCHAR}, 
+      #{originCountry,jdbcType=VARCHAR}, #{certifications,jdbcType=VARCHAR}, #{port,jdbcType=VARCHAR}, 
+      #{payway,jdbcType=VARCHAR}, #{market,jdbcType=VARCHAR}, #{hotPeriod,jdbcType=VARCHAR}, 
+      #{lowPeriod,jdbcType=VARCHAR}, #{productive,jdbcType=VARCHAR}, #{createBy,jdbcType=VARCHAR}, 
+      #{updateBy,jdbcType=VARCHAR}, #{createDate,jdbcType=DATE}, #{updateDate,jdbcType=DATE}, 
+      #{delFlag,jdbcType=VARCHAR}, #{remarks,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="zty.entity.ProManageProperty">
+    insert into pro_manage_property
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="proManageId != null">
+        pro_manage_id,
+      </if>
+      <if test="price != null">
+        price,
+      </if>
+      <if test="volume != null">
+        volume,
+      </if>
+      <if test="minPrice != null">
+        min_price,
+      </if>
+      <if test="topPrice != null">
+        top_price,
+      </if>
+      <if test="minOrder != null">
+        min_order,
+      </if>
+      <if test="proUnit != null">
+        pro_unit,
+      </if>
+      <if test="title != null">
+        title,
+      </if>
+      <if test="attrId != null">
+        attr_id,
+      </if>
+      <if test="stock != null">
+        stock,
+      </if>
+      <if test="brandName != null">
+        brand_name,
+      </if>
+      <if test="sizeLong != null">
+        size_long,
+      </if>
+      <if test="sizeWide != null">
+        size_wide,
+      </if>
+      <if test="sizeHigh != null">
+        size_high,
+      </if>
+      <if test="unitSize != null">
+        unit_size,
+      </if>
+      <if test="weightNum != null">
+        weight_num,
+      </if>
+      <if test="unitWeight != null">
+        unit_weight,
+      </if>
+      <if test="originCountry != null">
+        origin_country,
+      </if>
+      <if test="certifications != null">
+        certifications,
+      </if>
+      <if test="port != null">
+        port,
+      </if>
+      <if test="payway != null">
+        payway,
+      </if>
+      <if test="market != null">
+        market,
+      </if>
+      <if test="hotPeriod != null">
+        hot_period,
+      </if>
+      <if test="lowPeriod != null">
+        low_period,
+      </if>
+      <if test="productive != null">
+        productive,
+      </if>
+      <if test="createBy != null">
+        create_by,
+      </if>
+      <if test="updateBy != null">
+        update_by,
+      </if>
+      <if test="createDate != null">
+        create_date,
+      </if>
+      <if test="updateDate != null">
+        update_date,
+      </if>
+      <if test="delFlag != null">
+        del_flag,
+      </if>
+      <if test="remarks != null">
+        remarks,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="proManageId != null">
+        #{proManageId,jdbcType=VARCHAR},
+      </if>
+      <if test="price != null">
+        #{price,jdbcType=VARCHAR},
+      </if>
+      <if test="volume != null">
+        #{volume,jdbcType=VARCHAR},
+      </if>
+      <if test="minPrice != null">
+        #{minPrice,jdbcType=VARCHAR},
+      </if>
+      <if test="topPrice != null">
+        #{topPrice,jdbcType=VARCHAR},
+      </if>
+      <if test="minOrder != null">
+        #{minOrder,jdbcType=VARCHAR},
+      </if>
+      <if test="proUnit != null">
+        #{proUnit,jdbcType=VARCHAR},
+      </if>
+      <if test="title != null">
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="attrId != null">
+        #{attrId,jdbcType=VARCHAR},
+      </if>
+      <if test="stock != null">
+        #{stock,jdbcType=VARCHAR},
+      </if>
+      <if test="brandName != null">
+        #{brandName,jdbcType=VARCHAR},
+      </if>
+      <if test="sizeLong != null">
+        #{sizeLong,jdbcType=VARCHAR},
+      </if>
+      <if test="sizeWide != null">
+        #{sizeWide,jdbcType=VARCHAR},
+      </if>
+      <if test="sizeHigh != null">
+        #{sizeHigh,jdbcType=VARCHAR},
+      </if>
+      <if test="unitSize != null">
+        #{unitSize,jdbcType=VARCHAR},
+      </if>
+      <if test="weightNum != null">
+        #{weightNum,jdbcType=VARCHAR},
+      </if>
+      <if test="unitWeight != null">
+        #{unitWeight,jdbcType=VARCHAR},
+      </if>
+      <if test="originCountry != null">
+        #{originCountry,jdbcType=VARCHAR},
+      </if>
+      <if test="certifications != null">
+        #{certifications,jdbcType=VARCHAR},
+      </if>
+      <if test="port != null">
+        #{port,jdbcType=VARCHAR},
+      </if>
+      <if test="payway != null">
+        #{payway,jdbcType=VARCHAR},
+      </if>
+      <if test="market != null">
+        #{market,jdbcType=VARCHAR},
+      </if>
+      <if test="hotPeriod != null">
+        #{hotPeriod,jdbcType=VARCHAR},
+      </if>
+      <if test="lowPeriod != null">
+        #{lowPeriod,jdbcType=VARCHAR},
+      </if>
+      <if test="productive != null">
+        #{productive,jdbcType=VARCHAR},
+      </if>
+      <if test="createBy != null">
+        #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="updateBy != null">
+        #{updateBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null">
+        #{createDate,jdbcType=DATE},
+      </if>
+      <if test="updateDate != null">
+        #{updateDate,jdbcType=DATE},
+      </if>
+      <if test="delFlag != null">
+        #{delFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="remarks != null">
+        #{remarks,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="zty.entity.ProManagePropertyExample" resultType="java.lang.Long">
+    select count(*) from pro_manage_property
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update pro_manage_property
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.proManageId != null">
+        pro_manage_id = #{record.proManageId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.price != null">
+        price = #{record.price,jdbcType=VARCHAR},
+      </if>
+      <if test="record.volume != null">
+        volume = #{record.volume,jdbcType=VARCHAR},
+      </if>
+      <if test="record.minPrice != null">
+        min_price = #{record.minPrice,jdbcType=VARCHAR},
+      </if>
+      <if test="record.topPrice != null">
+        top_price = #{record.topPrice,jdbcType=VARCHAR},
+      </if>
+      <if test="record.minOrder != null">
+        min_order = #{record.minOrder,jdbcType=VARCHAR},
+      </if>
+      <if test="record.proUnit != null">
+        pro_unit = #{record.proUnit,jdbcType=VARCHAR},
+      </if>
+      <if test="record.title != null">
+        title = #{record.title,jdbcType=VARCHAR},
+      </if>
+      <if test="record.attrId != null">
+        attr_id = #{record.attrId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.stock != null">
+        stock = #{record.stock,jdbcType=VARCHAR},
+      </if>
+      <if test="record.brandName != null">
+        brand_name = #{record.brandName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sizeLong != null">
+        size_long = #{record.sizeLong,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sizeWide != null">
+        size_wide = #{record.sizeWide,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sizeHigh != null">
+        size_high = #{record.sizeHigh,jdbcType=VARCHAR},
+      </if>
+      <if test="record.unitSize != null">
+        unit_size = #{record.unitSize,jdbcType=VARCHAR},
+      </if>
+      <if test="record.weightNum != null">
+        weight_num = #{record.weightNum,jdbcType=VARCHAR},
+      </if>
+      <if test="record.unitWeight != null">
+        unit_weight = #{record.unitWeight,jdbcType=VARCHAR},
+      </if>
+      <if test="record.originCountry != null">
+        origin_country = #{record.originCountry,jdbcType=VARCHAR},
+      </if>
+      <if test="record.certifications != null">
+        certifications = #{record.certifications,jdbcType=VARCHAR},
+      </if>
+      <if test="record.port != null">
+        port = #{record.port,jdbcType=VARCHAR},
+      </if>
+      <if test="record.payway != null">
+        payway = #{record.payway,jdbcType=VARCHAR},
+      </if>
+      <if test="record.market != null">
+        market = #{record.market,jdbcType=VARCHAR},
+      </if>
+      <if test="record.hotPeriod != null">
+        hot_period = #{record.hotPeriod,jdbcType=VARCHAR},
+      </if>
+      <if test="record.lowPeriod != null">
+        low_period = #{record.lowPeriod,jdbcType=VARCHAR},
+      </if>
+      <if test="record.productive != null">
+        productive = #{record.productive,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createBy != null">
+        create_by = #{record.createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="record.updateBy != null">
+        update_by = #{record.updateBy,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createDate != null">
+        create_date = #{record.createDate,jdbcType=DATE},
+      </if>
+      <if test="record.updateDate != null">
+        update_date = #{record.updateDate,jdbcType=DATE},
+      </if>
+      <if test="record.delFlag != null">
+        del_flag = #{record.delFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="record.remarks != null">
+        remarks = #{record.remarks,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update pro_manage_property
+    set id = #{record.id,jdbcType=VARCHAR},
+      pro_manage_id = #{record.proManageId,jdbcType=VARCHAR},
+      price = #{record.price,jdbcType=VARCHAR},
+      volume = #{record.volume,jdbcType=VARCHAR},
+      min_price = #{record.minPrice,jdbcType=VARCHAR},
+      top_price = #{record.topPrice,jdbcType=VARCHAR},
+      min_order = #{record.minOrder,jdbcType=VARCHAR},
+      pro_unit = #{record.proUnit,jdbcType=VARCHAR},
+      title = #{record.title,jdbcType=VARCHAR},
+      attr_id = #{record.attrId,jdbcType=VARCHAR},
+      stock = #{record.stock,jdbcType=VARCHAR},
+      brand_name = #{record.brandName,jdbcType=VARCHAR},
+      size_long = #{record.sizeLong,jdbcType=VARCHAR},
+      size_wide = #{record.sizeWide,jdbcType=VARCHAR},
+      size_high = #{record.sizeHigh,jdbcType=VARCHAR},
+      unit_size = #{record.unitSize,jdbcType=VARCHAR},
+      weight_num = #{record.weightNum,jdbcType=VARCHAR},
+      unit_weight = #{record.unitWeight,jdbcType=VARCHAR},
+      origin_country = #{record.originCountry,jdbcType=VARCHAR},
+      certifications = #{record.certifications,jdbcType=VARCHAR},
+      port = #{record.port,jdbcType=VARCHAR},
+      payway = #{record.payway,jdbcType=VARCHAR},
+      market = #{record.market,jdbcType=VARCHAR},
+      hot_period = #{record.hotPeriod,jdbcType=VARCHAR},
+      low_period = #{record.lowPeriod,jdbcType=VARCHAR},
+      productive = #{record.productive,jdbcType=VARCHAR},
+      create_by = #{record.createBy,jdbcType=VARCHAR},
+      update_by = #{record.updateBy,jdbcType=VARCHAR},
+      create_date = #{record.createDate,jdbcType=DATE},
+      update_date = #{record.updateDate,jdbcType=DATE},
+      del_flag = #{record.delFlag,jdbcType=VARCHAR},
+      remarks = #{record.remarks,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <resultMap id="BaseResultMap" type="com.entity.ProManageProperty">
+    <result column="id" jdbcType="VARCHAR" property="id" />
+    <result column="pro_manage_id" jdbcType="VARCHAR" property="proManageId" />
+    <result column="price" jdbcType="VARCHAR" property="price" />
+    <result column="volume" jdbcType="VARCHAR" property="volume" />
+    <result column="min_price" jdbcType="VARCHAR" property="minPrice" />
+    <result column="top_price" jdbcType="VARCHAR" property="topPrice" />
+    <result column="min_order" jdbcType="VARCHAR" property="minOrder" />
+    <result column="pro_unit" jdbcType="VARCHAR" property="proUnit" />
+    <result column="title" jdbcType="VARCHAR" property="title" />
+    <result column="attr_id" jdbcType="VARCHAR" property="attrId" />
+    <result column="stock" jdbcType="VARCHAR" property="stock" />
+    <result column="brand_name" jdbcType="VARCHAR" property="brandName" />
+    <result column="size_long" jdbcType="VARCHAR" property="sizeLong" />
+    <result column="size_wide" jdbcType="VARCHAR" property="sizeWide" />
+    <result column="size_high" jdbcType="VARCHAR" property="sizeHigh" />
+    <result column="unit_size" jdbcType="VARCHAR" property="unitSize" />
+    <result column="weight_num" jdbcType="VARCHAR" property="weightNum" />
+    <result column="unit_weight" jdbcType="VARCHAR" property="unitWeight" />
+    <result column="origin_country" jdbcType="VARCHAR" property="originCountry" />
+    <result column="certifications" jdbcType="VARCHAR" property="certifications" />
+    <result column="port" jdbcType="VARCHAR" property="port" />
+    <result column="payway" jdbcType="VARCHAR" property="payway" />
+    <result column="market" jdbcType="VARCHAR" property="market" />
+    <result column="hot_period" jdbcType="VARCHAR" property="hotPeriod" />
+    <result column="low_period" jdbcType="VARCHAR" property="lowPeriod" />
+    <result column="productive" jdbcType="VARCHAR" property="productive" />
+    <result column="create_by" jdbcType="VARCHAR" property="createBy" />
+    <result column="update_by" jdbcType="VARCHAR" property="updateBy" />
+    <result column="create_date" jdbcType="DATE" property="createDate" />
+    <result column="update_date" jdbcType="DATE" property="updateDate" />
+    <result column="del_flag" jdbcType="VARCHAR" property="delFlag" />
+    <result column="remarks" jdbcType="VARCHAR" property="remarks" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, pro_manage_id, price, volume, min_price, top_price, min_order, pro_unit, title, 
+    attr_id, stock, brand_name, size_long, size_wide, size_high, unit_size, weight_num, 
+    unit_weight, origin_country, certifications, port, payway, market, hot_period, low_period, 
+    productive, create_by, update_by, create_date, update_date, del_flag, remarks
+  </sql>
+  <select id="selectByExample" parameterType="com.entity.ProManagePropertyExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from pro_manage_property
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.entity.ProManagePropertyExample">
+    delete from pro_manage_property
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.entity.ProManageProperty">
+    insert into pro_manage_property (id, pro_manage_id, price, 
+      volume, min_price, top_price, 
+      min_order, pro_unit, title, 
+      attr_id, stock, brand_name, 
+      size_long, size_wide, size_high, 
+      unit_size, weight_num, unit_weight, 
+      origin_country, certifications, port, 
+      payway, market, hot_period, 
+      low_period, productive, create_by, 
+      update_by, create_date, update_date, 
+      del_flag, remarks)
+    values (#{id,jdbcType=VARCHAR}, #{proManageId,jdbcType=VARCHAR}, #{price,jdbcType=VARCHAR}, 
+      #{volume,jdbcType=VARCHAR}, #{minPrice,jdbcType=VARCHAR}, #{topPrice,jdbcType=VARCHAR}, 
+      #{minOrder,jdbcType=VARCHAR}, #{proUnit,jdbcType=VARCHAR}, #{title,jdbcType=VARCHAR}, 
+      #{attrId,jdbcType=VARCHAR}, #{stock,jdbcType=VARCHAR}, #{brandName,jdbcType=VARCHAR}, 
+      #{sizeLong,jdbcType=VARCHAR}, #{sizeWide,jdbcType=VARCHAR}, #{sizeHigh,jdbcType=VARCHAR}, 
+      #{unitSize,jdbcType=VARCHAR}, #{weightNum,jdbcType=VARCHAR}, #{unitWeight,jdbcType=VARCHAR}, 
+      #{originCountry,jdbcType=VARCHAR}, #{certifications,jdbcType=VARCHAR}, #{port,jdbcType=VARCHAR}, 
+      #{payway,jdbcType=VARCHAR}, #{market,jdbcType=VARCHAR}, #{hotPeriod,jdbcType=VARCHAR}, 
+      #{lowPeriod,jdbcType=VARCHAR}, #{productive,jdbcType=VARCHAR}, #{createBy,jdbcType=VARCHAR}, 
+      #{updateBy,jdbcType=VARCHAR}, #{createDate,jdbcType=DATE}, #{updateDate,jdbcType=DATE}, 
+      #{delFlag,jdbcType=VARCHAR}, #{remarks,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.entity.ProManageProperty">
+    insert into pro_manage_property
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="proManageId != null">
+        pro_manage_id,
+      </if>
+      <if test="price != null">
+        price,
+      </if>
+      <if test="volume != null">
+        volume,
+      </if>
+      <if test="minPrice != null">
+        min_price,
+      </if>
+      <if test="topPrice != null">
+        top_price,
+      </if>
+      <if test="minOrder != null">
+        min_order,
+      </if>
+      <if test="proUnit != null">
+        pro_unit,
+      </if>
+      <if test="title != null">
+        title,
+      </if>
+      <if test="attrId != null">
+        attr_id,
+      </if>
+      <if test="stock != null">
+        stock,
+      </if>
+      <if test="brandName != null">
+        brand_name,
+      </if>
+      <if test="sizeLong != null">
+        size_long,
+      </if>
+      <if test="sizeWide != null">
+        size_wide,
+      </if>
+      <if test="sizeHigh != null">
+        size_high,
+      </if>
+      <if test="unitSize != null">
+        unit_size,
+      </if>
+      <if test="weightNum != null">
+        weight_num,
+      </if>
+      <if test="unitWeight != null">
+        unit_weight,
+      </if>
+      <if test="originCountry != null">
+        origin_country,
+      </if>
+      <if test="certifications != null">
+        certifications,
+      </if>
+      <if test="port != null">
+        port,
+      </if>
+      <if test="payway != null">
+        payway,
+      </if>
+      <if test="market != null">
+        market,
+      </if>
+      <if test="hotPeriod != null">
+        hot_period,
+      </if>
+      <if test="lowPeriod != null">
+        low_period,
+      </if>
+      <if test="productive != null">
+        productive,
+      </if>
+      <if test="createBy != null">
+        create_by,
+      </if>
+      <if test="updateBy != null">
+        update_by,
+      </if>
+      <if test="createDate != null">
+        create_date,
+      </if>
+      <if test="updateDate != null">
+        update_date,
+      </if>
+      <if test="delFlag != null">
+        del_flag,
+      </if>
+      <if test="remarks != null">
+        remarks,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="proManageId != null">
+        #{proManageId,jdbcType=VARCHAR},
+      </if>
+      <if test="price != null">
+        #{price,jdbcType=VARCHAR},
+      </if>
+      <if test="volume != null">
+        #{volume,jdbcType=VARCHAR},
+      </if>
+      <if test="minPrice != null">
+        #{minPrice,jdbcType=VARCHAR},
+      </if>
+      <if test="topPrice != null">
+        #{topPrice,jdbcType=VARCHAR},
+      </if>
+      <if test="minOrder != null">
+        #{minOrder,jdbcType=VARCHAR},
+      </if>
+      <if test="proUnit != null">
+        #{proUnit,jdbcType=VARCHAR},
+      </if>
+      <if test="title != null">
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="attrId != null">
+        #{attrId,jdbcType=VARCHAR},
+      </if>
+      <if test="stock != null">
+        #{stock,jdbcType=VARCHAR},
+      </if>
+      <if test="brandName != null">
+        #{brandName,jdbcType=VARCHAR},
+      </if>
+      <if test="sizeLong != null">
+        #{sizeLong,jdbcType=VARCHAR},
+      </if>
+      <if test="sizeWide != null">
+        #{sizeWide,jdbcType=VARCHAR},
+      </if>
+      <if test="sizeHigh != null">
+        #{sizeHigh,jdbcType=VARCHAR},
+      </if>
+      <if test="unitSize != null">
+        #{unitSize,jdbcType=VARCHAR},
+      </if>
+      <if test="weightNum != null">
+        #{weightNum,jdbcType=VARCHAR},
+      </if>
+      <if test="unitWeight != null">
+        #{unitWeight,jdbcType=VARCHAR},
+      </if>
+      <if test="originCountry != null">
+        #{originCountry,jdbcType=VARCHAR},
+      </if>
+      <if test="certifications != null">
+        #{certifications,jdbcType=VARCHAR},
+      </if>
+      <if test="port != null">
+        #{port,jdbcType=VARCHAR},
+      </if>
+      <if test="payway != null">
+        #{payway,jdbcType=VARCHAR},
+      </if>
+      <if test="market != null">
+        #{market,jdbcType=VARCHAR},
+      </if>
+      <if test="hotPeriod != null">
+        #{hotPeriod,jdbcType=VARCHAR},
+      </if>
+      <if test="lowPeriod != null">
+        #{lowPeriod,jdbcType=VARCHAR},
+      </if>
+      <if test="productive != null">
+        #{productive,jdbcType=VARCHAR},
+      </if>
+      <if test="createBy != null">
+        #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="updateBy != null">
+        #{updateBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null">
+        #{createDate,jdbcType=DATE},
+      </if>
+      <if test="updateDate != null">
+        #{updateDate,jdbcType=DATE},
+      </if>
+      <if test="delFlag != null">
+        #{delFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="remarks != null">
+        #{remarks,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.entity.ProManagePropertyExample" resultType="java.lang.Long">
+    select count(*) from pro_manage_property
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update pro_manage_property
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.proManageId != null">
+        pro_manage_id = #{record.proManageId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.price != null">
+        price = #{record.price,jdbcType=VARCHAR},
+      </if>
+      <if test="record.volume != null">
+        volume = #{record.volume,jdbcType=VARCHAR},
+      </if>
+      <if test="record.minPrice != null">
+        min_price = #{record.minPrice,jdbcType=VARCHAR},
+      </if>
+      <if test="record.topPrice != null">
+        top_price = #{record.topPrice,jdbcType=VARCHAR},
+      </if>
+      <if test="record.minOrder != null">
+        min_order = #{record.minOrder,jdbcType=VARCHAR},
+      </if>
+      <if test="record.proUnit != null">
+        pro_unit = #{record.proUnit,jdbcType=VARCHAR},
+      </if>
+      <if test="record.title != null">
+        title = #{record.title,jdbcType=VARCHAR},
+      </if>
+      <if test="record.attrId != null">
+        attr_id = #{record.attrId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.stock != null">
+        stock = #{record.stock,jdbcType=VARCHAR},
+      </if>
+      <if test="record.brandName != null">
+        brand_name = #{record.brandName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sizeLong != null">
+        size_long = #{record.sizeLong,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sizeWide != null">
+        size_wide = #{record.sizeWide,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sizeHigh != null">
+        size_high = #{record.sizeHigh,jdbcType=VARCHAR},
+      </if>
+      <if test="record.unitSize != null">
+        unit_size = #{record.unitSize,jdbcType=VARCHAR},
+      </if>
+      <if test="record.weightNum != null">
+        weight_num = #{record.weightNum,jdbcType=VARCHAR},
+      </if>
+      <if test="record.unitWeight != null">
+        unit_weight = #{record.unitWeight,jdbcType=VARCHAR},
+      </if>
+      <if test="record.originCountry != null">
+        origin_country = #{record.originCountry,jdbcType=VARCHAR},
+      </if>
+      <if test="record.certifications != null">
+        certifications = #{record.certifications,jdbcType=VARCHAR},
+      </if>
+      <if test="record.port != null">
+        port = #{record.port,jdbcType=VARCHAR},
+      </if>
+      <if test="record.payway != null">
+        payway = #{record.payway,jdbcType=VARCHAR},
+      </if>
+      <if test="record.market != null">
+        market = #{record.market,jdbcType=VARCHAR},
+      </if>
+      <if test="record.hotPeriod != null">
+        hot_period = #{record.hotPeriod,jdbcType=VARCHAR},
+      </if>
+      <if test="record.lowPeriod != null">
+        low_period = #{record.lowPeriod,jdbcType=VARCHAR},
+      </if>
+      <if test="record.productive != null">
+        productive = #{record.productive,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createBy != null">
+        create_by = #{record.createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="record.updateBy != null">
+        update_by = #{record.updateBy,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createDate != null">
+        create_date = #{record.createDate,jdbcType=DATE},
+      </if>
+      <if test="record.updateDate != null">
+        update_date = #{record.updateDate,jdbcType=DATE},
+      </if>
+      <if test="record.delFlag != null">
+        del_flag = #{record.delFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="record.remarks != null">
+        remarks = #{record.remarks,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update pro_manage_property
+    set id = #{record.id,jdbcType=VARCHAR},
+      pro_manage_id = #{record.proManageId,jdbcType=VARCHAR},
+      price = #{record.price,jdbcType=VARCHAR},
+      volume = #{record.volume,jdbcType=VARCHAR},
+      min_price = #{record.minPrice,jdbcType=VARCHAR},
+      top_price = #{record.topPrice,jdbcType=VARCHAR},
+      min_order = #{record.minOrder,jdbcType=VARCHAR},
+      pro_unit = #{record.proUnit,jdbcType=VARCHAR},
+      title = #{record.title,jdbcType=VARCHAR},
+      attr_id = #{record.attrId,jdbcType=VARCHAR},
+      stock = #{record.stock,jdbcType=VARCHAR},
+      brand_name = #{record.brandName,jdbcType=VARCHAR},
+      size_long = #{record.sizeLong,jdbcType=VARCHAR},
+      size_wide = #{record.sizeWide,jdbcType=VARCHAR},
+      size_high = #{record.sizeHigh,jdbcType=VARCHAR},
+      unit_size = #{record.unitSize,jdbcType=VARCHAR},
+      weight_num = #{record.weightNum,jdbcType=VARCHAR},
+      unit_weight = #{record.unitWeight,jdbcType=VARCHAR},
+      origin_country = #{record.originCountry,jdbcType=VARCHAR},
+      certifications = #{record.certifications,jdbcType=VARCHAR},
+      port = #{record.port,jdbcType=VARCHAR},
+      payway = #{record.payway,jdbcType=VARCHAR},
+      market = #{record.market,jdbcType=VARCHAR},
+      hot_period = #{record.hotPeriod,jdbcType=VARCHAR},
+      low_period = #{record.lowPeriod,jdbcType=VARCHAR},
+      productive = #{record.productive,jdbcType=VARCHAR},
+      create_by = #{record.createBy,jdbcType=VARCHAR},
+      update_by = #{record.updateBy,jdbcType=VARCHAR},
+      create_date = #{record.createDate,jdbcType=DATE},
+      update_date = #{record.updateDate,jdbcType=DATE},
+      del_flag = #{record.delFlag,jdbcType=VARCHAR},
+      remarks = #{record.remarks,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <resultMap id="BaseResultMap" type="com.entity.ProManageProperty">
+    <result column="id" jdbcType="VARCHAR" property="id" />
+    <result column="pro_manage_id" jdbcType="VARCHAR" property="proManageId" />
+    <result column="price" jdbcType="VARCHAR" property="price" />
+    <result column="volume" jdbcType="VARCHAR" property="volume" />
+    <result column="min_price" jdbcType="VARCHAR" property="minPrice" />
+    <result column="top_price" jdbcType="VARCHAR" property="topPrice" />
+    <result column="min_order" jdbcType="VARCHAR" property="minOrder" />
+    <result column="pro_unit" jdbcType="VARCHAR" property="proUnit" />
+    <result column="title" jdbcType="VARCHAR" property="title" />
+    <result column="attr_id" jdbcType="VARCHAR" property="attrId" />
+    <result column="stock" jdbcType="VARCHAR" property="stock" />
+    <result column="brand_name" jdbcType="VARCHAR" property="brandName" />
+    <result column="size_long" jdbcType="VARCHAR" property="sizeLong" />
+    <result column="size_wide" jdbcType="VARCHAR" property="sizeWide" />
+    <result column="size_high" jdbcType="VARCHAR" property="sizeHigh" />
+    <result column="unit_size" jdbcType="VARCHAR" property="unitSize" />
+    <result column="weight_num" jdbcType="VARCHAR" property="weightNum" />
+    <result column="unit_weight" jdbcType="VARCHAR" property="unitWeight" />
+    <result column="origin_country" jdbcType="VARCHAR" property="originCountry" />
+    <result column="certifications" jdbcType="VARCHAR" property="certifications" />
+    <result column="port" jdbcType="VARCHAR" property="port" />
+    <result column="payway" jdbcType="VARCHAR" property="payway" />
+    <result column="market" jdbcType="VARCHAR" property="market" />
+    <result column="hot_period" jdbcType="VARCHAR" property="hotPeriod" />
+    <result column="low_period" jdbcType="VARCHAR" property="lowPeriod" />
+    <result column="productive" jdbcType="VARCHAR" property="productive" />
+    <result column="create_by" jdbcType="VARCHAR" property="createBy" />
+    <result column="update_by" jdbcType="VARCHAR" property="updateBy" />
+    <result column="create_date" jdbcType="DATE" property="createDate" />
+    <result column="update_date" jdbcType="DATE" property="updateDate" />
+    <result column="del_flag" jdbcType="VARCHAR" property="delFlag" />
+    <result column="remarks" jdbcType="VARCHAR" property="remarks" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, pro_manage_id, price, volume, min_price, top_price, min_order, pro_unit, title, 
+    attr_id, stock, brand_name, size_long, size_wide, size_high, unit_size, weight_num, 
+    unit_weight, origin_country, certifications, port, payway, market, hot_period, low_period, 
+    productive, create_by, update_by, create_date, update_date, del_flag, remarks
+  </sql>
+  <select id="selectByExample" parameterType="com.entity.ProManagePropertyExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from pro_manage_property
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.entity.ProManagePropertyExample">
+    delete from pro_manage_property
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.entity.ProManageProperty">
+    insert into pro_manage_property (id, pro_manage_id, price, 
+      volume, min_price, top_price, 
+      min_order, pro_unit, title, 
+      attr_id, stock, brand_name, 
+      size_long, size_wide, size_high, 
+      unit_size, weight_num, unit_weight, 
+      origin_country, certifications, port, 
+      payway, market, hot_period, 
+      low_period, productive, create_by, 
+      update_by, create_date, update_date, 
+      del_flag, remarks)
+    values (#{id,jdbcType=VARCHAR}, #{proManageId,jdbcType=VARCHAR}, #{price,jdbcType=VARCHAR}, 
+      #{volume,jdbcType=VARCHAR}, #{minPrice,jdbcType=VARCHAR}, #{topPrice,jdbcType=VARCHAR}, 
+      #{minOrder,jdbcType=VARCHAR}, #{proUnit,jdbcType=VARCHAR}, #{title,jdbcType=VARCHAR}, 
+      #{attrId,jdbcType=VARCHAR}, #{stock,jdbcType=VARCHAR}, #{brandName,jdbcType=VARCHAR}, 
+      #{sizeLong,jdbcType=VARCHAR}, #{sizeWide,jdbcType=VARCHAR}, #{sizeHigh,jdbcType=VARCHAR}, 
+      #{unitSize,jdbcType=VARCHAR}, #{weightNum,jdbcType=VARCHAR}, #{unitWeight,jdbcType=VARCHAR}, 
+      #{originCountry,jdbcType=VARCHAR}, #{certifications,jdbcType=VARCHAR}, #{port,jdbcType=VARCHAR}, 
+      #{payway,jdbcType=VARCHAR}, #{market,jdbcType=VARCHAR}, #{hotPeriod,jdbcType=VARCHAR}, 
+      #{lowPeriod,jdbcType=VARCHAR}, #{productive,jdbcType=VARCHAR}, #{createBy,jdbcType=VARCHAR}, 
+      #{updateBy,jdbcType=VARCHAR}, #{createDate,jdbcType=DATE}, #{updateDate,jdbcType=DATE}, 
+      #{delFlag,jdbcType=VARCHAR}, #{remarks,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.entity.ProManageProperty">
+    insert into pro_manage_property
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="proManageId != null">
+        pro_manage_id,
+      </if>
+      <if test="price != null">
+        price,
+      </if>
+      <if test="volume != null">
+        volume,
+      </if>
+      <if test="minPrice != null">
+        min_price,
+      </if>
+      <if test="topPrice != null">
+        top_price,
+      </if>
+      <if test="minOrder != null">
+        min_order,
+      </if>
+      <if test="proUnit != null">
+        pro_unit,
+      </if>
+      <if test="title != null">
+        title,
+      </if>
+      <if test="attrId != null">
+        attr_id,
+      </if>
+      <if test="stock != null">
+        stock,
+      </if>
+      <if test="brandName != null">
+        brand_name,
+      </if>
+      <if test="sizeLong != null">
+        size_long,
+      </if>
+      <if test="sizeWide != null">
+        size_wide,
+      </if>
+      <if test="sizeHigh != null">
+        size_high,
+      </if>
+      <if test="unitSize != null">
+        unit_size,
+      </if>
+      <if test="weightNum != null">
+        weight_num,
+      </if>
+      <if test="unitWeight != null">
+        unit_weight,
+      </if>
+      <if test="originCountry != null">
+        origin_country,
+      </if>
+      <if test="certifications != null">
+        certifications,
+      </if>
+      <if test="port != null">
+        port,
+      </if>
+      <if test="payway != null">
+        payway,
+      </if>
+      <if test="market != null">
+        market,
+      </if>
+      <if test="hotPeriod != null">
+        hot_period,
+      </if>
+      <if test="lowPeriod != null">
+        low_period,
+      </if>
+      <if test="productive != null">
+        productive,
+      </if>
+      <if test="createBy != null">
+        create_by,
+      </if>
+      <if test="updateBy != null">
+        update_by,
+      </if>
+      <if test="createDate != null">
+        create_date,
+      </if>
+      <if test="updateDate != null">
+        update_date,
+      </if>
+      <if test="delFlag != null">
+        del_flag,
+      </if>
+      <if test="remarks != null">
+        remarks,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="proManageId != null">
+        #{proManageId,jdbcType=VARCHAR},
+      </if>
+      <if test="price != null">
+        #{price,jdbcType=VARCHAR},
+      </if>
+      <if test="volume != null">
+        #{volume,jdbcType=VARCHAR},
+      </if>
+      <if test="minPrice != null">
+        #{minPrice,jdbcType=VARCHAR},
+      </if>
+      <if test="topPrice != null">
+        #{topPrice,jdbcType=VARCHAR},
+      </if>
+      <if test="minOrder != null">
+        #{minOrder,jdbcType=VARCHAR},
+      </if>
+      <if test="proUnit != null">
+        #{proUnit,jdbcType=VARCHAR},
+      </if>
+      <if test="title != null">
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="attrId != null">
+        #{attrId,jdbcType=VARCHAR},
+      </if>
+      <if test="stock != null">
+        #{stock,jdbcType=VARCHAR},
+      </if>
+      <if test="brandName != null">
+        #{brandName,jdbcType=VARCHAR},
+      </if>
+      <if test="sizeLong != null">
+        #{sizeLong,jdbcType=VARCHAR},
+      </if>
+      <if test="sizeWide != null">
+        #{sizeWide,jdbcType=VARCHAR},
+      </if>
+      <if test="sizeHigh != null">
+        #{sizeHigh,jdbcType=VARCHAR},
+      </if>
+      <if test="unitSize != null">
+        #{unitSize,jdbcType=VARCHAR},
+      </if>
+      <if test="weightNum != null">
+        #{weightNum,jdbcType=VARCHAR},
+      </if>
+      <if test="unitWeight != null">
+        #{unitWeight,jdbcType=VARCHAR},
+      </if>
+      <if test="originCountry != null">
+        #{originCountry,jdbcType=VARCHAR},
+      </if>
+      <if test="certifications != null">
+        #{certifications,jdbcType=VARCHAR},
+      </if>
+      <if test="port != null">
+        #{port,jdbcType=VARCHAR},
+      </if>
+      <if test="payway != null">
+        #{payway,jdbcType=VARCHAR},
+      </if>
+      <if test="market != null">
+        #{market,jdbcType=VARCHAR},
+      </if>
+      <if test="hotPeriod != null">
+        #{hotPeriod,jdbcType=VARCHAR},
+      </if>
+      <if test="lowPeriod != null">
+        #{lowPeriod,jdbcType=VARCHAR},
+      </if>
+      <if test="productive != null">
+        #{productive,jdbcType=VARCHAR},
+      </if>
+      <if test="createBy != null">
+        #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="updateBy != null">
+        #{updateBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null">
+        #{createDate,jdbcType=DATE},
+      </if>
+      <if test="updateDate != null">
+        #{updateDate,jdbcType=DATE},
+      </if>
+      <if test="delFlag != null">
+        #{delFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="remarks != null">
+        #{remarks,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.entity.ProManagePropertyExample" resultType="java.lang.Long">
+    select count(*) from pro_manage_property
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update pro_manage_property
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.proManageId != null">
+        pro_manage_id = #{record.proManageId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.price != null">
+        price = #{record.price,jdbcType=VARCHAR},
+      </if>
+      <if test="record.volume != null">
+        volume = #{record.volume,jdbcType=VARCHAR},
+      </if>
+      <if test="record.minPrice != null">
+        min_price = #{record.minPrice,jdbcType=VARCHAR},
+      </if>
+      <if test="record.topPrice != null">
+        top_price = #{record.topPrice,jdbcType=VARCHAR},
+      </if>
+      <if test="record.minOrder != null">
+        min_order = #{record.minOrder,jdbcType=VARCHAR},
+      </if>
+      <if test="record.proUnit != null">
+        pro_unit = #{record.proUnit,jdbcType=VARCHAR},
+      </if>
+      <if test="record.title != null">
+        title = #{record.title,jdbcType=VARCHAR},
+      </if>
+      <if test="record.attrId != null">
+        attr_id = #{record.attrId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.stock != null">
+        stock = #{record.stock,jdbcType=VARCHAR},
+      </if>
+      <if test="record.brandName != null">
+        brand_name = #{record.brandName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sizeLong != null">
+        size_long = #{record.sizeLong,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sizeWide != null">
+        size_wide = #{record.sizeWide,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sizeHigh != null">
+        size_high = #{record.sizeHigh,jdbcType=VARCHAR},
+      </if>
+      <if test="record.unitSize != null">
+        unit_size = #{record.unitSize,jdbcType=VARCHAR},
+      </if>
+      <if test="record.weightNum != null">
+        weight_num = #{record.weightNum,jdbcType=VARCHAR},
+      </if>
+      <if test="record.unitWeight != null">
+        unit_weight = #{record.unitWeight,jdbcType=VARCHAR},
+      </if>
+      <if test="record.originCountry != null">
+        origin_country = #{record.originCountry,jdbcType=VARCHAR},
+      </if>
+      <if test="record.certifications != null">
+        certifications = #{record.certifications,jdbcType=VARCHAR},
+      </if>
+      <if test="record.port != null">
+        port = #{record.port,jdbcType=VARCHAR},
+      </if>
+      <if test="record.payway != null">
+        payway = #{record.payway,jdbcType=VARCHAR},
+      </if>
+      <if test="record.market != null">
+        market = #{record.market,jdbcType=VARCHAR},
+      </if>
+      <if test="record.hotPeriod != null">
+        hot_period = #{record.hotPeriod,jdbcType=VARCHAR},
+      </if>
+      <if test="record.lowPeriod != null">
+        low_period = #{record.lowPeriod,jdbcType=VARCHAR},
+      </if>
+      <if test="record.productive != null">
+        productive = #{record.productive,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createBy != null">
+        create_by = #{record.createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="record.updateBy != null">
+        update_by = #{record.updateBy,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createDate != null">
+        create_date = #{record.createDate,jdbcType=DATE},
+      </if>
+      <if test="record.updateDate != null">
+        update_date = #{record.updateDate,jdbcType=DATE},
+      </if>
+      <if test="record.delFlag != null">
+        del_flag = #{record.delFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="record.remarks != null">
+        remarks = #{record.remarks,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update pro_manage_property
+    set id = #{record.id,jdbcType=VARCHAR},
+      pro_manage_id = #{record.proManageId,jdbcType=VARCHAR},
+      price = #{record.price,jdbcType=VARCHAR},
+      volume = #{record.volume,jdbcType=VARCHAR},
+      min_price = #{record.minPrice,jdbcType=VARCHAR},
+      top_price = #{record.topPrice,jdbcType=VARCHAR},
+      min_order = #{record.minOrder,jdbcType=VARCHAR},
+      pro_unit = #{record.proUnit,jdbcType=VARCHAR},
+      title = #{record.title,jdbcType=VARCHAR},
+      attr_id = #{record.attrId,jdbcType=VARCHAR},
+      stock = #{record.stock,jdbcType=VARCHAR},
+      brand_name = #{record.brandName,jdbcType=VARCHAR},
+      size_long = #{record.sizeLong,jdbcType=VARCHAR},
+      size_wide = #{record.sizeWide,jdbcType=VARCHAR},
+      size_high = #{record.sizeHigh,jdbcType=VARCHAR},
+      unit_size = #{record.unitSize,jdbcType=VARCHAR},
+      weight_num = #{record.weightNum,jdbcType=VARCHAR},
+      unit_weight = #{record.unitWeight,jdbcType=VARCHAR},
+      origin_country = #{record.originCountry,jdbcType=VARCHAR},
+      certifications = #{record.certifications,jdbcType=VARCHAR},
+      port = #{record.port,jdbcType=VARCHAR},
+      payway = #{record.payway,jdbcType=VARCHAR},
+      market = #{record.market,jdbcType=VARCHAR},
+      hot_period = #{record.hotPeriod,jdbcType=VARCHAR},
+      low_period = #{record.lowPeriod,jdbcType=VARCHAR},
+      productive = #{record.productive,jdbcType=VARCHAR},
+      create_by = #{record.createBy,jdbcType=VARCHAR},
+      update_by = #{record.updateBy,jdbcType=VARCHAR},
+      create_date = #{record.createDate,jdbcType=DATE},
+      update_date = #{record.updateDate,jdbcType=DATE},
+      del_flag = #{record.delFlag,jdbcType=VARCHAR},
+      remarks = #{record.remarks,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+</mapper>

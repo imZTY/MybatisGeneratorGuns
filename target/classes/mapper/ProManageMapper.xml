@@ -1,0 +1,3514 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="zty.dao.ProManageMapper">
+  <resultMap id="BaseResultMap" type="zty.entity.ProManage">
+    <result column="id" jdbcType="VARCHAR" property="id" />
+    <result column="products_id" jdbcType="VARCHAR" property="productsId" />
+    <result column="company_id" jdbcType="VARCHAR" property="companyId" />
+    <result column="type_source" jdbcType="VARCHAR" property="typeSource" />
+    <result column="pro_no" jdbcType="VARCHAR" property="proNo" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="catalog" jdbcType="VARCHAR" property="catalog" />
+    <result column="model" jdbcType="VARCHAR" property="model" />
+    <result column="reason" jdbcType="VARCHAR" property="reason" />
+    <result column="keyword" jdbcType="VARCHAR" property="keyword" />
+    <result column="start" jdbcType="VARCHAR" property="start" />
+    <result column="state" jdbcType="VARCHAR" property="state" />
+    <result column="groups_id" jdbcType="VARCHAR" property="groupsId" />
+    <result column="subaccount_id" jdbcType="VARCHAR" property="subaccountId" />
+    <result column="img" jdbcType="VARCHAR" property="img" />
+    <result column="hotsale_flag" jdbcType="CHAR" property="hotsaleFlag" />
+    <result column="customs_no" jdbcType="VARCHAR" property="customsNo" />
+    <result column="tax_cost" jdbcType="REAL" property="taxCost" />
+    <result column="cost_qua_unit" jdbcType="CHAR" property="costQuaUnit" />
+    <result column="cost_currency" jdbcType="VARCHAR" property="costCurrency" />
+    <result column="off_shore_currency" jdbcType="VARCHAR" property="offShoreCurrency" />
+    <result column="off_shore_qua_unit" jdbcType="CHAR" property="offShoreQuaUnit" />
+    <result column="off_shore_min_price" jdbcType="REAL" property="offShoreMinPrice" />
+    <result column="off_shore_max_price" jdbcType="REAL" property="offShoreMaxPrice" />
+    <result column="min_order_quantity" jdbcType="REAL" property="minOrderQuantity" />
+    <result column="min_order_unit" jdbcType="CHAR" property="minOrderUnit" />
+    <result column="page_unit" jdbcType="CHAR" property="pageUnit" />
+    <result column="per_page_num" jdbcType="REAL" property="perPageNum" />
+    <result column="per_page" jdbcType="REAL" property="perPage" />
+    <result column="per_weight" jdbcType="REAL" property="perWeight" />
+    <result column="pg_description" jdbcType="VARCHAR" property="pgDescription" />
+    <result column="pro_description" jdbcType="VARCHAR" property="proDescription" />
+    <result column="pro_url" jdbcType="VARCHAR" property="proUrl" />
+    <result column="attach_key" jdbcType="VARCHAR" property="attachKey" />
+    <result column="create_by" jdbcType="VARCHAR" property="createBy" />
+    <result column="create_date" jdbcType="TIMESTAMP" property="createDate" />
+    <result column="update_by" jdbcType="VARCHAR" property="updateBy" />
+    <result column="update_date" jdbcType="TIMESTAMP" property="updateDate" />
+    <result column="remarks" jdbcType="VARCHAR" property="remarks" />
+    <result column="del_flag" jdbcType="CHAR" property="delFlag" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, products_id, company_id, type_source, pro_no, name, catalog, model, reason, keyword, 
+    start, state, groups_id, subaccount_id, img, hotsale_flag, customs_no, tax_cost, 
+    cost_qua_unit, cost_currency, off_shore_currency, off_shore_qua_unit, off_shore_min_price, 
+    off_shore_max_price, min_order_quantity, min_order_unit, page_unit, per_page_num, 
+    per_page, per_weight, pg_description, pro_description, pro_url, attach_key, create_by, 
+    create_date, update_by, update_date, remarks, del_flag
+  </sql>
+  <select id="selectByExample" parameterType="zty.entity.ProManageExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from pro_manage
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="zty.entity.ProManageExample">
+    delete from pro_manage
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="zty.entity.ProManage">
+    insert into pro_manage (id, products_id, company_id, 
+      type_source, pro_no, name, 
+      catalog, model, reason, 
+      keyword, start, state, 
+      groups_id, subaccount_id, img, 
+      hotsale_flag, customs_no, tax_cost, 
+      cost_qua_unit, cost_currency, off_shore_currency, 
+      off_shore_qua_unit, off_shore_min_price, off_shore_max_price, 
+      min_order_quantity, min_order_unit, page_unit, 
+      per_page_num, per_page, per_weight, 
+      pg_description, pro_description, pro_url, 
+      attach_key, create_by, create_date, 
+      update_by, update_date, remarks, 
+      del_flag)
+    values (#{id,jdbcType=VARCHAR}, #{productsId,jdbcType=VARCHAR}, #{companyId,jdbcType=VARCHAR}, 
+      #{typeSource,jdbcType=VARCHAR}, #{proNo,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, 
+      #{catalog,jdbcType=VARCHAR}, #{model,jdbcType=VARCHAR}, #{reason,jdbcType=VARCHAR}, 
+      #{keyword,jdbcType=VARCHAR}, #{start,jdbcType=VARCHAR}, #{state,jdbcType=VARCHAR}, 
+      #{groupsId,jdbcType=VARCHAR}, #{subaccountId,jdbcType=VARCHAR}, #{img,jdbcType=VARCHAR}, 
+      #{hotsaleFlag,jdbcType=CHAR}, #{customsNo,jdbcType=VARCHAR}, #{taxCost,jdbcType=REAL}, 
+      #{costQuaUnit,jdbcType=CHAR}, #{costCurrency,jdbcType=VARCHAR}, #{offShoreCurrency,jdbcType=VARCHAR}, 
+      #{offShoreQuaUnit,jdbcType=CHAR}, #{offShoreMinPrice,jdbcType=REAL}, #{offShoreMaxPrice,jdbcType=REAL}, 
+      #{minOrderQuantity,jdbcType=REAL}, #{minOrderUnit,jdbcType=CHAR}, #{pageUnit,jdbcType=CHAR}, 
+      #{perPageNum,jdbcType=REAL}, #{perPage,jdbcType=REAL}, #{perWeight,jdbcType=REAL}, 
+      #{pgDescription,jdbcType=VARCHAR}, #{proDescription,jdbcType=VARCHAR}, #{proUrl,jdbcType=VARCHAR}, 
+      #{attachKey,jdbcType=VARCHAR}, #{createBy,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}, 
+      #{updateBy,jdbcType=VARCHAR}, #{updateDate,jdbcType=TIMESTAMP}, #{remarks,jdbcType=VARCHAR}, 
+      #{delFlag,jdbcType=CHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="zty.entity.ProManage">
+    insert into pro_manage
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="productsId != null">
+        products_id,
+      </if>
+      <if test="companyId != null">
+        company_id,
+      </if>
+      <if test="typeSource != null">
+        type_source,
+      </if>
+      <if test="proNo != null">
+        pro_no,
+      </if>
+      <if test="name != null">
+        name,
+      </if>
+      <if test="catalog != null">
+        catalog,
+      </if>
+      <if test="model != null">
+        model,
+      </if>
+      <if test="reason != null">
+        reason,
+      </if>
+      <if test="keyword != null">
+        keyword,
+      </if>
+      <if test="start != null">
+        start,
+      </if>
+      <if test="state != null">
+        state,
+      </if>
+      <if test="groupsId != null">
+        groups_id,
+      </if>
+      <if test="subaccountId != null">
+        subaccount_id,
+      </if>
+      <if test="img != null">
+        img,
+      </if>
+      <if test="hotsaleFlag != null">
+        hotsale_flag,
+      </if>
+      <if test="customsNo != null">
+        customs_no,
+      </if>
+      <if test="taxCost != null">
+        tax_cost,
+      </if>
+      <if test="costQuaUnit != null">
+        cost_qua_unit,
+      </if>
+      <if test="costCurrency != null">
+        cost_currency,
+      </if>
+      <if test="offShoreCurrency != null">
+        off_shore_currency,
+      </if>
+      <if test="offShoreQuaUnit != null">
+        off_shore_qua_unit,
+      </if>
+      <if test="offShoreMinPrice != null">
+        off_shore_min_price,
+      </if>
+      <if test="offShoreMaxPrice != null">
+        off_shore_max_price,
+      </if>
+      <if test="minOrderQuantity != null">
+        min_order_quantity,
+      </if>
+      <if test="minOrderUnit != null">
+        min_order_unit,
+      </if>
+      <if test="pageUnit != null">
+        page_unit,
+      </if>
+      <if test="perPageNum != null">
+        per_page_num,
+      </if>
+      <if test="perPage != null">
+        per_page,
+      </if>
+      <if test="perWeight != null">
+        per_weight,
+      </if>
+      <if test="pgDescription != null">
+        pg_description,
+      </if>
+      <if test="proDescription != null">
+        pro_description,
+      </if>
+      <if test="proUrl != null">
+        pro_url,
+      </if>
+      <if test="attachKey != null">
+        attach_key,
+      </if>
+      <if test="createBy != null">
+        create_by,
+      </if>
+      <if test="createDate != null">
+        create_date,
+      </if>
+      <if test="updateBy != null">
+        update_by,
+      </if>
+      <if test="updateDate != null">
+        update_date,
+      </if>
+      <if test="remarks != null">
+        remarks,
+      </if>
+      <if test="delFlag != null">
+        del_flag,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="productsId != null">
+        #{productsId,jdbcType=VARCHAR},
+      </if>
+      <if test="companyId != null">
+        #{companyId,jdbcType=VARCHAR},
+      </if>
+      <if test="typeSource != null">
+        #{typeSource,jdbcType=VARCHAR},
+      </if>
+      <if test="proNo != null">
+        #{proNo,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="catalog != null">
+        #{catalog,jdbcType=VARCHAR},
+      </if>
+      <if test="model != null">
+        #{model,jdbcType=VARCHAR},
+      </if>
+      <if test="reason != null">
+        #{reason,jdbcType=VARCHAR},
+      </if>
+      <if test="keyword != null">
+        #{keyword,jdbcType=VARCHAR},
+      </if>
+      <if test="start != null">
+        #{start,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null">
+        #{state,jdbcType=VARCHAR},
+      </if>
+      <if test="groupsId != null">
+        #{groupsId,jdbcType=VARCHAR},
+      </if>
+      <if test="subaccountId != null">
+        #{subaccountId,jdbcType=VARCHAR},
+      </if>
+      <if test="img != null">
+        #{img,jdbcType=VARCHAR},
+      </if>
+      <if test="hotsaleFlag != null">
+        #{hotsaleFlag,jdbcType=CHAR},
+      </if>
+      <if test="customsNo != null">
+        #{customsNo,jdbcType=VARCHAR},
+      </if>
+      <if test="taxCost != null">
+        #{taxCost,jdbcType=REAL},
+      </if>
+      <if test="costQuaUnit != null">
+        #{costQuaUnit,jdbcType=CHAR},
+      </if>
+      <if test="costCurrency != null">
+        #{costCurrency,jdbcType=VARCHAR},
+      </if>
+      <if test="offShoreCurrency != null">
+        #{offShoreCurrency,jdbcType=VARCHAR},
+      </if>
+      <if test="offShoreQuaUnit != null">
+        #{offShoreQuaUnit,jdbcType=CHAR},
+      </if>
+      <if test="offShoreMinPrice != null">
+        #{offShoreMinPrice,jdbcType=REAL},
+      </if>
+      <if test="offShoreMaxPrice != null">
+        #{offShoreMaxPrice,jdbcType=REAL},
+      </if>
+      <if test="minOrderQuantity != null">
+        #{minOrderQuantity,jdbcType=REAL},
+      </if>
+      <if test="minOrderUnit != null">
+        #{minOrderUnit,jdbcType=CHAR},
+      </if>
+      <if test="pageUnit != null">
+        #{pageUnit,jdbcType=CHAR},
+      </if>
+      <if test="perPageNum != null">
+        #{perPageNum,jdbcType=REAL},
+      </if>
+      <if test="perPage != null">
+        #{perPage,jdbcType=REAL},
+      </if>
+      <if test="perWeight != null">
+        #{perWeight,jdbcType=REAL},
+      </if>
+      <if test="pgDescription != null">
+        #{pgDescription,jdbcType=VARCHAR},
+      </if>
+      <if test="proDescription != null">
+        #{proDescription,jdbcType=VARCHAR},
+      </if>
+      <if test="proUrl != null">
+        #{proUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="attachKey != null">
+        #{attachKey,jdbcType=VARCHAR},
+      </if>
+      <if test="createBy != null">
+        #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null">
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateBy != null">
+        #{updateBy,jdbcType=VARCHAR},
+      </if>
+      <if test="updateDate != null">
+        #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="remarks != null">
+        #{remarks,jdbcType=VARCHAR},
+      </if>
+      <if test="delFlag != null">
+        #{delFlag,jdbcType=CHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="zty.entity.ProManageExample" resultType="java.lang.Long">
+    select count(*) from pro_manage
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update pro_manage
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.productsId != null">
+        products_id = #{record.productsId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.companyId != null">
+        company_id = #{record.companyId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.typeSource != null">
+        type_source = #{record.typeSource,jdbcType=VARCHAR},
+      </if>
+      <if test="record.proNo != null">
+        pro_no = #{record.proNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.name != null">
+        name = #{record.name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.catalog != null">
+        catalog = #{record.catalog,jdbcType=VARCHAR},
+      </if>
+      <if test="record.model != null">
+        model = #{record.model,jdbcType=VARCHAR},
+      </if>
+      <if test="record.reason != null">
+        reason = #{record.reason,jdbcType=VARCHAR},
+      </if>
+      <if test="record.keyword != null">
+        keyword = #{record.keyword,jdbcType=VARCHAR},
+      </if>
+      <if test="record.start != null">
+        start = #{record.start,jdbcType=VARCHAR},
+      </if>
+      <if test="record.state != null">
+        state = #{record.state,jdbcType=VARCHAR},
+      </if>
+      <if test="record.groupsId != null">
+        groups_id = #{record.groupsId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.subaccountId != null">
+        subaccount_id = #{record.subaccountId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.img != null">
+        img = #{record.img,jdbcType=VARCHAR},
+      </if>
+      <if test="record.hotsaleFlag != null">
+        hotsale_flag = #{record.hotsaleFlag,jdbcType=CHAR},
+      </if>
+      <if test="record.customsNo != null">
+        customs_no = #{record.customsNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.taxCost != null">
+        tax_cost = #{record.taxCost,jdbcType=REAL},
+      </if>
+      <if test="record.costQuaUnit != null">
+        cost_qua_unit = #{record.costQuaUnit,jdbcType=CHAR},
+      </if>
+      <if test="record.costCurrency != null">
+        cost_currency = #{record.costCurrency,jdbcType=VARCHAR},
+      </if>
+      <if test="record.offShoreCurrency != null">
+        off_shore_currency = #{record.offShoreCurrency,jdbcType=VARCHAR},
+      </if>
+      <if test="record.offShoreQuaUnit != null">
+        off_shore_qua_unit = #{record.offShoreQuaUnit,jdbcType=CHAR},
+      </if>
+      <if test="record.offShoreMinPrice != null">
+        off_shore_min_price = #{record.offShoreMinPrice,jdbcType=REAL},
+      </if>
+      <if test="record.offShoreMaxPrice != null">
+        off_shore_max_price = #{record.offShoreMaxPrice,jdbcType=REAL},
+      </if>
+      <if test="record.minOrderQuantity != null">
+        min_order_quantity = #{record.minOrderQuantity,jdbcType=REAL},
+      </if>
+      <if test="record.minOrderUnit != null">
+        min_order_unit = #{record.minOrderUnit,jdbcType=CHAR},
+      </if>
+      <if test="record.pageUnit != null">
+        page_unit = #{record.pageUnit,jdbcType=CHAR},
+      </if>
+      <if test="record.perPageNum != null">
+        per_page_num = #{record.perPageNum,jdbcType=REAL},
+      </if>
+      <if test="record.perPage != null">
+        per_page = #{record.perPage,jdbcType=REAL},
+      </if>
+      <if test="record.perWeight != null">
+        per_weight = #{record.perWeight,jdbcType=REAL},
+      </if>
+      <if test="record.pgDescription != null">
+        pg_description = #{record.pgDescription,jdbcType=VARCHAR},
+      </if>
+      <if test="record.proDescription != null">
+        pro_description = #{record.proDescription,jdbcType=VARCHAR},
+      </if>
+      <if test="record.proUrl != null">
+        pro_url = #{record.proUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.attachKey != null">
+        attach_key = #{record.attachKey,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createBy != null">
+        create_by = #{record.createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createDate != null">
+        create_date = #{record.createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updateBy != null">
+        update_by = #{record.updateBy,jdbcType=VARCHAR},
+      </if>
+      <if test="record.updateDate != null">
+        update_date = #{record.updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.remarks != null">
+        remarks = #{record.remarks,jdbcType=VARCHAR},
+      </if>
+      <if test="record.delFlag != null">
+        del_flag = #{record.delFlag,jdbcType=CHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update pro_manage
+    set id = #{record.id,jdbcType=VARCHAR},
+      products_id = #{record.productsId,jdbcType=VARCHAR},
+      company_id = #{record.companyId,jdbcType=VARCHAR},
+      type_source = #{record.typeSource,jdbcType=VARCHAR},
+      pro_no = #{record.proNo,jdbcType=VARCHAR},
+      name = #{record.name,jdbcType=VARCHAR},
+      catalog = #{record.catalog,jdbcType=VARCHAR},
+      model = #{record.model,jdbcType=VARCHAR},
+      reason = #{record.reason,jdbcType=VARCHAR},
+      keyword = #{record.keyword,jdbcType=VARCHAR},
+      start = #{record.start,jdbcType=VARCHAR},
+      state = #{record.state,jdbcType=VARCHAR},
+      groups_id = #{record.groupsId,jdbcType=VARCHAR},
+      subaccount_id = #{record.subaccountId,jdbcType=VARCHAR},
+      img = #{record.img,jdbcType=VARCHAR},
+      hotsale_flag = #{record.hotsaleFlag,jdbcType=CHAR},
+      customs_no = #{record.customsNo,jdbcType=VARCHAR},
+      tax_cost = #{record.taxCost,jdbcType=REAL},
+      cost_qua_unit = #{record.costQuaUnit,jdbcType=CHAR},
+      cost_currency = #{record.costCurrency,jdbcType=VARCHAR},
+      off_shore_currency = #{record.offShoreCurrency,jdbcType=VARCHAR},
+      off_shore_qua_unit = #{record.offShoreQuaUnit,jdbcType=CHAR},
+      off_shore_min_price = #{record.offShoreMinPrice,jdbcType=REAL},
+      off_shore_max_price = #{record.offShoreMaxPrice,jdbcType=REAL},
+      min_order_quantity = #{record.minOrderQuantity,jdbcType=REAL},
+      min_order_unit = #{record.minOrderUnit,jdbcType=CHAR},
+      page_unit = #{record.pageUnit,jdbcType=CHAR},
+      per_page_num = #{record.perPageNum,jdbcType=REAL},
+      per_page = #{record.perPage,jdbcType=REAL},
+      per_weight = #{record.perWeight,jdbcType=REAL},
+      pg_description = #{record.pgDescription,jdbcType=VARCHAR},
+      pro_description = #{record.proDescription,jdbcType=VARCHAR},
+      pro_url = #{record.proUrl,jdbcType=VARCHAR},
+      attach_key = #{record.attachKey,jdbcType=VARCHAR},
+      create_by = #{record.createBy,jdbcType=VARCHAR},
+      create_date = #{record.createDate,jdbcType=TIMESTAMP},
+      update_by = #{record.updateBy,jdbcType=VARCHAR},
+      update_date = #{record.updateDate,jdbcType=TIMESTAMP},
+      remarks = #{record.remarks,jdbcType=VARCHAR},
+      del_flag = #{record.delFlag,jdbcType=CHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <resultMap id="BaseResultMap" type="zty.entity.ProManage">
+    <result column="id" jdbcType="VARCHAR" property="id" />
+    <result column="products_id" jdbcType="VARCHAR" property="productsId" />
+    <result column="company_id" jdbcType="VARCHAR" property="companyId" />
+    <result column="type_source" jdbcType="VARCHAR" property="typeSource" />
+    <result column="pro_no" jdbcType="VARCHAR" property="proNo" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="catalog" jdbcType="VARCHAR" property="catalog" />
+    <result column="model" jdbcType="VARCHAR" property="model" />
+    <result column="reason" jdbcType="VARCHAR" property="reason" />
+    <result column="keyword" jdbcType="VARCHAR" property="keyword" />
+    <result column="start" jdbcType="VARCHAR" property="start" />
+    <result column="state" jdbcType="VARCHAR" property="state" />
+    <result column="groups_id" jdbcType="VARCHAR" property="groupsId" />
+    <result column="subaccount_id" jdbcType="VARCHAR" property="subaccountId" />
+    <result column="img" jdbcType="VARCHAR" property="img" />
+    <result column="hotsale_flag" jdbcType="CHAR" property="hotsaleFlag" />
+    <result column="customs_no" jdbcType="VARCHAR" property="customsNo" />
+    <result column="tax_cost" jdbcType="REAL" property="taxCost" />
+    <result column="cost_qua_unit" jdbcType="CHAR" property="costQuaUnit" />
+    <result column="cost_currency" jdbcType="VARCHAR" property="costCurrency" />
+    <result column="off_shore_currency" jdbcType="VARCHAR" property="offShoreCurrency" />
+    <result column="off_shore_qua_unit" jdbcType="CHAR" property="offShoreQuaUnit" />
+    <result column="off_shore_min_price" jdbcType="REAL" property="offShoreMinPrice" />
+    <result column="off_shore_max_price" jdbcType="REAL" property="offShoreMaxPrice" />
+    <result column="min_order_quantity" jdbcType="REAL" property="minOrderQuantity" />
+    <result column="min_order_unit" jdbcType="CHAR" property="minOrderUnit" />
+    <result column="page_unit" jdbcType="CHAR" property="pageUnit" />
+    <result column="per_page_num" jdbcType="REAL" property="perPageNum" />
+    <result column="per_page" jdbcType="REAL" property="perPage" />
+    <result column="per_weight" jdbcType="REAL" property="perWeight" />
+    <result column="pg_description" jdbcType="VARCHAR" property="pgDescription" />
+    <result column="pro_description" jdbcType="VARCHAR" property="proDescription" />
+    <result column="pro_url" jdbcType="VARCHAR" property="proUrl" />
+    <result column="attach_key" jdbcType="VARCHAR" property="attachKey" />
+    <result column="create_by" jdbcType="VARCHAR" property="createBy" />
+    <result column="create_date" jdbcType="TIMESTAMP" property="createDate" />
+    <result column="update_by" jdbcType="VARCHAR" property="updateBy" />
+    <result column="update_date" jdbcType="TIMESTAMP" property="updateDate" />
+    <result column="remarks" jdbcType="VARCHAR" property="remarks" />
+    <result column="del_flag" jdbcType="CHAR" property="delFlag" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, products_id, company_id, type_source, pro_no, name, catalog, model, reason, keyword, 
+    start, state, groups_id, subaccount_id, img, hotsale_flag, customs_no, tax_cost, 
+    cost_qua_unit, cost_currency, off_shore_currency, off_shore_qua_unit, off_shore_min_price, 
+    off_shore_max_price, min_order_quantity, min_order_unit, page_unit, per_page_num, 
+    per_page, per_weight, pg_description, pro_description, pro_url, attach_key, create_by, 
+    create_date, update_by, update_date, remarks, del_flag
+  </sql>
+  <select id="selectByExample" parameterType="zty.entity.ProManageExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from pro_manage
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="zty.entity.ProManageExample">
+    delete from pro_manage
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="zty.entity.ProManage">
+    insert into pro_manage (id, products_id, company_id, 
+      type_source, pro_no, name, 
+      catalog, model, reason, 
+      keyword, start, state, 
+      groups_id, subaccount_id, img, 
+      hotsale_flag, customs_no, tax_cost, 
+      cost_qua_unit, cost_currency, off_shore_currency, 
+      off_shore_qua_unit, off_shore_min_price, off_shore_max_price, 
+      min_order_quantity, min_order_unit, page_unit, 
+      per_page_num, per_page, per_weight, 
+      pg_description, pro_description, pro_url, 
+      attach_key, create_by, create_date, 
+      update_by, update_date, remarks, 
+      del_flag)
+    values (#{id,jdbcType=VARCHAR}, #{productsId,jdbcType=VARCHAR}, #{companyId,jdbcType=VARCHAR}, 
+      #{typeSource,jdbcType=VARCHAR}, #{proNo,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, 
+      #{catalog,jdbcType=VARCHAR}, #{model,jdbcType=VARCHAR}, #{reason,jdbcType=VARCHAR}, 
+      #{keyword,jdbcType=VARCHAR}, #{start,jdbcType=VARCHAR}, #{state,jdbcType=VARCHAR}, 
+      #{groupsId,jdbcType=VARCHAR}, #{subaccountId,jdbcType=VARCHAR}, #{img,jdbcType=VARCHAR}, 
+      #{hotsaleFlag,jdbcType=CHAR}, #{customsNo,jdbcType=VARCHAR}, #{taxCost,jdbcType=REAL}, 
+      #{costQuaUnit,jdbcType=CHAR}, #{costCurrency,jdbcType=VARCHAR}, #{offShoreCurrency,jdbcType=VARCHAR}, 
+      #{offShoreQuaUnit,jdbcType=CHAR}, #{offShoreMinPrice,jdbcType=REAL}, #{offShoreMaxPrice,jdbcType=REAL}, 
+      #{minOrderQuantity,jdbcType=REAL}, #{minOrderUnit,jdbcType=CHAR}, #{pageUnit,jdbcType=CHAR}, 
+      #{perPageNum,jdbcType=REAL}, #{perPage,jdbcType=REAL}, #{perWeight,jdbcType=REAL}, 
+      #{pgDescription,jdbcType=VARCHAR}, #{proDescription,jdbcType=VARCHAR}, #{proUrl,jdbcType=VARCHAR}, 
+      #{attachKey,jdbcType=VARCHAR}, #{createBy,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}, 
+      #{updateBy,jdbcType=VARCHAR}, #{updateDate,jdbcType=TIMESTAMP}, #{remarks,jdbcType=VARCHAR}, 
+      #{delFlag,jdbcType=CHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="zty.entity.ProManage">
+    insert into pro_manage
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="productsId != null">
+        products_id,
+      </if>
+      <if test="companyId != null">
+        company_id,
+      </if>
+      <if test="typeSource != null">
+        type_source,
+      </if>
+      <if test="proNo != null">
+        pro_no,
+      </if>
+      <if test="name != null">
+        name,
+      </if>
+      <if test="catalog != null">
+        catalog,
+      </if>
+      <if test="model != null">
+        model,
+      </if>
+      <if test="reason != null">
+        reason,
+      </if>
+      <if test="keyword != null">
+        keyword,
+      </if>
+      <if test="start != null">
+        start,
+      </if>
+      <if test="state != null">
+        state,
+      </if>
+      <if test="groupsId != null">
+        groups_id,
+      </if>
+      <if test="subaccountId != null">
+        subaccount_id,
+      </if>
+      <if test="img != null">
+        img,
+      </if>
+      <if test="hotsaleFlag != null">
+        hotsale_flag,
+      </if>
+      <if test="customsNo != null">
+        customs_no,
+      </if>
+      <if test="taxCost != null">
+        tax_cost,
+      </if>
+      <if test="costQuaUnit != null">
+        cost_qua_unit,
+      </if>
+      <if test="costCurrency != null">
+        cost_currency,
+      </if>
+      <if test="offShoreCurrency != null">
+        off_shore_currency,
+      </if>
+      <if test="offShoreQuaUnit != null">
+        off_shore_qua_unit,
+      </if>
+      <if test="offShoreMinPrice != null">
+        off_shore_min_price,
+      </if>
+      <if test="offShoreMaxPrice != null">
+        off_shore_max_price,
+      </if>
+      <if test="minOrderQuantity != null">
+        min_order_quantity,
+      </if>
+      <if test="minOrderUnit != null">
+        min_order_unit,
+      </if>
+      <if test="pageUnit != null">
+        page_unit,
+      </if>
+      <if test="perPageNum != null">
+        per_page_num,
+      </if>
+      <if test="perPage != null">
+        per_page,
+      </if>
+      <if test="perWeight != null">
+        per_weight,
+      </if>
+      <if test="pgDescription != null">
+        pg_description,
+      </if>
+      <if test="proDescription != null">
+        pro_description,
+      </if>
+      <if test="proUrl != null">
+        pro_url,
+      </if>
+      <if test="attachKey != null">
+        attach_key,
+      </if>
+      <if test="createBy != null">
+        create_by,
+      </if>
+      <if test="createDate != null">
+        create_date,
+      </if>
+      <if test="updateBy != null">
+        update_by,
+      </if>
+      <if test="updateDate != null">
+        update_date,
+      </if>
+      <if test="remarks != null">
+        remarks,
+      </if>
+      <if test="delFlag != null">
+        del_flag,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="productsId != null">
+        #{productsId,jdbcType=VARCHAR},
+      </if>
+      <if test="companyId != null">
+        #{companyId,jdbcType=VARCHAR},
+      </if>
+      <if test="typeSource != null">
+        #{typeSource,jdbcType=VARCHAR},
+      </if>
+      <if test="proNo != null">
+        #{proNo,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="catalog != null">
+        #{catalog,jdbcType=VARCHAR},
+      </if>
+      <if test="model != null">
+        #{model,jdbcType=VARCHAR},
+      </if>
+      <if test="reason != null">
+        #{reason,jdbcType=VARCHAR},
+      </if>
+      <if test="keyword != null">
+        #{keyword,jdbcType=VARCHAR},
+      </if>
+      <if test="start != null">
+        #{start,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null">
+        #{state,jdbcType=VARCHAR},
+      </if>
+      <if test="groupsId != null">
+        #{groupsId,jdbcType=VARCHAR},
+      </if>
+      <if test="subaccountId != null">
+        #{subaccountId,jdbcType=VARCHAR},
+      </if>
+      <if test="img != null">
+        #{img,jdbcType=VARCHAR},
+      </if>
+      <if test="hotsaleFlag != null">
+        #{hotsaleFlag,jdbcType=CHAR},
+      </if>
+      <if test="customsNo != null">
+        #{customsNo,jdbcType=VARCHAR},
+      </if>
+      <if test="taxCost != null">
+        #{taxCost,jdbcType=REAL},
+      </if>
+      <if test="costQuaUnit != null">
+        #{costQuaUnit,jdbcType=CHAR},
+      </if>
+      <if test="costCurrency != null">
+        #{costCurrency,jdbcType=VARCHAR},
+      </if>
+      <if test="offShoreCurrency != null">
+        #{offShoreCurrency,jdbcType=VARCHAR},
+      </if>
+      <if test="offShoreQuaUnit != null">
+        #{offShoreQuaUnit,jdbcType=CHAR},
+      </if>
+      <if test="offShoreMinPrice != null">
+        #{offShoreMinPrice,jdbcType=REAL},
+      </if>
+      <if test="offShoreMaxPrice != null">
+        #{offShoreMaxPrice,jdbcType=REAL},
+      </if>
+      <if test="minOrderQuantity != null">
+        #{minOrderQuantity,jdbcType=REAL},
+      </if>
+      <if test="minOrderUnit != null">
+        #{minOrderUnit,jdbcType=CHAR},
+      </if>
+      <if test="pageUnit != null">
+        #{pageUnit,jdbcType=CHAR},
+      </if>
+      <if test="perPageNum != null">
+        #{perPageNum,jdbcType=REAL},
+      </if>
+      <if test="perPage != null">
+        #{perPage,jdbcType=REAL},
+      </if>
+      <if test="perWeight != null">
+        #{perWeight,jdbcType=REAL},
+      </if>
+      <if test="pgDescription != null">
+        #{pgDescription,jdbcType=VARCHAR},
+      </if>
+      <if test="proDescription != null">
+        #{proDescription,jdbcType=VARCHAR},
+      </if>
+      <if test="proUrl != null">
+        #{proUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="attachKey != null">
+        #{attachKey,jdbcType=VARCHAR},
+      </if>
+      <if test="createBy != null">
+        #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null">
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateBy != null">
+        #{updateBy,jdbcType=VARCHAR},
+      </if>
+      <if test="updateDate != null">
+        #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="remarks != null">
+        #{remarks,jdbcType=VARCHAR},
+      </if>
+      <if test="delFlag != null">
+        #{delFlag,jdbcType=CHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="zty.entity.ProManageExample" resultType="java.lang.Long">
+    select count(*) from pro_manage
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update pro_manage
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.productsId != null">
+        products_id = #{record.productsId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.companyId != null">
+        company_id = #{record.companyId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.typeSource != null">
+        type_source = #{record.typeSource,jdbcType=VARCHAR},
+      </if>
+      <if test="record.proNo != null">
+        pro_no = #{record.proNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.name != null">
+        name = #{record.name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.catalog != null">
+        catalog = #{record.catalog,jdbcType=VARCHAR},
+      </if>
+      <if test="record.model != null">
+        model = #{record.model,jdbcType=VARCHAR},
+      </if>
+      <if test="record.reason != null">
+        reason = #{record.reason,jdbcType=VARCHAR},
+      </if>
+      <if test="record.keyword != null">
+        keyword = #{record.keyword,jdbcType=VARCHAR},
+      </if>
+      <if test="record.start != null">
+        start = #{record.start,jdbcType=VARCHAR},
+      </if>
+      <if test="record.state != null">
+        state = #{record.state,jdbcType=VARCHAR},
+      </if>
+      <if test="record.groupsId != null">
+        groups_id = #{record.groupsId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.subaccountId != null">
+        subaccount_id = #{record.subaccountId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.img != null">
+        img = #{record.img,jdbcType=VARCHAR},
+      </if>
+      <if test="record.hotsaleFlag != null">
+        hotsale_flag = #{record.hotsaleFlag,jdbcType=CHAR},
+      </if>
+      <if test="record.customsNo != null">
+        customs_no = #{record.customsNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.taxCost != null">
+        tax_cost = #{record.taxCost,jdbcType=REAL},
+      </if>
+      <if test="record.costQuaUnit != null">
+        cost_qua_unit = #{record.costQuaUnit,jdbcType=CHAR},
+      </if>
+      <if test="record.costCurrency != null">
+        cost_currency = #{record.costCurrency,jdbcType=VARCHAR},
+      </if>
+      <if test="record.offShoreCurrency != null">
+        off_shore_currency = #{record.offShoreCurrency,jdbcType=VARCHAR},
+      </if>
+      <if test="record.offShoreQuaUnit != null">
+        off_shore_qua_unit = #{record.offShoreQuaUnit,jdbcType=CHAR},
+      </if>
+      <if test="record.offShoreMinPrice != null">
+        off_shore_min_price = #{record.offShoreMinPrice,jdbcType=REAL},
+      </if>
+      <if test="record.offShoreMaxPrice != null">
+        off_shore_max_price = #{record.offShoreMaxPrice,jdbcType=REAL},
+      </if>
+      <if test="record.minOrderQuantity != null">
+        min_order_quantity = #{record.minOrderQuantity,jdbcType=REAL},
+      </if>
+      <if test="record.minOrderUnit != null">
+        min_order_unit = #{record.minOrderUnit,jdbcType=CHAR},
+      </if>
+      <if test="record.pageUnit != null">
+        page_unit = #{record.pageUnit,jdbcType=CHAR},
+      </if>
+      <if test="record.perPageNum != null">
+        per_page_num = #{record.perPageNum,jdbcType=REAL},
+      </if>
+      <if test="record.perPage != null">
+        per_page = #{record.perPage,jdbcType=REAL},
+      </if>
+      <if test="record.perWeight != null">
+        per_weight = #{record.perWeight,jdbcType=REAL},
+      </if>
+      <if test="record.pgDescription != null">
+        pg_description = #{record.pgDescription,jdbcType=VARCHAR},
+      </if>
+      <if test="record.proDescription != null">
+        pro_description = #{record.proDescription,jdbcType=VARCHAR},
+      </if>
+      <if test="record.proUrl != null">
+        pro_url = #{record.proUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.attachKey != null">
+        attach_key = #{record.attachKey,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createBy != null">
+        create_by = #{record.createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createDate != null">
+        create_date = #{record.createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updateBy != null">
+        update_by = #{record.updateBy,jdbcType=VARCHAR},
+      </if>
+      <if test="record.updateDate != null">
+        update_date = #{record.updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.remarks != null">
+        remarks = #{record.remarks,jdbcType=VARCHAR},
+      </if>
+      <if test="record.delFlag != null">
+        del_flag = #{record.delFlag,jdbcType=CHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update pro_manage
+    set id = #{record.id,jdbcType=VARCHAR},
+      products_id = #{record.productsId,jdbcType=VARCHAR},
+      company_id = #{record.companyId,jdbcType=VARCHAR},
+      type_source = #{record.typeSource,jdbcType=VARCHAR},
+      pro_no = #{record.proNo,jdbcType=VARCHAR},
+      name = #{record.name,jdbcType=VARCHAR},
+      catalog = #{record.catalog,jdbcType=VARCHAR},
+      model = #{record.model,jdbcType=VARCHAR},
+      reason = #{record.reason,jdbcType=VARCHAR},
+      keyword = #{record.keyword,jdbcType=VARCHAR},
+      start = #{record.start,jdbcType=VARCHAR},
+      state = #{record.state,jdbcType=VARCHAR},
+      groups_id = #{record.groupsId,jdbcType=VARCHAR},
+      subaccount_id = #{record.subaccountId,jdbcType=VARCHAR},
+      img = #{record.img,jdbcType=VARCHAR},
+      hotsale_flag = #{record.hotsaleFlag,jdbcType=CHAR},
+      customs_no = #{record.customsNo,jdbcType=VARCHAR},
+      tax_cost = #{record.taxCost,jdbcType=REAL},
+      cost_qua_unit = #{record.costQuaUnit,jdbcType=CHAR},
+      cost_currency = #{record.costCurrency,jdbcType=VARCHAR},
+      off_shore_currency = #{record.offShoreCurrency,jdbcType=VARCHAR},
+      off_shore_qua_unit = #{record.offShoreQuaUnit,jdbcType=CHAR},
+      off_shore_min_price = #{record.offShoreMinPrice,jdbcType=REAL},
+      off_shore_max_price = #{record.offShoreMaxPrice,jdbcType=REAL},
+      min_order_quantity = #{record.minOrderQuantity,jdbcType=REAL},
+      min_order_unit = #{record.minOrderUnit,jdbcType=CHAR},
+      page_unit = #{record.pageUnit,jdbcType=CHAR},
+      per_page_num = #{record.perPageNum,jdbcType=REAL},
+      per_page = #{record.perPage,jdbcType=REAL},
+      per_weight = #{record.perWeight,jdbcType=REAL},
+      pg_description = #{record.pgDescription,jdbcType=VARCHAR},
+      pro_description = #{record.proDescription,jdbcType=VARCHAR},
+      pro_url = #{record.proUrl,jdbcType=VARCHAR},
+      attach_key = #{record.attachKey,jdbcType=VARCHAR},
+      create_by = #{record.createBy,jdbcType=VARCHAR},
+      create_date = #{record.createDate,jdbcType=TIMESTAMP},
+      update_by = #{record.updateBy,jdbcType=VARCHAR},
+      update_date = #{record.updateDate,jdbcType=TIMESTAMP},
+      remarks = #{record.remarks,jdbcType=VARCHAR},
+      del_flag = #{record.delFlag,jdbcType=CHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <resultMap id="BaseResultMap" type="zty.entity.ProManage">
+    <result column="id" jdbcType="VARCHAR" property="id" />
+    <result column="products_id" jdbcType="VARCHAR" property="productsId" />
+    <result column="company_id" jdbcType="VARCHAR" property="companyId" />
+    <result column="type_source" jdbcType="VARCHAR" property="typeSource" />
+    <result column="pro_no" jdbcType="VARCHAR" property="proNo" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="catalog" jdbcType="VARCHAR" property="catalog" />
+    <result column="model" jdbcType="VARCHAR" property="model" />
+    <result column="reason" jdbcType="VARCHAR" property="reason" />
+    <result column="keyword" jdbcType="VARCHAR" property="keyword" />
+    <result column="start" jdbcType="VARCHAR" property="start" />
+    <result column="state" jdbcType="VARCHAR" property="state" />
+    <result column="groups_id" jdbcType="VARCHAR" property="groupsId" />
+    <result column="subaccount_id" jdbcType="VARCHAR" property="subaccountId" />
+    <result column="img" jdbcType="VARCHAR" property="img" />
+    <result column="hotsale_flag" jdbcType="CHAR" property="hotsaleFlag" />
+    <result column="customs_no" jdbcType="VARCHAR" property="customsNo" />
+    <result column="tax_cost" jdbcType="REAL" property="taxCost" />
+    <result column="cost_qua_unit" jdbcType="CHAR" property="costQuaUnit" />
+    <result column="cost_currency" jdbcType="VARCHAR" property="costCurrency" />
+    <result column="off_shore_currency" jdbcType="VARCHAR" property="offShoreCurrency" />
+    <result column="off_shore_qua_unit" jdbcType="CHAR" property="offShoreQuaUnit" />
+    <result column="off_shore_min_price" jdbcType="REAL" property="offShoreMinPrice" />
+    <result column="off_shore_max_price" jdbcType="REAL" property="offShoreMaxPrice" />
+    <result column="min_order_quantity" jdbcType="REAL" property="minOrderQuantity" />
+    <result column="min_order_unit" jdbcType="CHAR" property="minOrderUnit" />
+    <result column="page_unit" jdbcType="CHAR" property="pageUnit" />
+    <result column="per_page_num" jdbcType="REAL" property="perPageNum" />
+    <result column="per_page" jdbcType="REAL" property="perPage" />
+    <result column="per_weight" jdbcType="REAL" property="perWeight" />
+    <result column="pg_description" jdbcType="VARCHAR" property="pgDescription" />
+    <result column="pro_description" jdbcType="VARCHAR" property="proDescription" />
+    <result column="pro_url" jdbcType="VARCHAR" property="proUrl" />
+    <result column="attach_key" jdbcType="VARCHAR" property="attachKey" />
+    <result column="create_by" jdbcType="VARCHAR" property="createBy" />
+    <result column="create_date" jdbcType="TIMESTAMP" property="createDate" />
+    <result column="update_by" jdbcType="VARCHAR" property="updateBy" />
+    <result column="update_date" jdbcType="TIMESTAMP" property="updateDate" />
+    <result column="remarks" jdbcType="VARCHAR" property="remarks" />
+    <result column="del_flag" jdbcType="CHAR" property="delFlag" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, products_id, company_id, type_source, pro_no, name, catalog, model, reason, keyword, 
+    start, state, groups_id, subaccount_id, img, hotsale_flag, customs_no, tax_cost, 
+    cost_qua_unit, cost_currency, off_shore_currency, off_shore_qua_unit, off_shore_min_price, 
+    off_shore_max_price, min_order_quantity, min_order_unit, page_unit, per_page_num, 
+    per_page, per_weight, pg_description, pro_description, pro_url, attach_key, create_by, 
+    create_date, update_by, update_date, remarks, del_flag
+  </sql>
+  <select id="selectByExample" parameterType="zty.entity.ProManageExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from pro_manage
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="zty.entity.ProManageExample">
+    delete from pro_manage
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="zty.entity.ProManage">
+    insert into pro_manage (id, products_id, company_id, 
+      type_source, pro_no, name, 
+      catalog, model, reason, 
+      keyword, start, state, 
+      groups_id, subaccount_id, img, 
+      hotsale_flag, customs_no, tax_cost, 
+      cost_qua_unit, cost_currency, off_shore_currency, 
+      off_shore_qua_unit, off_shore_min_price, off_shore_max_price, 
+      min_order_quantity, min_order_unit, page_unit, 
+      per_page_num, per_page, per_weight, 
+      pg_description, pro_description, pro_url, 
+      attach_key, create_by, create_date, 
+      update_by, update_date, remarks, 
+      del_flag)
+    values (#{id,jdbcType=VARCHAR}, #{productsId,jdbcType=VARCHAR}, #{companyId,jdbcType=VARCHAR}, 
+      #{typeSource,jdbcType=VARCHAR}, #{proNo,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, 
+      #{catalog,jdbcType=VARCHAR}, #{model,jdbcType=VARCHAR}, #{reason,jdbcType=VARCHAR}, 
+      #{keyword,jdbcType=VARCHAR}, #{start,jdbcType=VARCHAR}, #{state,jdbcType=VARCHAR}, 
+      #{groupsId,jdbcType=VARCHAR}, #{subaccountId,jdbcType=VARCHAR}, #{img,jdbcType=VARCHAR}, 
+      #{hotsaleFlag,jdbcType=CHAR}, #{customsNo,jdbcType=VARCHAR}, #{taxCost,jdbcType=REAL}, 
+      #{costQuaUnit,jdbcType=CHAR}, #{costCurrency,jdbcType=VARCHAR}, #{offShoreCurrency,jdbcType=VARCHAR}, 
+      #{offShoreQuaUnit,jdbcType=CHAR}, #{offShoreMinPrice,jdbcType=REAL}, #{offShoreMaxPrice,jdbcType=REAL}, 
+      #{minOrderQuantity,jdbcType=REAL}, #{minOrderUnit,jdbcType=CHAR}, #{pageUnit,jdbcType=CHAR}, 
+      #{perPageNum,jdbcType=REAL}, #{perPage,jdbcType=REAL}, #{perWeight,jdbcType=REAL}, 
+      #{pgDescription,jdbcType=VARCHAR}, #{proDescription,jdbcType=VARCHAR}, #{proUrl,jdbcType=VARCHAR}, 
+      #{attachKey,jdbcType=VARCHAR}, #{createBy,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}, 
+      #{updateBy,jdbcType=VARCHAR}, #{updateDate,jdbcType=TIMESTAMP}, #{remarks,jdbcType=VARCHAR}, 
+      #{delFlag,jdbcType=CHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="zty.entity.ProManage">
+    insert into pro_manage
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="productsId != null">
+        products_id,
+      </if>
+      <if test="companyId != null">
+        company_id,
+      </if>
+      <if test="typeSource != null">
+        type_source,
+      </if>
+      <if test="proNo != null">
+        pro_no,
+      </if>
+      <if test="name != null">
+        name,
+      </if>
+      <if test="catalog != null">
+        catalog,
+      </if>
+      <if test="model != null">
+        model,
+      </if>
+      <if test="reason != null">
+        reason,
+      </if>
+      <if test="keyword != null">
+        keyword,
+      </if>
+      <if test="start != null">
+        start,
+      </if>
+      <if test="state != null">
+        state,
+      </if>
+      <if test="groupsId != null">
+        groups_id,
+      </if>
+      <if test="subaccountId != null">
+        subaccount_id,
+      </if>
+      <if test="img != null">
+        img,
+      </if>
+      <if test="hotsaleFlag != null">
+        hotsale_flag,
+      </if>
+      <if test="customsNo != null">
+        customs_no,
+      </if>
+      <if test="taxCost != null">
+        tax_cost,
+      </if>
+      <if test="costQuaUnit != null">
+        cost_qua_unit,
+      </if>
+      <if test="costCurrency != null">
+        cost_currency,
+      </if>
+      <if test="offShoreCurrency != null">
+        off_shore_currency,
+      </if>
+      <if test="offShoreQuaUnit != null">
+        off_shore_qua_unit,
+      </if>
+      <if test="offShoreMinPrice != null">
+        off_shore_min_price,
+      </if>
+      <if test="offShoreMaxPrice != null">
+        off_shore_max_price,
+      </if>
+      <if test="minOrderQuantity != null">
+        min_order_quantity,
+      </if>
+      <if test="minOrderUnit != null">
+        min_order_unit,
+      </if>
+      <if test="pageUnit != null">
+        page_unit,
+      </if>
+      <if test="perPageNum != null">
+        per_page_num,
+      </if>
+      <if test="perPage != null">
+        per_page,
+      </if>
+      <if test="perWeight != null">
+        per_weight,
+      </if>
+      <if test="pgDescription != null">
+        pg_description,
+      </if>
+      <if test="proDescription != null">
+        pro_description,
+      </if>
+      <if test="proUrl != null">
+        pro_url,
+      </if>
+      <if test="attachKey != null">
+        attach_key,
+      </if>
+      <if test="createBy != null">
+        create_by,
+      </if>
+      <if test="createDate != null">
+        create_date,
+      </if>
+      <if test="updateBy != null">
+        update_by,
+      </if>
+      <if test="updateDate != null">
+        update_date,
+      </if>
+      <if test="remarks != null">
+        remarks,
+      </if>
+      <if test="delFlag != null">
+        del_flag,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="productsId != null">
+        #{productsId,jdbcType=VARCHAR},
+      </if>
+      <if test="companyId != null">
+        #{companyId,jdbcType=VARCHAR},
+      </if>
+      <if test="typeSource != null">
+        #{typeSource,jdbcType=VARCHAR},
+      </if>
+      <if test="proNo != null">
+        #{proNo,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="catalog != null">
+        #{catalog,jdbcType=VARCHAR},
+      </if>
+      <if test="model != null">
+        #{model,jdbcType=VARCHAR},
+      </if>
+      <if test="reason != null">
+        #{reason,jdbcType=VARCHAR},
+      </if>
+      <if test="keyword != null">
+        #{keyword,jdbcType=VARCHAR},
+      </if>
+      <if test="start != null">
+        #{start,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null">
+        #{state,jdbcType=VARCHAR},
+      </if>
+      <if test="groupsId != null">
+        #{groupsId,jdbcType=VARCHAR},
+      </if>
+      <if test="subaccountId != null">
+        #{subaccountId,jdbcType=VARCHAR},
+      </if>
+      <if test="img != null">
+        #{img,jdbcType=VARCHAR},
+      </if>
+      <if test="hotsaleFlag != null">
+        #{hotsaleFlag,jdbcType=CHAR},
+      </if>
+      <if test="customsNo != null">
+        #{customsNo,jdbcType=VARCHAR},
+      </if>
+      <if test="taxCost != null">
+        #{taxCost,jdbcType=REAL},
+      </if>
+      <if test="costQuaUnit != null">
+        #{costQuaUnit,jdbcType=CHAR},
+      </if>
+      <if test="costCurrency != null">
+        #{costCurrency,jdbcType=VARCHAR},
+      </if>
+      <if test="offShoreCurrency != null">
+        #{offShoreCurrency,jdbcType=VARCHAR},
+      </if>
+      <if test="offShoreQuaUnit != null">
+        #{offShoreQuaUnit,jdbcType=CHAR},
+      </if>
+      <if test="offShoreMinPrice != null">
+        #{offShoreMinPrice,jdbcType=REAL},
+      </if>
+      <if test="offShoreMaxPrice != null">
+        #{offShoreMaxPrice,jdbcType=REAL},
+      </if>
+      <if test="minOrderQuantity != null">
+        #{minOrderQuantity,jdbcType=REAL},
+      </if>
+      <if test="minOrderUnit != null">
+        #{minOrderUnit,jdbcType=CHAR},
+      </if>
+      <if test="pageUnit != null">
+        #{pageUnit,jdbcType=CHAR},
+      </if>
+      <if test="perPageNum != null">
+        #{perPageNum,jdbcType=REAL},
+      </if>
+      <if test="perPage != null">
+        #{perPage,jdbcType=REAL},
+      </if>
+      <if test="perWeight != null">
+        #{perWeight,jdbcType=REAL},
+      </if>
+      <if test="pgDescription != null">
+        #{pgDescription,jdbcType=VARCHAR},
+      </if>
+      <if test="proDescription != null">
+        #{proDescription,jdbcType=VARCHAR},
+      </if>
+      <if test="proUrl != null">
+        #{proUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="attachKey != null">
+        #{attachKey,jdbcType=VARCHAR},
+      </if>
+      <if test="createBy != null">
+        #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null">
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateBy != null">
+        #{updateBy,jdbcType=VARCHAR},
+      </if>
+      <if test="updateDate != null">
+        #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="remarks != null">
+        #{remarks,jdbcType=VARCHAR},
+      </if>
+      <if test="delFlag != null">
+        #{delFlag,jdbcType=CHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="zty.entity.ProManageExample" resultType="java.lang.Long">
+    select count(*) from pro_manage
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update pro_manage
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.productsId != null">
+        products_id = #{record.productsId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.companyId != null">
+        company_id = #{record.companyId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.typeSource != null">
+        type_source = #{record.typeSource,jdbcType=VARCHAR},
+      </if>
+      <if test="record.proNo != null">
+        pro_no = #{record.proNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.name != null">
+        name = #{record.name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.catalog != null">
+        catalog = #{record.catalog,jdbcType=VARCHAR},
+      </if>
+      <if test="record.model != null">
+        model = #{record.model,jdbcType=VARCHAR},
+      </if>
+      <if test="record.reason != null">
+        reason = #{record.reason,jdbcType=VARCHAR},
+      </if>
+      <if test="record.keyword != null">
+        keyword = #{record.keyword,jdbcType=VARCHAR},
+      </if>
+      <if test="record.start != null">
+        start = #{record.start,jdbcType=VARCHAR},
+      </if>
+      <if test="record.state != null">
+        state = #{record.state,jdbcType=VARCHAR},
+      </if>
+      <if test="record.groupsId != null">
+        groups_id = #{record.groupsId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.subaccountId != null">
+        subaccount_id = #{record.subaccountId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.img != null">
+        img = #{record.img,jdbcType=VARCHAR},
+      </if>
+      <if test="record.hotsaleFlag != null">
+        hotsale_flag = #{record.hotsaleFlag,jdbcType=CHAR},
+      </if>
+      <if test="record.customsNo != null">
+        customs_no = #{record.customsNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.taxCost != null">
+        tax_cost = #{record.taxCost,jdbcType=REAL},
+      </if>
+      <if test="record.costQuaUnit != null">
+        cost_qua_unit = #{record.costQuaUnit,jdbcType=CHAR},
+      </if>
+      <if test="record.costCurrency != null">
+        cost_currency = #{record.costCurrency,jdbcType=VARCHAR},
+      </if>
+      <if test="record.offShoreCurrency != null">
+        off_shore_currency = #{record.offShoreCurrency,jdbcType=VARCHAR},
+      </if>
+      <if test="record.offShoreQuaUnit != null">
+        off_shore_qua_unit = #{record.offShoreQuaUnit,jdbcType=CHAR},
+      </if>
+      <if test="record.offShoreMinPrice != null">
+        off_shore_min_price = #{record.offShoreMinPrice,jdbcType=REAL},
+      </if>
+      <if test="record.offShoreMaxPrice != null">
+        off_shore_max_price = #{record.offShoreMaxPrice,jdbcType=REAL},
+      </if>
+      <if test="record.minOrderQuantity != null">
+        min_order_quantity = #{record.minOrderQuantity,jdbcType=REAL},
+      </if>
+      <if test="record.minOrderUnit != null">
+        min_order_unit = #{record.minOrderUnit,jdbcType=CHAR},
+      </if>
+      <if test="record.pageUnit != null">
+        page_unit = #{record.pageUnit,jdbcType=CHAR},
+      </if>
+      <if test="record.perPageNum != null">
+        per_page_num = #{record.perPageNum,jdbcType=REAL},
+      </if>
+      <if test="record.perPage != null">
+        per_page = #{record.perPage,jdbcType=REAL},
+      </if>
+      <if test="record.perWeight != null">
+        per_weight = #{record.perWeight,jdbcType=REAL},
+      </if>
+      <if test="record.pgDescription != null">
+        pg_description = #{record.pgDescription,jdbcType=VARCHAR},
+      </if>
+      <if test="record.proDescription != null">
+        pro_description = #{record.proDescription,jdbcType=VARCHAR},
+      </if>
+      <if test="record.proUrl != null">
+        pro_url = #{record.proUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.attachKey != null">
+        attach_key = #{record.attachKey,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createBy != null">
+        create_by = #{record.createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createDate != null">
+        create_date = #{record.createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updateBy != null">
+        update_by = #{record.updateBy,jdbcType=VARCHAR},
+      </if>
+      <if test="record.updateDate != null">
+        update_date = #{record.updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.remarks != null">
+        remarks = #{record.remarks,jdbcType=VARCHAR},
+      </if>
+      <if test="record.delFlag != null">
+        del_flag = #{record.delFlag,jdbcType=CHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update pro_manage
+    set id = #{record.id,jdbcType=VARCHAR},
+      products_id = #{record.productsId,jdbcType=VARCHAR},
+      company_id = #{record.companyId,jdbcType=VARCHAR},
+      type_source = #{record.typeSource,jdbcType=VARCHAR},
+      pro_no = #{record.proNo,jdbcType=VARCHAR},
+      name = #{record.name,jdbcType=VARCHAR},
+      catalog = #{record.catalog,jdbcType=VARCHAR},
+      model = #{record.model,jdbcType=VARCHAR},
+      reason = #{record.reason,jdbcType=VARCHAR},
+      keyword = #{record.keyword,jdbcType=VARCHAR},
+      start = #{record.start,jdbcType=VARCHAR},
+      state = #{record.state,jdbcType=VARCHAR},
+      groups_id = #{record.groupsId,jdbcType=VARCHAR},
+      subaccount_id = #{record.subaccountId,jdbcType=VARCHAR},
+      img = #{record.img,jdbcType=VARCHAR},
+      hotsale_flag = #{record.hotsaleFlag,jdbcType=CHAR},
+      customs_no = #{record.customsNo,jdbcType=VARCHAR},
+      tax_cost = #{record.taxCost,jdbcType=REAL},
+      cost_qua_unit = #{record.costQuaUnit,jdbcType=CHAR},
+      cost_currency = #{record.costCurrency,jdbcType=VARCHAR},
+      off_shore_currency = #{record.offShoreCurrency,jdbcType=VARCHAR},
+      off_shore_qua_unit = #{record.offShoreQuaUnit,jdbcType=CHAR},
+      off_shore_min_price = #{record.offShoreMinPrice,jdbcType=REAL},
+      off_shore_max_price = #{record.offShoreMaxPrice,jdbcType=REAL},
+      min_order_quantity = #{record.minOrderQuantity,jdbcType=REAL},
+      min_order_unit = #{record.minOrderUnit,jdbcType=CHAR},
+      page_unit = #{record.pageUnit,jdbcType=CHAR},
+      per_page_num = #{record.perPageNum,jdbcType=REAL},
+      per_page = #{record.perPage,jdbcType=REAL},
+      per_weight = #{record.perWeight,jdbcType=REAL},
+      pg_description = #{record.pgDescription,jdbcType=VARCHAR},
+      pro_description = #{record.proDescription,jdbcType=VARCHAR},
+      pro_url = #{record.proUrl,jdbcType=VARCHAR},
+      attach_key = #{record.attachKey,jdbcType=VARCHAR},
+      create_by = #{record.createBy,jdbcType=VARCHAR},
+      create_date = #{record.createDate,jdbcType=TIMESTAMP},
+      update_by = #{record.updateBy,jdbcType=VARCHAR},
+      update_date = #{record.updateDate,jdbcType=TIMESTAMP},
+      remarks = #{record.remarks,jdbcType=VARCHAR},
+      del_flag = #{record.delFlag,jdbcType=CHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <resultMap id="BaseResultMap" type="zty.entity.ProManage">
+    <result column="id" jdbcType="VARCHAR" property="id" />
+    <result column="products_id" jdbcType="VARCHAR" property="productsId" />
+    <result column="company_id" jdbcType="VARCHAR" property="companyId" />
+    <result column="type_source" jdbcType="VARCHAR" property="typeSource" />
+    <result column="pro_no" jdbcType="VARCHAR" property="proNo" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="catalog" jdbcType="VARCHAR" property="catalog" />
+    <result column="model" jdbcType="VARCHAR" property="model" />
+    <result column="reason" jdbcType="VARCHAR" property="reason" />
+    <result column="keyword" jdbcType="VARCHAR" property="keyword" />
+    <result column="start" jdbcType="VARCHAR" property="start" />
+    <result column="state" jdbcType="VARCHAR" property="state" />
+    <result column="groups_id" jdbcType="VARCHAR" property="groupsId" />
+    <result column="subaccount_id" jdbcType="VARCHAR" property="subaccountId" />
+    <result column="img" jdbcType="VARCHAR" property="img" />
+    <result column="hotsale_flag" jdbcType="CHAR" property="hotsaleFlag" />
+    <result column="customs_no" jdbcType="VARCHAR" property="customsNo" />
+    <result column="tax_cost" jdbcType="REAL" property="taxCost" />
+    <result column="cost_qua_unit" jdbcType="CHAR" property="costQuaUnit" />
+    <result column="cost_currency" jdbcType="VARCHAR" property="costCurrency" />
+    <result column="off_shore_currency" jdbcType="VARCHAR" property="offShoreCurrency" />
+    <result column="off_shore_qua_unit" jdbcType="CHAR" property="offShoreQuaUnit" />
+    <result column="off_shore_min_price" jdbcType="REAL" property="offShoreMinPrice" />
+    <result column="off_shore_max_price" jdbcType="REAL" property="offShoreMaxPrice" />
+    <result column="min_order_quantity" jdbcType="REAL" property="minOrderQuantity" />
+    <result column="min_order_unit" jdbcType="CHAR" property="minOrderUnit" />
+    <result column="page_unit" jdbcType="CHAR" property="pageUnit" />
+    <result column="per_page_num" jdbcType="REAL" property="perPageNum" />
+    <result column="per_page" jdbcType="REAL" property="perPage" />
+    <result column="per_weight" jdbcType="REAL" property="perWeight" />
+    <result column="pg_description" jdbcType="VARCHAR" property="pgDescription" />
+    <result column="pro_description" jdbcType="VARCHAR" property="proDescription" />
+    <result column="pro_url" jdbcType="VARCHAR" property="proUrl" />
+    <result column="attach_key" jdbcType="VARCHAR" property="attachKey" />
+    <result column="create_by" jdbcType="VARCHAR" property="createBy" />
+    <result column="create_date" jdbcType="TIMESTAMP" property="createDate" />
+    <result column="update_by" jdbcType="VARCHAR" property="updateBy" />
+    <result column="update_date" jdbcType="TIMESTAMP" property="updateDate" />
+    <result column="remarks" jdbcType="VARCHAR" property="remarks" />
+    <result column="del_flag" jdbcType="CHAR" property="delFlag" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, products_id, company_id, type_source, pro_no, name, catalog, model, reason, keyword, 
+    start, state, groups_id, subaccount_id, img, hotsale_flag, customs_no, tax_cost, 
+    cost_qua_unit, cost_currency, off_shore_currency, off_shore_qua_unit, off_shore_min_price, 
+    off_shore_max_price, min_order_quantity, min_order_unit, page_unit, per_page_num, 
+    per_page, per_weight, pg_description, pro_description, pro_url, attach_key, create_by, 
+    create_date, update_by, update_date, remarks, del_flag
+  </sql>
+  <select id="selectByExample" parameterType="zty.entity.ProManageExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from pro_manage
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="zty.entity.ProManageExample">
+    delete from pro_manage
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="zty.entity.ProManage">
+    insert into pro_manage (id, products_id, company_id, 
+      type_source, pro_no, name, 
+      catalog, model, reason, 
+      keyword, start, state, 
+      groups_id, subaccount_id, img, 
+      hotsale_flag, customs_no, tax_cost, 
+      cost_qua_unit, cost_currency, off_shore_currency, 
+      off_shore_qua_unit, off_shore_min_price, off_shore_max_price, 
+      min_order_quantity, min_order_unit, page_unit, 
+      per_page_num, per_page, per_weight, 
+      pg_description, pro_description, pro_url, 
+      attach_key, create_by, create_date, 
+      update_by, update_date, remarks, 
+      del_flag)
+    values (#{id,jdbcType=VARCHAR}, #{productsId,jdbcType=VARCHAR}, #{companyId,jdbcType=VARCHAR}, 
+      #{typeSource,jdbcType=VARCHAR}, #{proNo,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, 
+      #{catalog,jdbcType=VARCHAR}, #{model,jdbcType=VARCHAR}, #{reason,jdbcType=VARCHAR}, 
+      #{keyword,jdbcType=VARCHAR}, #{start,jdbcType=VARCHAR}, #{state,jdbcType=VARCHAR}, 
+      #{groupsId,jdbcType=VARCHAR}, #{subaccountId,jdbcType=VARCHAR}, #{img,jdbcType=VARCHAR}, 
+      #{hotsaleFlag,jdbcType=CHAR}, #{customsNo,jdbcType=VARCHAR}, #{taxCost,jdbcType=REAL}, 
+      #{costQuaUnit,jdbcType=CHAR}, #{costCurrency,jdbcType=VARCHAR}, #{offShoreCurrency,jdbcType=VARCHAR}, 
+      #{offShoreQuaUnit,jdbcType=CHAR}, #{offShoreMinPrice,jdbcType=REAL}, #{offShoreMaxPrice,jdbcType=REAL}, 
+      #{minOrderQuantity,jdbcType=REAL}, #{minOrderUnit,jdbcType=CHAR}, #{pageUnit,jdbcType=CHAR}, 
+      #{perPageNum,jdbcType=REAL}, #{perPage,jdbcType=REAL}, #{perWeight,jdbcType=REAL}, 
+      #{pgDescription,jdbcType=VARCHAR}, #{proDescription,jdbcType=VARCHAR}, #{proUrl,jdbcType=VARCHAR}, 
+      #{attachKey,jdbcType=VARCHAR}, #{createBy,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}, 
+      #{updateBy,jdbcType=VARCHAR}, #{updateDate,jdbcType=TIMESTAMP}, #{remarks,jdbcType=VARCHAR}, 
+      #{delFlag,jdbcType=CHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="zty.entity.ProManage">
+    insert into pro_manage
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="productsId != null">
+        products_id,
+      </if>
+      <if test="companyId != null">
+        company_id,
+      </if>
+      <if test="typeSource != null">
+        type_source,
+      </if>
+      <if test="proNo != null">
+        pro_no,
+      </if>
+      <if test="name != null">
+        name,
+      </if>
+      <if test="catalog != null">
+        catalog,
+      </if>
+      <if test="model != null">
+        model,
+      </if>
+      <if test="reason != null">
+        reason,
+      </if>
+      <if test="keyword != null">
+        keyword,
+      </if>
+      <if test="start != null">
+        start,
+      </if>
+      <if test="state != null">
+        state,
+      </if>
+      <if test="groupsId != null">
+        groups_id,
+      </if>
+      <if test="subaccountId != null">
+        subaccount_id,
+      </if>
+      <if test="img != null">
+        img,
+      </if>
+      <if test="hotsaleFlag != null">
+        hotsale_flag,
+      </if>
+      <if test="customsNo != null">
+        customs_no,
+      </if>
+      <if test="taxCost != null">
+        tax_cost,
+      </if>
+      <if test="costQuaUnit != null">
+        cost_qua_unit,
+      </if>
+      <if test="costCurrency != null">
+        cost_currency,
+      </if>
+      <if test="offShoreCurrency != null">
+        off_shore_currency,
+      </if>
+      <if test="offShoreQuaUnit != null">
+        off_shore_qua_unit,
+      </if>
+      <if test="offShoreMinPrice != null">
+        off_shore_min_price,
+      </if>
+      <if test="offShoreMaxPrice != null">
+        off_shore_max_price,
+      </if>
+      <if test="minOrderQuantity != null">
+        min_order_quantity,
+      </if>
+      <if test="minOrderUnit != null">
+        min_order_unit,
+      </if>
+      <if test="pageUnit != null">
+        page_unit,
+      </if>
+      <if test="perPageNum != null">
+        per_page_num,
+      </if>
+      <if test="perPage != null">
+        per_page,
+      </if>
+      <if test="perWeight != null">
+        per_weight,
+      </if>
+      <if test="pgDescription != null">
+        pg_description,
+      </if>
+      <if test="proDescription != null">
+        pro_description,
+      </if>
+      <if test="proUrl != null">
+        pro_url,
+      </if>
+      <if test="attachKey != null">
+        attach_key,
+      </if>
+      <if test="createBy != null">
+        create_by,
+      </if>
+      <if test="createDate != null">
+        create_date,
+      </if>
+      <if test="updateBy != null">
+        update_by,
+      </if>
+      <if test="updateDate != null">
+        update_date,
+      </if>
+      <if test="remarks != null">
+        remarks,
+      </if>
+      <if test="delFlag != null">
+        del_flag,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="productsId != null">
+        #{productsId,jdbcType=VARCHAR},
+      </if>
+      <if test="companyId != null">
+        #{companyId,jdbcType=VARCHAR},
+      </if>
+      <if test="typeSource != null">
+        #{typeSource,jdbcType=VARCHAR},
+      </if>
+      <if test="proNo != null">
+        #{proNo,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="catalog != null">
+        #{catalog,jdbcType=VARCHAR},
+      </if>
+      <if test="model != null">
+        #{model,jdbcType=VARCHAR},
+      </if>
+      <if test="reason != null">
+        #{reason,jdbcType=VARCHAR},
+      </if>
+      <if test="keyword != null">
+        #{keyword,jdbcType=VARCHAR},
+      </if>
+      <if test="start != null">
+        #{start,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null">
+        #{state,jdbcType=VARCHAR},
+      </if>
+      <if test="groupsId != null">
+        #{groupsId,jdbcType=VARCHAR},
+      </if>
+      <if test="subaccountId != null">
+        #{subaccountId,jdbcType=VARCHAR},
+      </if>
+      <if test="img != null">
+        #{img,jdbcType=VARCHAR},
+      </if>
+      <if test="hotsaleFlag != null">
+        #{hotsaleFlag,jdbcType=CHAR},
+      </if>
+      <if test="customsNo != null">
+        #{customsNo,jdbcType=VARCHAR},
+      </if>
+      <if test="taxCost != null">
+        #{taxCost,jdbcType=REAL},
+      </if>
+      <if test="costQuaUnit != null">
+        #{costQuaUnit,jdbcType=CHAR},
+      </if>
+      <if test="costCurrency != null">
+        #{costCurrency,jdbcType=VARCHAR},
+      </if>
+      <if test="offShoreCurrency != null">
+        #{offShoreCurrency,jdbcType=VARCHAR},
+      </if>
+      <if test="offShoreQuaUnit != null">
+        #{offShoreQuaUnit,jdbcType=CHAR},
+      </if>
+      <if test="offShoreMinPrice != null">
+        #{offShoreMinPrice,jdbcType=REAL},
+      </if>
+      <if test="offShoreMaxPrice != null">
+        #{offShoreMaxPrice,jdbcType=REAL},
+      </if>
+      <if test="minOrderQuantity != null">
+        #{minOrderQuantity,jdbcType=REAL},
+      </if>
+      <if test="minOrderUnit != null">
+        #{minOrderUnit,jdbcType=CHAR},
+      </if>
+      <if test="pageUnit != null">
+        #{pageUnit,jdbcType=CHAR},
+      </if>
+      <if test="perPageNum != null">
+        #{perPageNum,jdbcType=REAL},
+      </if>
+      <if test="perPage != null">
+        #{perPage,jdbcType=REAL},
+      </if>
+      <if test="perWeight != null">
+        #{perWeight,jdbcType=REAL},
+      </if>
+      <if test="pgDescription != null">
+        #{pgDescription,jdbcType=VARCHAR},
+      </if>
+      <if test="proDescription != null">
+        #{proDescription,jdbcType=VARCHAR},
+      </if>
+      <if test="proUrl != null">
+        #{proUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="attachKey != null">
+        #{attachKey,jdbcType=VARCHAR},
+      </if>
+      <if test="createBy != null">
+        #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null">
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateBy != null">
+        #{updateBy,jdbcType=VARCHAR},
+      </if>
+      <if test="updateDate != null">
+        #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="remarks != null">
+        #{remarks,jdbcType=VARCHAR},
+      </if>
+      <if test="delFlag != null">
+        #{delFlag,jdbcType=CHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="zty.entity.ProManageExample" resultType="java.lang.Long">
+    select count(*) from pro_manage
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update pro_manage
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.productsId != null">
+        products_id = #{record.productsId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.companyId != null">
+        company_id = #{record.companyId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.typeSource != null">
+        type_source = #{record.typeSource,jdbcType=VARCHAR},
+      </if>
+      <if test="record.proNo != null">
+        pro_no = #{record.proNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.name != null">
+        name = #{record.name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.catalog != null">
+        catalog = #{record.catalog,jdbcType=VARCHAR},
+      </if>
+      <if test="record.model != null">
+        model = #{record.model,jdbcType=VARCHAR},
+      </if>
+      <if test="record.reason != null">
+        reason = #{record.reason,jdbcType=VARCHAR},
+      </if>
+      <if test="record.keyword != null">
+        keyword = #{record.keyword,jdbcType=VARCHAR},
+      </if>
+      <if test="record.start != null">
+        start = #{record.start,jdbcType=VARCHAR},
+      </if>
+      <if test="record.state != null">
+        state = #{record.state,jdbcType=VARCHAR},
+      </if>
+      <if test="record.groupsId != null">
+        groups_id = #{record.groupsId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.subaccountId != null">
+        subaccount_id = #{record.subaccountId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.img != null">
+        img = #{record.img,jdbcType=VARCHAR},
+      </if>
+      <if test="record.hotsaleFlag != null">
+        hotsale_flag = #{record.hotsaleFlag,jdbcType=CHAR},
+      </if>
+      <if test="record.customsNo != null">
+        customs_no = #{record.customsNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.taxCost != null">
+        tax_cost = #{record.taxCost,jdbcType=REAL},
+      </if>
+      <if test="record.costQuaUnit != null">
+        cost_qua_unit = #{record.costQuaUnit,jdbcType=CHAR},
+      </if>
+      <if test="record.costCurrency != null">
+        cost_currency = #{record.costCurrency,jdbcType=VARCHAR},
+      </if>
+      <if test="record.offShoreCurrency != null">
+        off_shore_currency = #{record.offShoreCurrency,jdbcType=VARCHAR},
+      </if>
+      <if test="record.offShoreQuaUnit != null">
+        off_shore_qua_unit = #{record.offShoreQuaUnit,jdbcType=CHAR},
+      </if>
+      <if test="record.offShoreMinPrice != null">
+        off_shore_min_price = #{record.offShoreMinPrice,jdbcType=REAL},
+      </if>
+      <if test="record.offShoreMaxPrice != null">
+        off_shore_max_price = #{record.offShoreMaxPrice,jdbcType=REAL},
+      </if>
+      <if test="record.minOrderQuantity != null">
+        min_order_quantity = #{record.minOrderQuantity,jdbcType=REAL},
+      </if>
+      <if test="record.minOrderUnit != null">
+        min_order_unit = #{record.minOrderUnit,jdbcType=CHAR},
+      </if>
+      <if test="record.pageUnit != null">
+        page_unit = #{record.pageUnit,jdbcType=CHAR},
+      </if>
+      <if test="record.perPageNum != null">
+        per_page_num = #{record.perPageNum,jdbcType=REAL},
+      </if>
+      <if test="record.perPage != null">
+        per_page = #{record.perPage,jdbcType=REAL},
+      </if>
+      <if test="record.perWeight != null">
+        per_weight = #{record.perWeight,jdbcType=REAL},
+      </if>
+      <if test="record.pgDescription != null">
+        pg_description = #{record.pgDescription,jdbcType=VARCHAR},
+      </if>
+      <if test="record.proDescription != null">
+        pro_description = #{record.proDescription,jdbcType=VARCHAR},
+      </if>
+      <if test="record.proUrl != null">
+        pro_url = #{record.proUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.attachKey != null">
+        attach_key = #{record.attachKey,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createBy != null">
+        create_by = #{record.createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createDate != null">
+        create_date = #{record.createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updateBy != null">
+        update_by = #{record.updateBy,jdbcType=VARCHAR},
+      </if>
+      <if test="record.updateDate != null">
+        update_date = #{record.updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.remarks != null">
+        remarks = #{record.remarks,jdbcType=VARCHAR},
+      </if>
+      <if test="record.delFlag != null">
+        del_flag = #{record.delFlag,jdbcType=CHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update pro_manage
+    set id = #{record.id,jdbcType=VARCHAR},
+      products_id = #{record.productsId,jdbcType=VARCHAR},
+      company_id = #{record.companyId,jdbcType=VARCHAR},
+      type_source = #{record.typeSource,jdbcType=VARCHAR},
+      pro_no = #{record.proNo,jdbcType=VARCHAR},
+      name = #{record.name,jdbcType=VARCHAR},
+      catalog = #{record.catalog,jdbcType=VARCHAR},
+      model = #{record.model,jdbcType=VARCHAR},
+      reason = #{record.reason,jdbcType=VARCHAR},
+      keyword = #{record.keyword,jdbcType=VARCHAR},
+      start = #{record.start,jdbcType=VARCHAR},
+      state = #{record.state,jdbcType=VARCHAR},
+      groups_id = #{record.groupsId,jdbcType=VARCHAR},
+      subaccount_id = #{record.subaccountId,jdbcType=VARCHAR},
+      img = #{record.img,jdbcType=VARCHAR},
+      hotsale_flag = #{record.hotsaleFlag,jdbcType=CHAR},
+      customs_no = #{record.customsNo,jdbcType=VARCHAR},
+      tax_cost = #{record.taxCost,jdbcType=REAL},
+      cost_qua_unit = #{record.costQuaUnit,jdbcType=CHAR},
+      cost_currency = #{record.costCurrency,jdbcType=VARCHAR},
+      off_shore_currency = #{record.offShoreCurrency,jdbcType=VARCHAR},
+      off_shore_qua_unit = #{record.offShoreQuaUnit,jdbcType=CHAR},
+      off_shore_min_price = #{record.offShoreMinPrice,jdbcType=REAL},
+      off_shore_max_price = #{record.offShoreMaxPrice,jdbcType=REAL},
+      min_order_quantity = #{record.minOrderQuantity,jdbcType=REAL},
+      min_order_unit = #{record.minOrderUnit,jdbcType=CHAR},
+      page_unit = #{record.pageUnit,jdbcType=CHAR},
+      per_page_num = #{record.perPageNum,jdbcType=REAL},
+      per_page = #{record.perPage,jdbcType=REAL},
+      per_weight = #{record.perWeight,jdbcType=REAL},
+      pg_description = #{record.pgDescription,jdbcType=VARCHAR},
+      pro_description = #{record.proDescription,jdbcType=VARCHAR},
+      pro_url = #{record.proUrl,jdbcType=VARCHAR},
+      attach_key = #{record.attachKey,jdbcType=VARCHAR},
+      create_by = #{record.createBy,jdbcType=VARCHAR},
+      create_date = #{record.createDate,jdbcType=TIMESTAMP},
+      update_by = #{record.updateBy,jdbcType=VARCHAR},
+      update_date = #{record.updateDate,jdbcType=TIMESTAMP},
+      remarks = #{record.remarks,jdbcType=VARCHAR},
+      del_flag = #{record.delFlag,jdbcType=CHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <resultMap id="BaseResultMap" type="com.entity.ProManage">
+    <result column="id" jdbcType="VARCHAR" property="id" />
+    <result column="products_id" jdbcType="VARCHAR" property="productsId" />
+    <result column="company_id" jdbcType="VARCHAR" property="companyId" />
+    <result column="type_source" jdbcType="VARCHAR" property="typeSource" />
+    <result column="pro_no" jdbcType="VARCHAR" property="proNo" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="catalog" jdbcType="VARCHAR" property="catalog" />
+    <result column="model" jdbcType="VARCHAR" property="model" />
+    <result column="reason" jdbcType="VARCHAR" property="reason" />
+    <result column="keyword" jdbcType="VARCHAR" property="keyword" />
+    <result column="start" jdbcType="VARCHAR" property="start" />
+    <result column="state" jdbcType="VARCHAR" property="state" />
+    <result column="groups_id" jdbcType="VARCHAR" property="groupsId" />
+    <result column="subaccount_id" jdbcType="VARCHAR" property="subaccountId" />
+    <result column="img" jdbcType="VARCHAR" property="img" />
+    <result column="hotsale_flag" jdbcType="CHAR" property="hotsaleFlag" />
+    <result column="customs_no" jdbcType="VARCHAR" property="customsNo" />
+    <result column="tax_cost" jdbcType="REAL" property="taxCost" />
+    <result column="cost_qua_unit" jdbcType="CHAR" property="costQuaUnit" />
+    <result column="cost_currency" jdbcType="VARCHAR" property="costCurrency" />
+    <result column="off_shore_currency" jdbcType="VARCHAR" property="offShoreCurrency" />
+    <result column="off_shore_qua_unit" jdbcType="CHAR" property="offShoreQuaUnit" />
+    <result column="off_shore_min_price" jdbcType="REAL" property="offShoreMinPrice" />
+    <result column="off_shore_max_price" jdbcType="REAL" property="offShoreMaxPrice" />
+    <result column="min_order_quantity" jdbcType="REAL" property="minOrderQuantity" />
+    <result column="min_order_unit" jdbcType="CHAR" property="minOrderUnit" />
+    <result column="page_unit" jdbcType="CHAR" property="pageUnit" />
+    <result column="per_page_num" jdbcType="REAL" property="perPageNum" />
+    <result column="per_page" jdbcType="REAL" property="perPage" />
+    <result column="per_weight" jdbcType="REAL" property="perWeight" />
+    <result column="pg_description" jdbcType="VARCHAR" property="pgDescription" />
+    <result column="pro_description" jdbcType="VARCHAR" property="proDescription" />
+    <result column="pro_url" jdbcType="VARCHAR" property="proUrl" />
+    <result column="attach_key" jdbcType="VARCHAR" property="attachKey" />
+    <result column="create_by" jdbcType="VARCHAR" property="createBy" />
+    <result column="create_date" jdbcType="TIMESTAMP" property="createDate" />
+    <result column="update_by" jdbcType="VARCHAR" property="updateBy" />
+    <result column="update_date" jdbcType="TIMESTAMP" property="updateDate" />
+    <result column="remarks" jdbcType="VARCHAR" property="remarks" />
+    <result column="del_flag" jdbcType="CHAR" property="delFlag" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, products_id, company_id, type_source, pro_no, name, catalog, model, reason, keyword, 
+    start, state, groups_id, subaccount_id, img, hotsale_flag, customs_no, tax_cost, 
+    cost_qua_unit, cost_currency, off_shore_currency, off_shore_qua_unit, off_shore_min_price, 
+    off_shore_max_price, min_order_quantity, min_order_unit, page_unit, per_page_num, 
+    per_page, per_weight, pg_description, pro_description, pro_url, attach_key, create_by, 
+    create_date, update_by, update_date, remarks, del_flag
+  </sql>
+  <select id="selectByExample" parameterType="com.entity.ProManageExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from pro_manage
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.entity.ProManageExample">
+    delete from pro_manage
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.entity.ProManage">
+    insert into pro_manage (id, products_id, company_id, 
+      type_source, pro_no, name, 
+      catalog, model, reason, 
+      keyword, start, state, 
+      groups_id, subaccount_id, img, 
+      hotsale_flag, customs_no, tax_cost, 
+      cost_qua_unit, cost_currency, off_shore_currency, 
+      off_shore_qua_unit, off_shore_min_price, off_shore_max_price, 
+      min_order_quantity, min_order_unit, page_unit, 
+      per_page_num, per_page, per_weight, 
+      pg_description, pro_description, pro_url, 
+      attach_key, create_by, create_date, 
+      update_by, update_date, remarks, 
+      del_flag)
+    values (#{id,jdbcType=VARCHAR}, #{productsId,jdbcType=VARCHAR}, #{companyId,jdbcType=VARCHAR}, 
+      #{typeSource,jdbcType=VARCHAR}, #{proNo,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, 
+      #{catalog,jdbcType=VARCHAR}, #{model,jdbcType=VARCHAR}, #{reason,jdbcType=VARCHAR}, 
+      #{keyword,jdbcType=VARCHAR}, #{start,jdbcType=VARCHAR}, #{state,jdbcType=VARCHAR}, 
+      #{groupsId,jdbcType=VARCHAR}, #{subaccountId,jdbcType=VARCHAR}, #{img,jdbcType=VARCHAR}, 
+      #{hotsaleFlag,jdbcType=CHAR}, #{customsNo,jdbcType=VARCHAR}, #{taxCost,jdbcType=REAL}, 
+      #{costQuaUnit,jdbcType=CHAR}, #{costCurrency,jdbcType=VARCHAR}, #{offShoreCurrency,jdbcType=VARCHAR}, 
+      #{offShoreQuaUnit,jdbcType=CHAR}, #{offShoreMinPrice,jdbcType=REAL}, #{offShoreMaxPrice,jdbcType=REAL}, 
+      #{minOrderQuantity,jdbcType=REAL}, #{minOrderUnit,jdbcType=CHAR}, #{pageUnit,jdbcType=CHAR}, 
+      #{perPageNum,jdbcType=REAL}, #{perPage,jdbcType=REAL}, #{perWeight,jdbcType=REAL}, 
+      #{pgDescription,jdbcType=VARCHAR}, #{proDescription,jdbcType=VARCHAR}, #{proUrl,jdbcType=VARCHAR}, 
+      #{attachKey,jdbcType=VARCHAR}, #{createBy,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}, 
+      #{updateBy,jdbcType=VARCHAR}, #{updateDate,jdbcType=TIMESTAMP}, #{remarks,jdbcType=VARCHAR}, 
+      #{delFlag,jdbcType=CHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.entity.ProManage">
+    insert into pro_manage
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="productsId != null">
+        products_id,
+      </if>
+      <if test="companyId != null">
+        company_id,
+      </if>
+      <if test="typeSource != null">
+        type_source,
+      </if>
+      <if test="proNo != null">
+        pro_no,
+      </if>
+      <if test="name != null">
+        name,
+      </if>
+      <if test="catalog != null">
+        catalog,
+      </if>
+      <if test="model != null">
+        model,
+      </if>
+      <if test="reason != null">
+        reason,
+      </if>
+      <if test="keyword != null">
+        keyword,
+      </if>
+      <if test="start != null">
+        start,
+      </if>
+      <if test="state != null">
+        state,
+      </if>
+      <if test="groupsId != null">
+        groups_id,
+      </if>
+      <if test="subaccountId != null">
+        subaccount_id,
+      </if>
+      <if test="img != null">
+        img,
+      </if>
+      <if test="hotsaleFlag != null">
+        hotsale_flag,
+      </if>
+      <if test="customsNo != null">
+        customs_no,
+      </if>
+      <if test="taxCost != null">
+        tax_cost,
+      </if>
+      <if test="costQuaUnit != null">
+        cost_qua_unit,
+      </if>
+      <if test="costCurrency != null">
+        cost_currency,
+      </if>
+      <if test="offShoreCurrency != null">
+        off_shore_currency,
+      </if>
+      <if test="offShoreQuaUnit != null">
+        off_shore_qua_unit,
+      </if>
+      <if test="offShoreMinPrice != null">
+        off_shore_min_price,
+      </if>
+      <if test="offShoreMaxPrice != null">
+        off_shore_max_price,
+      </if>
+      <if test="minOrderQuantity != null">
+        min_order_quantity,
+      </if>
+      <if test="minOrderUnit != null">
+        min_order_unit,
+      </if>
+      <if test="pageUnit != null">
+        page_unit,
+      </if>
+      <if test="perPageNum != null">
+        per_page_num,
+      </if>
+      <if test="perPage != null">
+        per_page,
+      </if>
+      <if test="perWeight != null">
+        per_weight,
+      </if>
+      <if test="pgDescription != null">
+        pg_description,
+      </if>
+      <if test="proDescription != null">
+        pro_description,
+      </if>
+      <if test="proUrl != null">
+        pro_url,
+      </if>
+      <if test="attachKey != null">
+        attach_key,
+      </if>
+      <if test="createBy != null">
+        create_by,
+      </if>
+      <if test="createDate != null">
+        create_date,
+      </if>
+      <if test="updateBy != null">
+        update_by,
+      </if>
+      <if test="updateDate != null">
+        update_date,
+      </if>
+      <if test="remarks != null">
+        remarks,
+      </if>
+      <if test="delFlag != null">
+        del_flag,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="productsId != null">
+        #{productsId,jdbcType=VARCHAR},
+      </if>
+      <if test="companyId != null">
+        #{companyId,jdbcType=VARCHAR},
+      </if>
+      <if test="typeSource != null">
+        #{typeSource,jdbcType=VARCHAR},
+      </if>
+      <if test="proNo != null">
+        #{proNo,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="catalog != null">
+        #{catalog,jdbcType=VARCHAR},
+      </if>
+      <if test="model != null">
+        #{model,jdbcType=VARCHAR},
+      </if>
+      <if test="reason != null">
+        #{reason,jdbcType=VARCHAR},
+      </if>
+      <if test="keyword != null">
+        #{keyword,jdbcType=VARCHAR},
+      </if>
+      <if test="start != null">
+        #{start,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null">
+        #{state,jdbcType=VARCHAR},
+      </if>
+      <if test="groupsId != null">
+        #{groupsId,jdbcType=VARCHAR},
+      </if>
+      <if test="subaccountId != null">
+        #{subaccountId,jdbcType=VARCHAR},
+      </if>
+      <if test="img != null">
+        #{img,jdbcType=VARCHAR},
+      </if>
+      <if test="hotsaleFlag != null">
+        #{hotsaleFlag,jdbcType=CHAR},
+      </if>
+      <if test="customsNo != null">
+        #{customsNo,jdbcType=VARCHAR},
+      </if>
+      <if test="taxCost != null">
+        #{taxCost,jdbcType=REAL},
+      </if>
+      <if test="costQuaUnit != null">
+        #{costQuaUnit,jdbcType=CHAR},
+      </if>
+      <if test="costCurrency != null">
+        #{costCurrency,jdbcType=VARCHAR},
+      </if>
+      <if test="offShoreCurrency != null">
+        #{offShoreCurrency,jdbcType=VARCHAR},
+      </if>
+      <if test="offShoreQuaUnit != null">
+        #{offShoreQuaUnit,jdbcType=CHAR},
+      </if>
+      <if test="offShoreMinPrice != null">
+        #{offShoreMinPrice,jdbcType=REAL},
+      </if>
+      <if test="offShoreMaxPrice != null">
+        #{offShoreMaxPrice,jdbcType=REAL},
+      </if>
+      <if test="minOrderQuantity != null">
+        #{minOrderQuantity,jdbcType=REAL},
+      </if>
+      <if test="minOrderUnit != null">
+        #{minOrderUnit,jdbcType=CHAR},
+      </if>
+      <if test="pageUnit != null">
+        #{pageUnit,jdbcType=CHAR},
+      </if>
+      <if test="perPageNum != null">
+        #{perPageNum,jdbcType=REAL},
+      </if>
+      <if test="perPage != null">
+        #{perPage,jdbcType=REAL},
+      </if>
+      <if test="perWeight != null">
+        #{perWeight,jdbcType=REAL},
+      </if>
+      <if test="pgDescription != null">
+        #{pgDescription,jdbcType=VARCHAR},
+      </if>
+      <if test="proDescription != null">
+        #{proDescription,jdbcType=VARCHAR},
+      </if>
+      <if test="proUrl != null">
+        #{proUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="attachKey != null">
+        #{attachKey,jdbcType=VARCHAR},
+      </if>
+      <if test="createBy != null">
+        #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null">
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateBy != null">
+        #{updateBy,jdbcType=VARCHAR},
+      </if>
+      <if test="updateDate != null">
+        #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="remarks != null">
+        #{remarks,jdbcType=VARCHAR},
+      </if>
+      <if test="delFlag != null">
+        #{delFlag,jdbcType=CHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.entity.ProManageExample" resultType="java.lang.Long">
+    select count(*) from pro_manage
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update pro_manage
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.productsId != null">
+        products_id = #{record.productsId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.companyId != null">
+        company_id = #{record.companyId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.typeSource != null">
+        type_source = #{record.typeSource,jdbcType=VARCHAR},
+      </if>
+      <if test="record.proNo != null">
+        pro_no = #{record.proNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.name != null">
+        name = #{record.name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.catalog != null">
+        catalog = #{record.catalog,jdbcType=VARCHAR},
+      </if>
+      <if test="record.model != null">
+        model = #{record.model,jdbcType=VARCHAR},
+      </if>
+      <if test="record.reason != null">
+        reason = #{record.reason,jdbcType=VARCHAR},
+      </if>
+      <if test="record.keyword != null">
+        keyword = #{record.keyword,jdbcType=VARCHAR},
+      </if>
+      <if test="record.start != null">
+        start = #{record.start,jdbcType=VARCHAR},
+      </if>
+      <if test="record.state != null">
+        state = #{record.state,jdbcType=VARCHAR},
+      </if>
+      <if test="record.groupsId != null">
+        groups_id = #{record.groupsId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.subaccountId != null">
+        subaccount_id = #{record.subaccountId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.img != null">
+        img = #{record.img,jdbcType=VARCHAR},
+      </if>
+      <if test="record.hotsaleFlag != null">
+        hotsale_flag = #{record.hotsaleFlag,jdbcType=CHAR},
+      </if>
+      <if test="record.customsNo != null">
+        customs_no = #{record.customsNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.taxCost != null">
+        tax_cost = #{record.taxCost,jdbcType=REAL},
+      </if>
+      <if test="record.costQuaUnit != null">
+        cost_qua_unit = #{record.costQuaUnit,jdbcType=CHAR},
+      </if>
+      <if test="record.costCurrency != null">
+        cost_currency = #{record.costCurrency,jdbcType=VARCHAR},
+      </if>
+      <if test="record.offShoreCurrency != null">
+        off_shore_currency = #{record.offShoreCurrency,jdbcType=VARCHAR},
+      </if>
+      <if test="record.offShoreQuaUnit != null">
+        off_shore_qua_unit = #{record.offShoreQuaUnit,jdbcType=CHAR},
+      </if>
+      <if test="record.offShoreMinPrice != null">
+        off_shore_min_price = #{record.offShoreMinPrice,jdbcType=REAL},
+      </if>
+      <if test="record.offShoreMaxPrice != null">
+        off_shore_max_price = #{record.offShoreMaxPrice,jdbcType=REAL},
+      </if>
+      <if test="record.minOrderQuantity != null">
+        min_order_quantity = #{record.minOrderQuantity,jdbcType=REAL},
+      </if>
+      <if test="record.minOrderUnit != null">
+        min_order_unit = #{record.minOrderUnit,jdbcType=CHAR},
+      </if>
+      <if test="record.pageUnit != null">
+        page_unit = #{record.pageUnit,jdbcType=CHAR},
+      </if>
+      <if test="record.perPageNum != null">
+        per_page_num = #{record.perPageNum,jdbcType=REAL},
+      </if>
+      <if test="record.perPage != null">
+        per_page = #{record.perPage,jdbcType=REAL},
+      </if>
+      <if test="record.perWeight != null">
+        per_weight = #{record.perWeight,jdbcType=REAL},
+      </if>
+      <if test="record.pgDescription != null">
+        pg_description = #{record.pgDescription,jdbcType=VARCHAR},
+      </if>
+      <if test="record.proDescription != null">
+        pro_description = #{record.proDescription,jdbcType=VARCHAR},
+      </if>
+      <if test="record.proUrl != null">
+        pro_url = #{record.proUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.attachKey != null">
+        attach_key = #{record.attachKey,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createBy != null">
+        create_by = #{record.createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createDate != null">
+        create_date = #{record.createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updateBy != null">
+        update_by = #{record.updateBy,jdbcType=VARCHAR},
+      </if>
+      <if test="record.updateDate != null">
+        update_date = #{record.updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.remarks != null">
+        remarks = #{record.remarks,jdbcType=VARCHAR},
+      </if>
+      <if test="record.delFlag != null">
+        del_flag = #{record.delFlag,jdbcType=CHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update pro_manage
+    set id = #{record.id,jdbcType=VARCHAR},
+      products_id = #{record.productsId,jdbcType=VARCHAR},
+      company_id = #{record.companyId,jdbcType=VARCHAR},
+      type_source = #{record.typeSource,jdbcType=VARCHAR},
+      pro_no = #{record.proNo,jdbcType=VARCHAR},
+      name = #{record.name,jdbcType=VARCHAR},
+      catalog = #{record.catalog,jdbcType=VARCHAR},
+      model = #{record.model,jdbcType=VARCHAR},
+      reason = #{record.reason,jdbcType=VARCHAR},
+      keyword = #{record.keyword,jdbcType=VARCHAR},
+      start = #{record.start,jdbcType=VARCHAR},
+      state = #{record.state,jdbcType=VARCHAR},
+      groups_id = #{record.groupsId,jdbcType=VARCHAR},
+      subaccount_id = #{record.subaccountId,jdbcType=VARCHAR},
+      img = #{record.img,jdbcType=VARCHAR},
+      hotsale_flag = #{record.hotsaleFlag,jdbcType=CHAR},
+      customs_no = #{record.customsNo,jdbcType=VARCHAR},
+      tax_cost = #{record.taxCost,jdbcType=REAL},
+      cost_qua_unit = #{record.costQuaUnit,jdbcType=CHAR},
+      cost_currency = #{record.costCurrency,jdbcType=VARCHAR},
+      off_shore_currency = #{record.offShoreCurrency,jdbcType=VARCHAR},
+      off_shore_qua_unit = #{record.offShoreQuaUnit,jdbcType=CHAR},
+      off_shore_min_price = #{record.offShoreMinPrice,jdbcType=REAL},
+      off_shore_max_price = #{record.offShoreMaxPrice,jdbcType=REAL},
+      min_order_quantity = #{record.minOrderQuantity,jdbcType=REAL},
+      min_order_unit = #{record.minOrderUnit,jdbcType=CHAR},
+      page_unit = #{record.pageUnit,jdbcType=CHAR},
+      per_page_num = #{record.perPageNum,jdbcType=REAL},
+      per_page = #{record.perPage,jdbcType=REAL},
+      per_weight = #{record.perWeight,jdbcType=REAL},
+      pg_description = #{record.pgDescription,jdbcType=VARCHAR},
+      pro_description = #{record.proDescription,jdbcType=VARCHAR},
+      pro_url = #{record.proUrl,jdbcType=VARCHAR},
+      attach_key = #{record.attachKey,jdbcType=VARCHAR},
+      create_by = #{record.createBy,jdbcType=VARCHAR},
+      create_date = #{record.createDate,jdbcType=TIMESTAMP},
+      update_by = #{record.updateBy,jdbcType=VARCHAR},
+      update_date = #{record.updateDate,jdbcType=TIMESTAMP},
+      remarks = #{record.remarks,jdbcType=VARCHAR},
+      del_flag = #{record.delFlag,jdbcType=CHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <resultMap id="BaseResultMap" type="com.entity.ProManage">
+    <result column="id" jdbcType="VARCHAR" property="id" />
+    <result column="products_id" jdbcType="VARCHAR" property="productsId" />
+    <result column="company_id" jdbcType="VARCHAR" property="companyId" />
+    <result column="type_source" jdbcType="VARCHAR" property="typeSource" />
+    <result column="pro_no" jdbcType="VARCHAR" property="proNo" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="catalog" jdbcType="VARCHAR" property="catalog" />
+    <result column="model" jdbcType="VARCHAR" property="model" />
+    <result column="reason" jdbcType="VARCHAR" property="reason" />
+    <result column="keyword" jdbcType="VARCHAR" property="keyword" />
+    <result column="start" jdbcType="VARCHAR" property="start" />
+    <result column="state" jdbcType="VARCHAR" property="state" />
+    <result column="groups_id" jdbcType="VARCHAR" property="groupsId" />
+    <result column="subaccount_id" jdbcType="VARCHAR" property="subaccountId" />
+    <result column="img" jdbcType="VARCHAR" property="img" />
+    <result column="hotsale_flag" jdbcType="CHAR" property="hotsaleFlag" />
+    <result column="customs_no" jdbcType="VARCHAR" property="customsNo" />
+    <result column="tax_cost" jdbcType="REAL" property="taxCost" />
+    <result column="cost_qua_unit" jdbcType="CHAR" property="costQuaUnit" />
+    <result column="cost_currency" jdbcType="VARCHAR" property="costCurrency" />
+    <result column="off_shore_currency" jdbcType="VARCHAR" property="offShoreCurrency" />
+    <result column="off_shore_qua_unit" jdbcType="CHAR" property="offShoreQuaUnit" />
+    <result column="off_shore_min_price" jdbcType="REAL" property="offShoreMinPrice" />
+    <result column="off_shore_max_price" jdbcType="REAL" property="offShoreMaxPrice" />
+    <result column="min_order_quantity" jdbcType="REAL" property="minOrderQuantity" />
+    <result column="min_order_unit" jdbcType="CHAR" property="minOrderUnit" />
+    <result column="page_unit" jdbcType="CHAR" property="pageUnit" />
+    <result column="per_page_num" jdbcType="REAL" property="perPageNum" />
+    <result column="per_page" jdbcType="REAL" property="perPage" />
+    <result column="per_weight" jdbcType="REAL" property="perWeight" />
+    <result column="pg_description" jdbcType="VARCHAR" property="pgDescription" />
+    <result column="pro_description" jdbcType="VARCHAR" property="proDescription" />
+    <result column="pro_url" jdbcType="VARCHAR" property="proUrl" />
+    <result column="attach_key" jdbcType="VARCHAR" property="attachKey" />
+    <result column="create_by" jdbcType="VARCHAR" property="createBy" />
+    <result column="create_date" jdbcType="TIMESTAMP" property="createDate" />
+    <result column="update_by" jdbcType="VARCHAR" property="updateBy" />
+    <result column="update_date" jdbcType="TIMESTAMP" property="updateDate" />
+    <result column="remarks" jdbcType="VARCHAR" property="remarks" />
+    <result column="del_flag" jdbcType="CHAR" property="delFlag" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, products_id, company_id, type_source, pro_no, name, catalog, model, reason, keyword, 
+    start, state, groups_id, subaccount_id, img, hotsale_flag, customs_no, tax_cost, 
+    cost_qua_unit, cost_currency, off_shore_currency, off_shore_qua_unit, off_shore_min_price, 
+    off_shore_max_price, min_order_quantity, min_order_unit, page_unit, per_page_num, 
+    per_page, per_weight, pg_description, pro_description, pro_url, attach_key, create_by, 
+    create_date, update_by, update_date, remarks, del_flag
+  </sql>
+  <select id="selectByExample" parameterType="com.entity.ProManageExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from pro_manage
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.entity.ProManageExample">
+    delete from pro_manage
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.entity.ProManage">
+    insert into pro_manage (id, products_id, company_id, 
+      type_source, pro_no, name, 
+      catalog, model, reason, 
+      keyword, start, state, 
+      groups_id, subaccount_id, img, 
+      hotsale_flag, customs_no, tax_cost, 
+      cost_qua_unit, cost_currency, off_shore_currency, 
+      off_shore_qua_unit, off_shore_min_price, off_shore_max_price, 
+      min_order_quantity, min_order_unit, page_unit, 
+      per_page_num, per_page, per_weight, 
+      pg_description, pro_description, pro_url, 
+      attach_key, create_by, create_date, 
+      update_by, update_date, remarks, 
+      del_flag)
+    values (#{id,jdbcType=VARCHAR}, #{productsId,jdbcType=VARCHAR}, #{companyId,jdbcType=VARCHAR}, 
+      #{typeSource,jdbcType=VARCHAR}, #{proNo,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, 
+      #{catalog,jdbcType=VARCHAR}, #{model,jdbcType=VARCHAR}, #{reason,jdbcType=VARCHAR}, 
+      #{keyword,jdbcType=VARCHAR}, #{start,jdbcType=VARCHAR}, #{state,jdbcType=VARCHAR}, 
+      #{groupsId,jdbcType=VARCHAR}, #{subaccountId,jdbcType=VARCHAR}, #{img,jdbcType=VARCHAR}, 
+      #{hotsaleFlag,jdbcType=CHAR}, #{customsNo,jdbcType=VARCHAR}, #{taxCost,jdbcType=REAL}, 
+      #{costQuaUnit,jdbcType=CHAR}, #{costCurrency,jdbcType=VARCHAR}, #{offShoreCurrency,jdbcType=VARCHAR}, 
+      #{offShoreQuaUnit,jdbcType=CHAR}, #{offShoreMinPrice,jdbcType=REAL}, #{offShoreMaxPrice,jdbcType=REAL}, 
+      #{minOrderQuantity,jdbcType=REAL}, #{minOrderUnit,jdbcType=CHAR}, #{pageUnit,jdbcType=CHAR}, 
+      #{perPageNum,jdbcType=REAL}, #{perPage,jdbcType=REAL}, #{perWeight,jdbcType=REAL}, 
+      #{pgDescription,jdbcType=VARCHAR}, #{proDescription,jdbcType=VARCHAR}, #{proUrl,jdbcType=VARCHAR}, 
+      #{attachKey,jdbcType=VARCHAR}, #{createBy,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}, 
+      #{updateBy,jdbcType=VARCHAR}, #{updateDate,jdbcType=TIMESTAMP}, #{remarks,jdbcType=VARCHAR}, 
+      #{delFlag,jdbcType=CHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.entity.ProManage">
+    insert into pro_manage
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="productsId != null">
+        products_id,
+      </if>
+      <if test="companyId != null">
+        company_id,
+      </if>
+      <if test="typeSource != null">
+        type_source,
+      </if>
+      <if test="proNo != null">
+        pro_no,
+      </if>
+      <if test="name != null">
+        name,
+      </if>
+      <if test="catalog != null">
+        catalog,
+      </if>
+      <if test="model != null">
+        model,
+      </if>
+      <if test="reason != null">
+        reason,
+      </if>
+      <if test="keyword != null">
+        keyword,
+      </if>
+      <if test="start != null">
+        start,
+      </if>
+      <if test="state != null">
+        state,
+      </if>
+      <if test="groupsId != null">
+        groups_id,
+      </if>
+      <if test="subaccountId != null">
+        subaccount_id,
+      </if>
+      <if test="img != null">
+        img,
+      </if>
+      <if test="hotsaleFlag != null">
+        hotsale_flag,
+      </if>
+      <if test="customsNo != null">
+        customs_no,
+      </if>
+      <if test="taxCost != null">
+        tax_cost,
+      </if>
+      <if test="costQuaUnit != null">
+        cost_qua_unit,
+      </if>
+      <if test="costCurrency != null">
+        cost_currency,
+      </if>
+      <if test="offShoreCurrency != null">
+        off_shore_currency,
+      </if>
+      <if test="offShoreQuaUnit != null">
+        off_shore_qua_unit,
+      </if>
+      <if test="offShoreMinPrice != null">
+        off_shore_min_price,
+      </if>
+      <if test="offShoreMaxPrice != null">
+        off_shore_max_price,
+      </if>
+      <if test="minOrderQuantity != null">
+        min_order_quantity,
+      </if>
+      <if test="minOrderUnit != null">
+        min_order_unit,
+      </if>
+      <if test="pageUnit != null">
+        page_unit,
+      </if>
+      <if test="perPageNum != null">
+        per_page_num,
+      </if>
+      <if test="perPage != null">
+        per_page,
+      </if>
+      <if test="perWeight != null">
+        per_weight,
+      </if>
+      <if test="pgDescription != null">
+        pg_description,
+      </if>
+      <if test="proDescription != null">
+        pro_description,
+      </if>
+      <if test="proUrl != null">
+        pro_url,
+      </if>
+      <if test="attachKey != null">
+        attach_key,
+      </if>
+      <if test="createBy != null">
+        create_by,
+      </if>
+      <if test="createDate != null">
+        create_date,
+      </if>
+      <if test="updateBy != null">
+        update_by,
+      </if>
+      <if test="updateDate != null">
+        update_date,
+      </if>
+      <if test="remarks != null">
+        remarks,
+      </if>
+      <if test="delFlag != null">
+        del_flag,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="productsId != null">
+        #{productsId,jdbcType=VARCHAR},
+      </if>
+      <if test="companyId != null">
+        #{companyId,jdbcType=VARCHAR},
+      </if>
+      <if test="typeSource != null">
+        #{typeSource,jdbcType=VARCHAR},
+      </if>
+      <if test="proNo != null">
+        #{proNo,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="catalog != null">
+        #{catalog,jdbcType=VARCHAR},
+      </if>
+      <if test="model != null">
+        #{model,jdbcType=VARCHAR},
+      </if>
+      <if test="reason != null">
+        #{reason,jdbcType=VARCHAR},
+      </if>
+      <if test="keyword != null">
+        #{keyword,jdbcType=VARCHAR},
+      </if>
+      <if test="start != null">
+        #{start,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null">
+        #{state,jdbcType=VARCHAR},
+      </if>
+      <if test="groupsId != null">
+        #{groupsId,jdbcType=VARCHAR},
+      </if>
+      <if test="subaccountId != null">
+        #{subaccountId,jdbcType=VARCHAR},
+      </if>
+      <if test="img != null">
+        #{img,jdbcType=VARCHAR},
+      </if>
+      <if test="hotsaleFlag != null">
+        #{hotsaleFlag,jdbcType=CHAR},
+      </if>
+      <if test="customsNo != null">
+        #{customsNo,jdbcType=VARCHAR},
+      </if>
+      <if test="taxCost != null">
+        #{taxCost,jdbcType=REAL},
+      </if>
+      <if test="costQuaUnit != null">
+        #{costQuaUnit,jdbcType=CHAR},
+      </if>
+      <if test="costCurrency != null">
+        #{costCurrency,jdbcType=VARCHAR},
+      </if>
+      <if test="offShoreCurrency != null">
+        #{offShoreCurrency,jdbcType=VARCHAR},
+      </if>
+      <if test="offShoreQuaUnit != null">
+        #{offShoreQuaUnit,jdbcType=CHAR},
+      </if>
+      <if test="offShoreMinPrice != null">
+        #{offShoreMinPrice,jdbcType=REAL},
+      </if>
+      <if test="offShoreMaxPrice != null">
+        #{offShoreMaxPrice,jdbcType=REAL},
+      </if>
+      <if test="minOrderQuantity != null">
+        #{minOrderQuantity,jdbcType=REAL},
+      </if>
+      <if test="minOrderUnit != null">
+        #{minOrderUnit,jdbcType=CHAR},
+      </if>
+      <if test="pageUnit != null">
+        #{pageUnit,jdbcType=CHAR},
+      </if>
+      <if test="perPageNum != null">
+        #{perPageNum,jdbcType=REAL},
+      </if>
+      <if test="perPage != null">
+        #{perPage,jdbcType=REAL},
+      </if>
+      <if test="perWeight != null">
+        #{perWeight,jdbcType=REAL},
+      </if>
+      <if test="pgDescription != null">
+        #{pgDescription,jdbcType=VARCHAR},
+      </if>
+      <if test="proDescription != null">
+        #{proDescription,jdbcType=VARCHAR},
+      </if>
+      <if test="proUrl != null">
+        #{proUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="attachKey != null">
+        #{attachKey,jdbcType=VARCHAR},
+      </if>
+      <if test="createBy != null">
+        #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null">
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateBy != null">
+        #{updateBy,jdbcType=VARCHAR},
+      </if>
+      <if test="updateDate != null">
+        #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="remarks != null">
+        #{remarks,jdbcType=VARCHAR},
+      </if>
+      <if test="delFlag != null">
+        #{delFlag,jdbcType=CHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.entity.ProManageExample" resultType="java.lang.Long">
+    select count(*) from pro_manage
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update pro_manage
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.productsId != null">
+        products_id = #{record.productsId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.companyId != null">
+        company_id = #{record.companyId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.typeSource != null">
+        type_source = #{record.typeSource,jdbcType=VARCHAR},
+      </if>
+      <if test="record.proNo != null">
+        pro_no = #{record.proNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.name != null">
+        name = #{record.name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.catalog != null">
+        catalog = #{record.catalog,jdbcType=VARCHAR},
+      </if>
+      <if test="record.model != null">
+        model = #{record.model,jdbcType=VARCHAR},
+      </if>
+      <if test="record.reason != null">
+        reason = #{record.reason,jdbcType=VARCHAR},
+      </if>
+      <if test="record.keyword != null">
+        keyword = #{record.keyword,jdbcType=VARCHAR},
+      </if>
+      <if test="record.start != null">
+        start = #{record.start,jdbcType=VARCHAR},
+      </if>
+      <if test="record.state != null">
+        state = #{record.state,jdbcType=VARCHAR},
+      </if>
+      <if test="record.groupsId != null">
+        groups_id = #{record.groupsId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.subaccountId != null">
+        subaccount_id = #{record.subaccountId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.img != null">
+        img = #{record.img,jdbcType=VARCHAR},
+      </if>
+      <if test="record.hotsaleFlag != null">
+        hotsale_flag = #{record.hotsaleFlag,jdbcType=CHAR},
+      </if>
+      <if test="record.customsNo != null">
+        customs_no = #{record.customsNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.taxCost != null">
+        tax_cost = #{record.taxCost,jdbcType=REAL},
+      </if>
+      <if test="record.costQuaUnit != null">
+        cost_qua_unit = #{record.costQuaUnit,jdbcType=CHAR},
+      </if>
+      <if test="record.costCurrency != null">
+        cost_currency = #{record.costCurrency,jdbcType=VARCHAR},
+      </if>
+      <if test="record.offShoreCurrency != null">
+        off_shore_currency = #{record.offShoreCurrency,jdbcType=VARCHAR},
+      </if>
+      <if test="record.offShoreQuaUnit != null">
+        off_shore_qua_unit = #{record.offShoreQuaUnit,jdbcType=CHAR},
+      </if>
+      <if test="record.offShoreMinPrice != null">
+        off_shore_min_price = #{record.offShoreMinPrice,jdbcType=REAL},
+      </if>
+      <if test="record.offShoreMaxPrice != null">
+        off_shore_max_price = #{record.offShoreMaxPrice,jdbcType=REAL},
+      </if>
+      <if test="record.minOrderQuantity != null">
+        min_order_quantity = #{record.minOrderQuantity,jdbcType=REAL},
+      </if>
+      <if test="record.minOrderUnit != null">
+        min_order_unit = #{record.minOrderUnit,jdbcType=CHAR},
+      </if>
+      <if test="record.pageUnit != null">
+        page_unit = #{record.pageUnit,jdbcType=CHAR},
+      </if>
+      <if test="record.perPageNum != null">
+        per_page_num = #{record.perPageNum,jdbcType=REAL},
+      </if>
+      <if test="record.perPage != null">
+        per_page = #{record.perPage,jdbcType=REAL},
+      </if>
+      <if test="record.perWeight != null">
+        per_weight = #{record.perWeight,jdbcType=REAL},
+      </if>
+      <if test="record.pgDescription != null">
+        pg_description = #{record.pgDescription,jdbcType=VARCHAR},
+      </if>
+      <if test="record.proDescription != null">
+        pro_description = #{record.proDescription,jdbcType=VARCHAR},
+      </if>
+      <if test="record.proUrl != null">
+        pro_url = #{record.proUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.attachKey != null">
+        attach_key = #{record.attachKey,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createBy != null">
+        create_by = #{record.createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createDate != null">
+        create_date = #{record.createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updateBy != null">
+        update_by = #{record.updateBy,jdbcType=VARCHAR},
+      </if>
+      <if test="record.updateDate != null">
+        update_date = #{record.updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.remarks != null">
+        remarks = #{record.remarks,jdbcType=VARCHAR},
+      </if>
+      <if test="record.delFlag != null">
+        del_flag = #{record.delFlag,jdbcType=CHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update pro_manage
+    set id = #{record.id,jdbcType=VARCHAR},
+      products_id = #{record.productsId,jdbcType=VARCHAR},
+      company_id = #{record.companyId,jdbcType=VARCHAR},
+      type_source = #{record.typeSource,jdbcType=VARCHAR},
+      pro_no = #{record.proNo,jdbcType=VARCHAR},
+      name = #{record.name,jdbcType=VARCHAR},
+      catalog = #{record.catalog,jdbcType=VARCHAR},
+      model = #{record.model,jdbcType=VARCHAR},
+      reason = #{record.reason,jdbcType=VARCHAR},
+      keyword = #{record.keyword,jdbcType=VARCHAR},
+      start = #{record.start,jdbcType=VARCHAR},
+      state = #{record.state,jdbcType=VARCHAR},
+      groups_id = #{record.groupsId,jdbcType=VARCHAR},
+      subaccount_id = #{record.subaccountId,jdbcType=VARCHAR},
+      img = #{record.img,jdbcType=VARCHAR},
+      hotsale_flag = #{record.hotsaleFlag,jdbcType=CHAR},
+      customs_no = #{record.customsNo,jdbcType=VARCHAR},
+      tax_cost = #{record.taxCost,jdbcType=REAL},
+      cost_qua_unit = #{record.costQuaUnit,jdbcType=CHAR},
+      cost_currency = #{record.costCurrency,jdbcType=VARCHAR},
+      off_shore_currency = #{record.offShoreCurrency,jdbcType=VARCHAR},
+      off_shore_qua_unit = #{record.offShoreQuaUnit,jdbcType=CHAR},
+      off_shore_min_price = #{record.offShoreMinPrice,jdbcType=REAL},
+      off_shore_max_price = #{record.offShoreMaxPrice,jdbcType=REAL},
+      min_order_quantity = #{record.minOrderQuantity,jdbcType=REAL},
+      min_order_unit = #{record.minOrderUnit,jdbcType=CHAR},
+      page_unit = #{record.pageUnit,jdbcType=CHAR},
+      per_page_num = #{record.perPageNum,jdbcType=REAL},
+      per_page = #{record.perPage,jdbcType=REAL},
+      per_weight = #{record.perWeight,jdbcType=REAL},
+      pg_description = #{record.pgDescription,jdbcType=VARCHAR},
+      pro_description = #{record.proDescription,jdbcType=VARCHAR},
+      pro_url = #{record.proUrl,jdbcType=VARCHAR},
+      attach_key = #{record.attachKey,jdbcType=VARCHAR},
+      create_by = #{record.createBy,jdbcType=VARCHAR},
+      create_date = #{record.createDate,jdbcType=TIMESTAMP},
+      update_by = #{record.updateBy,jdbcType=VARCHAR},
+      update_date = #{record.updateDate,jdbcType=TIMESTAMP},
+      remarks = #{record.remarks,jdbcType=VARCHAR},
+      del_flag = #{record.delFlag,jdbcType=CHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+</mapper>

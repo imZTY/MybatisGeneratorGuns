@@ -1,0 +1,1744 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="zty.dao.ProFiledCtrlMapper">
+  <resultMap id="BaseResultMap" type="zty.entity.ProFiledCtrl">
+    <result column="id" jdbcType="VARCHAR" property="id" />
+    <result column="companyId" jdbcType="VARCHAR" property="companyid" />
+    <result column="filedName" jdbcType="VARCHAR" property="filedname" />
+    <result column="filedLabel" jdbcType="VARCHAR" property="filedlabel" />
+    <result column="isFixed" jdbcType="CHAR" property="isfixed" />
+    <result column="tips" jdbcType="VARCHAR" property="tips" />
+    <result column="defaultValue" jdbcType="VARCHAR" property="defaultvalue" />
+    <result column="isRequired" jdbcType="CHAR" property="isrequired" />
+    <result column="isHide" jdbcType="CHAR" property="ishide" />
+    <result column="create_by" jdbcType="VARCHAR" property="createBy" />
+    <result column="create_date" jdbcType="TIMESTAMP" property="createDate" />
+    <result column="update_by" jdbcType="VARCHAR" property="updateBy" />
+    <result column="update_date" jdbcType="TIMESTAMP" property="updateDate" />
+    <result column="remarks" jdbcType="VARCHAR" property="remarks" />
+    <result column="del_flag" jdbcType="CHAR" property="delFlag" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, companyId, filedName, filedLabel, isFixed, tips, defaultValue, isRequired, isHide, 
+    create_by, create_date, update_by, update_date, remarks, del_flag
+  </sql>
+  <select id="selectByExample" parameterType="zty.entity.ProFiledCtrlExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from pro_filed_ctrl
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="zty.entity.ProFiledCtrlExample">
+    delete from pro_filed_ctrl
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="zty.entity.ProFiledCtrl">
+    insert into pro_filed_ctrl (id, companyId, filedName, 
+      filedLabel, isFixed, tips, 
+      defaultValue, isRequired, isHide, 
+      create_by, create_date, update_by, 
+      update_date, remarks, del_flag
+      )
+    values (#{id,jdbcType=VARCHAR}, #{companyid,jdbcType=VARCHAR}, #{filedname,jdbcType=VARCHAR}, 
+      #{filedlabel,jdbcType=VARCHAR}, #{isfixed,jdbcType=CHAR}, #{tips,jdbcType=VARCHAR}, 
+      #{defaultvalue,jdbcType=VARCHAR}, #{isrequired,jdbcType=CHAR}, #{ishide,jdbcType=CHAR}, 
+      #{createBy,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}, #{updateBy,jdbcType=VARCHAR}, 
+      #{updateDate,jdbcType=TIMESTAMP}, #{remarks,jdbcType=VARCHAR}, #{delFlag,jdbcType=CHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="zty.entity.ProFiledCtrl">
+    insert into pro_filed_ctrl
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="companyid != null">
+        companyId,
+      </if>
+      <if test="filedname != null">
+        filedName,
+      </if>
+      <if test="filedlabel != null">
+        filedLabel,
+      </if>
+      <if test="isfixed != null">
+        isFixed,
+      </if>
+      <if test="tips != null">
+        tips,
+      </if>
+      <if test="defaultvalue != null">
+        defaultValue,
+      </if>
+      <if test="isrequired != null">
+        isRequired,
+      </if>
+      <if test="ishide != null">
+        isHide,
+      </if>
+      <if test="createBy != null">
+        create_by,
+      </if>
+      <if test="createDate != null">
+        create_date,
+      </if>
+      <if test="updateBy != null">
+        update_by,
+      </if>
+      <if test="updateDate != null">
+        update_date,
+      </if>
+      <if test="remarks != null">
+        remarks,
+      </if>
+      <if test="delFlag != null">
+        del_flag,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="companyid != null">
+        #{companyid,jdbcType=VARCHAR},
+      </if>
+      <if test="filedname != null">
+        #{filedname,jdbcType=VARCHAR},
+      </if>
+      <if test="filedlabel != null">
+        #{filedlabel,jdbcType=VARCHAR},
+      </if>
+      <if test="isfixed != null">
+        #{isfixed,jdbcType=CHAR},
+      </if>
+      <if test="tips != null">
+        #{tips,jdbcType=VARCHAR},
+      </if>
+      <if test="defaultvalue != null">
+        #{defaultvalue,jdbcType=VARCHAR},
+      </if>
+      <if test="isrequired != null">
+        #{isrequired,jdbcType=CHAR},
+      </if>
+      <if test="ishide != null">
+        #{ishide,jdbcType=CHAR},
+      </if>
+      <if test="createBy != null">
+        #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null">
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateBy != null">
+        #{updateBy,jdbcType=VARCHAR},
+      </if>
+      <if test="updateDate != null">
+        #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="remarks != null">
+        #{remarks,jdbcType=VARCHAR},
+      </if>
+      <if test="delFlag != null">
+        #{delFlag,jdbcType=CHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="zty.entity.ProFiledCtrlExample" resultType="java.lang.Long">
+    select count(*) from pro_filed_ctrl
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update pro_filed_ctrl
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.companyid != null">
+        companyId = #{record.companyid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.filedname != null">
+        filedName = #{record.filedname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.filedlabel != null">
+        filedLabel = #{record.filedlabel,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isfixed != null">
+        isFixed = #{record.isfixed,jdbcType=CHAR},
+      </if>
+      <if test="record.tips != null">
+        tips = #{record.tips,jdbcType=VARCHAR},
+      </if>
+      <if test="record.defaultvalue != null">
+        defaultValue = #{record.defaultvalue,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isrequired != null">
+        isRequired = #{record.isrequired,jdbcType=CHAR},
+      </if>
+      <if test="record.ishide != null">
+        isHide = #{record.ishide,jdbcType=CHAR},
+      </if>
+      <if test="record.createBy != null">
+        create_by = #{record.createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createDate != null">
+        create_date = #{record.createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updateBy != null">
+        update_by = #{record.updateBy,jdbcType=VARCHAR},
+      </if>
+      <if test="record.updateDate != null">
+        update_date = #{record.updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.remarks != null">
+        remarks = #{record.remarks,jdbcType=VARCHAR},
+      </if>
+      <if test="record.delFlag != null">
+        del_flag = #{record.delFlag,jdbcType=CHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update pro_filed_ctrl
+    set id = #{record.id,jdbcType=VARCHAR},
+      companyId = #{record.companyid,jdbcType=VARCHAR},
+      filedName = #{record.filedname,jdbcType=VARCHAR},
+      filedLabel = #{record.filedlabel,jdbcType=VARCHAR},
+      isFixed = #{record.isfixed,jdbcType=CHAR},
+      tips = #{record.tips,jdbcType=VARCHAR},
+      defaultValue = #{record.defaultvalue,jdbcType=VARCHAR},
+      isRequired = #{record.isrequired,jdbcType=CHAR},
+      isHide = #{record.ishide,jdbcType=CHAR},
+      create_by = #{record.createBy,jdbcType=VARCHAR},
+      create_date = #{record.createDate,jdbcType=TIMESTAMP},
+      update_by = #{record.updateBy,jdbcType=VARCHAR},
+      update_date = #{record.updateDate,jdbcType=TIMESTAMP},
+      remarks = #{record.remarks,jdbcType=VARCHAR},
+      del_flag = #{record.delFlag,jdbcType=CHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <resultMap id="BaseResultMap" type="zty.entity.ProFiledCtrl">
+    <result column="id" jdbcType="VARCHAR" property="id" />
+    <result column="companyId" jdbcType="VARCHAR" property="companyid" />
+    <result column="filedName" jdbcType="VARCHAR" property="filedname" />
+    <result column="filedLabel" jdbcType="VARCHAR" property="filedlabel" />
+    <result column="isFixed" jdbcType="CHAR" property="isfixed" />
+    <result column="tips" jdbcType="VARCHAR" property="tips" />
+    <result column="defaultValue" jdbcType="VARCHAR" property="defaultvalue" />
+    <result column="isRequired" jdbcType="CHAR" property="isrequired" />
+    <result column="isHide" jdbcType="CHAR" property="ishide" />
+    <result column="create_by" jdbcType="VARCHAR" property="createBy" />
+    <result column="create_date" jdbcType="TIMESTAMP" property="createDate" />
+    <result column="update_by" jdbcType="VARCHAR" property="updateBy" />
+    <result column="update_date" jdbcType="TIMESTAMP" property="updateDate" />
+    <result column="remarks" jdbcType="VARCHAR" property="remarks" />
+    <result column="del_flag" jdbcType="CHAR" property="delFlag" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, companyId, filedName, filedLabel, isFixed, tips, defaultValue, isRequired, isHide, 
+    create_by, create_date, update_by, update_date, remarks, del_flag
+  </sql>
+  <select id="selectByExample" parameterType="zty.entity.ProFiledCtrlExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from pro_filed_ctrl
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="zty.entity.ProFiledCtrlExample">
+    delete from pro_filed_ctrl
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="zty.entity.ProFiledCtrl">
+    insert into pro_filed_ctrl (id, companyId, filedName, 
+      filedLabel, isFixed, tips, 
+      defaultValue, isRequired, isHide, 
+      create_by, create_date, update_by, 
+      update_date, remarks, del_flag
+      )
+    values (#{id,jdbcType=VARCHAR}, #{companyid,jdbcType=VARCHAR}, #{filedname,jdbcType=VARCHAR}, 
+      #{filedlabel,jdbcType=VARCHAR}, #{isfixed,jdbcType=CHAR}, #{tips,jdbcType=VARCHAR}, 
+      #{defaultvalue,jdbcType=VARCHAR}, #{isrequired,jdbcType=CHAR}, #{ishide,jdbcType=CHAR}, 
+      #{createBy,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}, #{updateBy,jdbcType=VARCHAR}, 
+      #{updateDate,jdbcType=TIMESTAMP}, #{remarks,jdbcType=VARCHAR}, #{delFlag,jdbcType=CHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="zty.entity.ProFiledCtrl">
+    insert into pro_filed_ctrl
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="companyid != null">
+        companyId,
+      </if>
+      <if test="filedname != null">
+        filedName,
+      </if>
+      <if test="filedlabel != null">
+        filedLabel,
+      </if>
+      <if test="isfixed != null">
+        isFixed,
+      </if>
+      <if test="tips != null">
+        tips,
+      </if>
+      <if test="defaultvalue != null">
+        defaultValue,
+      </if>
+      <if test="isrequired != null">
+        isRequired,
+      </if>
+      <if test="ishide != null">
+        isHide,
+      </if>
+      <if test="createBy != null">
+        create_by,
+      </if>
+      <if test="createDate != null">
+        create_date,
+      </if>
+      <if test="updateBy != null">
+        update_by,
+      </if>
+      <if test="updateDate != null">
+        update_date,
+      </if>
+      <if test="remarks != null">
+        remarks,
+      </if>
+      <if test="delFlag != null">
+        del_flag,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="companyid != null">
+        #{companyid,jdbcType=VARCHAR},
+      </if>
+      <if test="filedname != null">
+        #{filedname,jdbcType=VARCHAR},
+      </if>
+      <if test="filedlabel != null">
+        #{filedlabel,jdbcType=VARCHAR},
+      </if>
+      <if test="isfixed != null">
+        #{isfixed,jdbcType=CHAR},
+      </if>
+      <if test="tips != null">
+        #{tips,jdbcType=VARCHAR},
+      </if>
+      <if test="defaultvalue != null">
+        #{defaultvalue,jdbcType=VARCHAR},
+      </if>
+      <if test="isrequired != null">
+        #{isrequired,jdbcType=CHAR},
+      </if>
+      <if test="ishide != null">
+        #{ishide,jdbcType=CHAR},
+      </if>
+      <if test="createBy != null">
+        #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null">
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateBy != null">
+        #{updateBy,jdbcType=VARCHAR},
+      </if>
+      <if test="updateDate != null">
+        #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="remarks != null">
+        #{remarks,jdbcType=VARCHAR},
+      </if>
+      <if test="delFlag != null">
+        #{delFlag,jdbcType=CHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="zty.entity.ProFiledCtrlExample" resultType="java.lang.Long">
+    select count(*) from pro_filed_ctrl
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update pro_filed_ctrl
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.companyid != null">
+        companyId = #{record.companyid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.filedname != null">
+        filedName = #{record.filedname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.filedlabel != null">
+        filedLabel = #{record.filedlabel,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isfixed != null">
+        isFixed = #{record.isfixed,jdbcType=CHAR},
+      </if>
+      <if test="record.tips != null">
+        tips = #{record.tips,jdbcType=VARCHAR},
+      </if>
+      <if test="record.defaultvalue != null">
+        defaultValue = #{record.defaultvalue,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isrequired != null">
+        isRequired = #{record.isrequired,jdbcType=CHAR},
+      </if>
+      <if test="record.ishide != null">
+        isHide = #{record.ishide,jdbcType=CHAR},
+      </if>
+      <if test="record.createBy != null">
+        create_by = #{record.createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createDate != null">
+        create_date = #{record.createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updateBy != null">
+        update_by = #{record.updateBy,jdbcType=VARCHAR},
+      </if>
+      <if test="record.updateDate != null">
+        update_date = #{record.updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.remarks != null">
+        remarks = #{record.remarks,jdbcType=VARCHAR},
+      </if>
+      <if test="record.delFlag != null">
+        del_flag = #{record.delFlag,jdbcType=CHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update pro_filed_ctrl
+    set id = #{record.id,jdbcType=VARCHAR},
+      companyId = #{record.companyid,jdbcType=VARCHAR},
+      filedName = #{record.filedname,jdbcType=VARCHAR},
+      filedLabel = #{record.filedlabel,jdbcType=VARCHAR},
+      isFixed = #{record.isfixed,jdbcType=CHAR},
+      tips = #{record.tips,jdbcType=VARCHAR},
+      defaultValue = #{record.defaultvalue,jdbcType=VARCHAR},
+      isRequired = #{record.isrequired,jdbcType=CHAR},
+      isHide = #{record.ishide,jdbcType=CHAR},
+      create_by = #{record.createBy,jdbcType=VARCHAR},
+      create_date = #{record.createDate,jdbcType=TIMESTAMP},
+      update_by = #{record.updateBy,jdbcType=VARCHAR},
+      update_date = #{record.updateDate,jdbcType=TIMESTAMP},
+      remarks = #{record.remarks,jdbcType=VARCHAR},
+      del_flag = #{record.delFlag,jdbcType=CHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <resultMap id="BaseResultMap" type="zty.entity.ProFiledCtrl">
+    <result column="id" jdbcType="VARCHAR" property="id" />
+    <result column="companyId" jdbcType="VARCHAR" property="companyid" />
+    <result column="filedName" jdbcType="VARCHAR" property="filedname" />
+    <result column="filedLabel" jdbcType="VARCHAR" property="filedlabel" />
+    <result column="isFixed" jdbcType="CHAR" property="isfixed" />
+    <result column="tips" jdbcType="VARCHAR" property="tips" />
+    <result column="defaultValue" jdbcType="VARCHAR" property="defaultvalue" />
+    <result column="isRequired" jdbcType="CHAR" property="isrequired" />
+    <result column="isHide" jdbcType="CHAR" property="ishide" />
+    <result column="create_by" jdbcType="VARCHAR" property="createBy" />
+    <result column="create_date" jdbcType="TIMESTAMP" property="createDate" />
+    <result column="update_by" jdbcType="VARCHAR" property="updateBy" />
+    <result column="update_date" jdbcType="TIMESTAMP" property="updateDate" />
+    <result column="remarks" jdbcType="VARCHAR" property="remarks" />
+    <result column="del_flag" jdbcType="CHAR" property="delFlag" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, companyId, filedName, filedLabel, isFixed, tips, defaultValue, isRequired, isHide, 
+    create_by, create_date, update_by, update_date, remarks, del_flag
+  </sql>
+  <select id="selectByExample" parameterType="zty.entity.ProFiledCtrlExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from pro_filed_ctrl
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="zty.entity.ProFiledCtrlExample">
+    delete from pro_filed_ctrl
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="zty.entity.ProFiledCtrl">
+    insert into pro_filed_ctrl (id, companyId, filedName, 
+      filedLabel, isFixed, tips, 
+      defaultValue, isRequired, isHide, 
+      create_by, create_date, update_by, 
+      update_date, remarks, del_flag
+      )
+    values (#{id,jdbcType=VARCHAR}, #{companyid,jdbcType=VARCHAR}, #{filedname,jdbcType=VARCHAR}, 
+      #{filedlabel,jdbcType=VARCHAR}, #{isfixed,jdbcType=CHAR}, #{tips,jdbcType=VARCHAR}, 
+      #{defaultvalue,jdbcType=VARCHAR}, #{isrequired,jdbcType=CHAR}, #{ishide,jdbcType=CHAR}, 
+      #{createBy,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}, #{updateBy,jdbcType=VARCHAR}, 
+      #{updateDate,jdbcType=TIMESTAMP}, #{remarks,jdbcType=VARCHAR}, #{delFlag,jdbcType=CHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="zty.entity.ProFiledCtrl">
+    insert into pro_filed_ctrl
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="companyid != null">
+        companyId,
+      </if>
+      <if test="filedname != null">
+        filedName,
+      </if>
+      <if test="filedlabel != null">
+        filedLabel,
+      </if>
+      <if test="isfixed != null">
+        isFixed,
+      </if>
+      <if test="tips != null">
+        tips,
+      </if>
+      <if test="defaultvalue != null">
+        defaultValue,
+      </if>
+      <if test="isrequired != null">
+        isRequired,
+      </if>
+      <if test="ishide != null">
+        isHide,
+      </if>
+      <if test="createBy != null">
+        create_by,
+      </if>
+      <if test="createDate != null">
+        create_date,
+      </if>
+      <if test="updateBy != null">
+        update_by,
+      </if>
+      <if test="updateDate != null">
+        update_date,
+      </if>
+      <if test="remarks != null">
+        remarks,
+      </if>
+      <if test="delFlag != null">
+        del_flag,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="companyid != null">
+        #{companyid,jdbcType=VARCHAR},
+      </if>
+      <if test="filedname != null">
+        #{filedname,jdbcType=VARCHAR},
+      </if>
+      <if test="filedlabel != null">
+        #{filedlabel,jdbcType=VARCHAR},
+      </if>
+      <if test="isfixed != null">
+        #{isfixed,jdbcType=CHAR},
+      </if>
+      <if test="tips != null">
+        #{tips,jdbcType=VARCHAR},
+      </if>
+      <if test="defaultvalue != null">
+        #{defaultvalue,jdbcType=VARCHAR},
+      </if>
+      <if test="isrequired != null">
+        #{isrequired,jdbcType=CHAR},
+      </if>
+      <if test="ishide != null">
+        #{ishide,jdbcType=CHAR},
+      </if>
+      <if test="createBy != null">
+        #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null">
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateBy != null">
+        #{updateBy,jdbcType=VARCHAR},
+      </if>
+      <if test="updateDate != null">
+        #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="remarks != null">
+        #{remarks,jdbcType=VARCHAR},
+      </if>
+      <if test="delFlag != null">
+        #{delFlag,jdbcType=CHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="zty.entity.ProFiledCtrlExample" resultType="java.lang.Long">
+    select count(*) from pro_filed_ctrl
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update pro_filed_ctrl
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.companyid != null">
+        companyId = #{record.companyid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.filedname != null">
+        filedName = #{record.filedname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.filedlabel != null">
+        filedLabel = #{record.filedlabel,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isfixed != null">
+        isFixed = #{record.isfixed,jdbcType=CHAR},
+      </if>
+      <if test="record.tips != null">
+        tips = #{record.tips,jdbcType=VARCHAR},
+      </if>
+      <if test="record.defaultvalue != null">
+        defaultValue = #{record.defaultvalue,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isrequired != null">
+        isRequired = #{record.isrequired,jdbcType=CHAR},
+      </if>
+      <if test="record.ishide != null">
+        isHide = #{record.ishide,jdbcType=CHAR},
+      </if>
+      <if test="record.createBy != null">
+        create_by = #{record.createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createDate != null">
+        create_date = #{record.createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updateBy != null">
+        update_by = #{record.updateBy,jdbcType=VARCHAR},
+      </if>
+      <if test="record.updateDate != null">
+        update_date = #{record.updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.remarks != null">
+        remarks = #{record.remarks,jdbcType=VARCHAR},
+      </if>
+      <if test="record.delFlag != null">
+        del_flag = #{record.delFlag,jdbcType=CHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update pro_filed_ctrl
+    set id = #{record.id,jdbcType=VARCHAR},
+      companyId = #{record.companyid,jdbcType=VARCHAR},
+      filedName = #{record.filedname,jdbcType=VARCHAR},
+      filedLabel = #{record.filedlabel,jdbcType=VARCHAR},
+      isFixed = #{record.isfixed,jdbcType=CHAR},
+      tips = #{record.tips,jdbcType=VARCHAR},
+      defaultValue = #{record.defaultvalue,jdbcType=VARCHAR},
+      isRequired = #{record.isrequired,jdbcType=CHAR},
+      isHide = #{record.ishide,jdbcType=CHAR},
+      create_by = #{record.createBy,jdbcType=VARCHAR},
+      create_date = #{record.createDate,jdbcType=TIMESTAMP},
+      update_by = #{record.updateBy,jdbcType=VARCHAR},
+      update_date = #{record.updateDate,jdbcType=TIMESTAMP},
+      remarks = #{record.remarks,jdbcType=VARCHAR},
+      del_flag = #{record.delFlag,jdbcType=CHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <resultMap id="BaseResultMap" type="zty.entity.ProFiledCtrl">
+    <result column="id" jdbcType="VARCHAR" property="id" />
+    <result column="companyId" jdbcType="VARCHAR" property="companyid" />
+    <result column="filedName" jdbcType="VARCHAR" property="filedname" />
+    <result column="filedLabel" jdbcType="VARCHAR" property="filedlabel" />
+    <result column="isFixed" jdbcType="CHAR" property="isfixed" />
+    <result column="tips" jdbcType="VARCHAR" property="tips" />
+    <result column="defaultValue" jdbcType="VARCHAR" property="defaultvalue" />
+    <result column="isRequired" jdbcType="CHAR" property="isrequired" />
+    <result column="isHide" jdbcType="CHAR" property="ishide" />
+    <result column="create_by" jdbcType="VARCHAR" property="createBy" />
+    <result column="create_date" jdbcType="TIMESTAMP" property="createDate" />
+    <result column="update_by" jdbcType="VARCHAR" property="updateBy" />
+    <result column="update_date" jdbcType="TIMESTAMP" property="updateDate" />
+    <result column="remarks" jdbcType="VARCHAR" property="remarks" />
+    <result column="del_flag" jdbcType="CHAR" property="delFlag" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, companyId, filedName, filedLabel, isFixed, tips, defaultValue, isRequired, isHide, 
+    create_by, create_date, update_by, update_date, remarks, del_flag
+  </sql>
+  <select id="selectByExample" parameterType="zty.entity.ProFiledCtrlExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from pro_filed_ctrl
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="zty.entity.ProFiledCtrlExample">
+    delete from pro_filed_ctrl
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="zty.entity.ProFiledCtrl">
+    insert into pro_filed_ctrl (id, companyId, filedName, 
+      filedLabel, isFixed, tips, 
+      defaultValue, isRequired, isHide, 
+      create_by, create_date, update_by, 
+      update_date, remarks, del_flag
+      )
+    values (#{id,jdbcType=VARCHAR}, #{companyid,jdbcType=VARCHAR}, #{filedname,jdbcType=VARCHAR}, 
+      #{filedlabel,jdbcType=VARCHAR}, #{isfixed,jdbcType=CHAR}, #{tips,jdbcType=VARCHAR}, 
+      #{defaultvalue,jdbcType=VARCHAR}, #{isrequired,jdbcType=CHAR}, #{ishide,jdbcType=CHAR}, 
+      #{createBy,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}, #{updateBy,jdbcType=VARCHAR}, 
+      #{updateDate,jdbcType=TIMESTAMP}, #{remarks,jdbcType=VARCHAR}, #{delFlag,jdbcType=CHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="zty.entity.ProFiledCtrl">
+    insert into pro_filed_ctrl
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="companyid != null">
+        companyId,
+      </if>
+      <if test="filedname != null">
+        filedName,
+      </if>
+      <if test="filedlabel != null">
+        filedLabel,
+      </if>
+      <if test="isfixed != null">
+        isFixed,
+      </if>
+      <if test="tips != null">
+        tips,
+      </if>
+      <if test="defaultvalue != null">
+        defaultValue,
+      </if>
+      <if test="isrequired != null">
+        isRequired,
+      </if>
+      <if test="ishide != null">
+        isHide,
+      </if>
+      <if test="createBy != null">
+        create_by,
+      </if>
+      <if test="createDate != null">
+        create_date,
+      </if>
+      <if test="updateBy != null">
+        update_by,
+      </if>
+      <if test="updateDate != null">
+        update_date,
+      </if>
+      <if test="remarks != null">
+        remarks,
+      </if>
+      <if test="delFlag != null">
+        del_flag,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="companyid != null">
+        #{companyid,jdbcType=VARCHAR},
+      </if>
+      <if test="filedname != null">
+        #{filedname,jdbcType=VARCHAR},
+      </if>
+      <if test="filedlabel != null">
+        #{filedlabel,jdbcType=VARCHAR},
+      </if>
+      <if test="isfixed != null">
+        #{isfixed,jdbcType=CHAR},
+      </if>
+      <if test="tips != null">
+        #{tips,jdbcType=VARCHAR},
+      </if>
+      <if test="defaultvalue != null">
+        #{defaultvalue,jdbcType=VARCHAR},
+      </if>
+      <if test="isrequired != null">
+        #{isrequired,jdbcType=CHAR},
+      </if>
+      <if test="ishide != null">
+        #{ishide,jdbcType=CHAR},
+      </if>
+      <if test="createBy != null">
+        #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null">
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateBy != null">
+        #{updateBy,jdbcType=VARCHAR},
+      </if>
+      <if test="updateDate != null">
+        #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="remarks != null">
+        #{remarks,jdbcType=VARCHAR},
+      </if>
+      <if test="delFlag != null">
+        #{delFlag,jdbcType=CHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="zty.entity.ProFiledCtrlExample" resultType="java.lang.Long">
+    select count(*) from pro_filed_ctrl
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update pro_filed_ctrl
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.companyid != null">
+        companyId = #{record.companyid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.filedname != null">
+        filedName = #{record.filedname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.filedlabel != null">
+        filedLabel = #{record.filedlabel,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isfixed != null">
+        isFixed = #{record.isfixed,jdbcType=CHAR},
+      </if>
+      <if test="record.tips != null">
+        tips = #{record.tips,jdbcType=VARCHAR},
+      </if>
+      <if test="record.defaultvalue != null">
+        defaultValue = #{record.defaultvalue,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isrequired != null">
+        isRequired = #{record.isrequired,jdbcType=CHAR},
+      </if>
+      <if test="record.ishide != null">
+        isHide = #{record.ishide,jdbcType=CHAR},
+      </if>
+      <if test="record.createBy != null">
+        create_by = #{record.createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createDate != null">
+        create_date = #{record.createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updateBy != null">
+        update_by = #{record.updateBy,jdbcType=VARCHAR},
+      </if>
+      <if test="record.updateDate != null">
+        update_date = #{record.updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.remarks != null">
+        remarks = #{record.remarks,jdbcType=VARCHAR},
+      </if>
+      <if test="record.delFlag != null">
+        del_flag = #{record.delFlag,jdbcType=CHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update pro_filed_ctrl
+    set id = #{record.id,jdbcType=VARCHAR},
+      companyId = #{record.companyid,jdbcType=VARCHAR},
+      filedName = #{record.filedname,jdbcType=VARCHAR},
+      filedLabel = #{record.filedlabel,jdbcType=VARCHAR},
+      isFixed = #{record.isfixed,jdbcType=CHAR},
+      tips = #{record.tips,jdbcType=VARCHAR},
+      defaultValue = #{record.defaultvalue,jdbcType=VARCHAR},
+      isRequired = #{record.isrequired,jdbcType=CHAR},
+      isHide = #{record.ishide,jdbcType=CHAR},
+      create_by = #{record.createBy,jdbcType=VARCHAR},
+      create_date = #{record.createDate,jdbcType=TIMESTAMP},
+      update_by = #{record.updateBy,jdbcType=VARCHAR},
+      update_date = #{record.updateDate,jdbcType=TIMESTAMP},
+      remarks = #{record.remarks,jdbcType=VARCHAR},
+      del_flag = #{record.delFlag,jdbcType=CHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <resultMap id="BaseResultMap" type="com.entity.ProFiledCtrl">
+    <result column="id" jdbcType="VARCHAR" property="id" />
+    <result column="companyId" jdbcType="VARCHAR" property="companyid" />
+    <result column="filedName" jdbcType="VARCHAR" property="filedname" />
+    <result column="filedLabel" jdbcType="VARCHAR" property="filedlabel" />
+    <result column="isFixed" jdbcType="CHAR" property="isfixed" />
+    <result column="tips" jdbcType="VARCHAR" property="tips" />
+    <result column="defaultValue" jdbcType="VARCHAR" property="defaultvalue" />
+    <result column="isRequired" jdbcType="CHAR" property="isrequired" />
+    <result column="isHide" jdbcType="CHAR" property="ishide" />
+    <result column="create_by" jdbcType="VARCHAR" property="createBy" />
+    <result column="create_date" jdbcType="TIMESTAMP" property="createDate" />
+    <result column="update_by" jdbcType="VARCHAR" property="updateBy" />
+    <result column="update_date" jdbcType="TIMESTAMP" property="updateDate" />
+    <result column="remarks" jdbcType="VARCHAR" property="remarks" />
+    <result column="del_flag" jdbcType="CHAR" property="delFlag" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, companyId, filedName, filedLabel, isFixed, tips, defaultValue, isRequired, isHide, 
+    create_by, create_date, update_by, update_date, remarks, del_flag
+  </sql>
+  <select id="selectByExample" parameterType="com.entity.ProFiledCtrlExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from pro_filed_ctrl
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.entity.ProFiledCtrlExample">
+    delete from pro_filed_ctrl
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.entity.ProFiledCtrl">
+    insert into pro_filed_ctrl (id, companyId, filedName, 
+      filedLabel, isFixed, tips, 
+      defaultValue, isRequired, isHide, 
+      create_by, create_date, update_by, 
+      update_date, remarks, del_flag
+      )
+    values (#{id,jdbcType=VARCHAR}, #{companyid,jdbcType=VARCHAR}, #{filedname,jdbcType=VARCHAR}, 
+      #{filedlabel,jdbcType=VARCHAR}, #{isfixed,jdbcType=CHAR}, #{tips,jdbcType=VARCHAR}, 
+      #{defaultvalue,jdbcType=VARCHAR}, #{isrequired,jdbcType=CHAR}, #{ishide,jdbcType=CHAR}, 
+      #{createBy,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}, #{updateBy,jdbcType=VARCHAR}, 
+      #{updateDate,jdbcType=TIMESTAMP}, #{remarks,jdbcType=VARCHAR}, #{delFlag,jdbcType=CHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.entity.ProFiledCtrl">
+    insert into pro_filed_ctrl
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="companyid != null">
+        companyId,
+      </if>
+      <if test="filedname != null">
+        filedName,
+      </if>
+      <if test="filedlabel != null">
+        filedLabel,
+      </if>
+      <if test="isfixed != null">
+        isFixed,
+      </if>
+      <if test="tips != null">
+        tips,
+      </if>
+      <if test="defaultvalue != null">
+        defaultValue,
+      </if>
+      <if test="isrequired != null">
+        isRequired,
+      </if>
+      <if test="ishide != null">
+        isHide,
+      </if>
+      <if test="createBy != null">
+        create_by,
+      </if>
+      <if test="createDate != null">
+        create_date,
+      </if>
+      <if test="updateBy != null">
+        update_by,
+      </if>
+      <if test="updateDate != null">
+        update_date,
+      </if>
+      <if test="remarks != null">
+        remarks,
+      </if>
+      <if test="delFlag != null">
+        del_flag,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="companyid != null">
+        #{companyid,jdbcType=VARCHAR},
+      </if>
+      <if test="filedname != null">
+        #{filedname,jdbcType=VARCHAR},
+      </if>
+      <if test="filedlabel != null">
+        #{filedlabel,jdbcType=VARCHAR},
+      </if>
+      <if test="isfixed != null">
+        #{isfixed,jdbcType=CHAR},
+      </if>
+      <if test="tips != null">
+        #{tips,jdbcType=VARCHAR},
+      </if>
+      <if test="defaultvalue != null">
+        #{defaultvalue,jdbcType=VARCHAR},
+      </if>
+      <if test="isrequired != null">
+        #{isrequired,jdbcType=CHAR},
+      </if>
+      <if test="ishide != null">
+        #{ishide,jdbcType=CHAR},
+      </if>
+      <if test="createBy != null">
+        #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null">
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateBy != null">
+        #{updateBy,jdbcType=VARCHAR},
+      </if>
+      <if test="updateDate != null">
+        #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="remarks != null">
+        #{remarks,jdbcType=VARCHAR},
+      </if>
+      <if test="delFlag != null">
+        #{delFlag,jdbcType=CHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.entity.ProFiledCtrlExample" resultType="java.lang.Long">
+    select count(*) from pro_filed_ctrl
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update pro_filed_ctrl
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.companyid != null">
+        companyId = #{record.companyid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.filedname != null">
+        filedName = #{record.filedname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.filedlabel != null">
+        filedLabel = #{record.filedlabel,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isfixed != null">
+        isFixed = #{record.isfixed,jdbcType=CHAR},
+      </if>
+      <if test="record.tips != null">
+        tips = #{record.tips,jdbcType=VARCHAR},
+      </if>
+      <if test="record.defaultvalue != null">
+        defaultValue = #{record.defaultvalue,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isrequired != null">
+        isRequired = #{record.isrequired,jdbcType=CHAR},
+      </if>
+      <if test="record.ishide != null">
+        isHide = #{record.ishide,jdbcType=CHAR},
+      </if>
+      <if test="record.createBy != null">
+        create_by = #{record.createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createDate != null">
+        create_date = #{record.createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updateBy != null">
+        update_by = #{record.updateBy,jdbcType=VARCHAR},
+      </if>
+      <if test="record.updateDate != null">
+        update_date = #{record.updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.remarks != null">
+        remarks = #{record.remarks,jdbcType=VARCHAR},
+      </if>
+      <if test="record.delFlag != null">
+        del_flag = #{record.delFlag,jdbcType=CHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update pro_filed_ctrl
+    set id = #{record.id,jdbcType=VARCHAR},
+      companyId = #{record.companyid,jdbcType=VARCHAR},
+      filedName = #{record.filedname,jdbcType=VARCHAR},
+      filedLabel = #{record.filedlabel,jdbcType=VARCHAR},
+      isFixed = #{record.isfixed,jdbcType=CHAR},
+      tips = #{record.tips,jdbcType=VARCHAR},
+      defaultValue = #{record.defaultvalue,jdbcType=VARCHAR},
+      isRequired = #{record.isrequired,jdbcType=CHAR},
+      isHide = #{record.ishide,jdbcType=CHAR},
+      create_by = #{record.createBy,jdbcType=VARCHAR},
+      create_date = #{record.createDate,jdbcType=TIMESTAMP},
+      update_by = #{record.updateBy,jdbcType=VARCHAR},
+      update_date = #{record.updateDate,jdbcType=TIMESTAMP},
+      remarks = #{record.remarks,jdbcType=VARCHAR},
+      del_flag = #{record.delFlag,jdbcType=CHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <resultMap id="BaseResultMap" type="com.entity.ProFiledCtrl">
+    <result column="id" jdbcType="VARCHAR" property="id" />
+    <result column="companyId" jdbcType="VARCHAR" property="companyid" />
+    <result column="filedName" jdbcType="VARCHAR" property="filedname" />
+    <result column="filedLabel" jdbcType="VARCHAR" property="filedlabel" />
+    <result column="isFixed" jdbcType="CHAR" property="isfixed" />
+    <result column="tips" jdbcType="VARCHAR" property="tips" />
+    <result column="defaultValue" jdbcType="VARCHAR" property="defaultvalue" />
+    <result column="isRequired" jdbcType="CHAR" property="isrequired" />
+    <result column="isHide" jdbcType="CHAR" property="ishide" />
+    <result column="create_by" jdbcType="VARCHAR" property="createBy" />
+    <result column="create_date" jdbcType="TIMESTAMP" property="createDate" />
+    <result column="update_by" jdbcType="VARCHAR" property="updateBy" />
+    <result column="update_date" jdbcType="TIMESTAMP" property="updateDate" />
+    <result column="remarks" jdbcType="VARCHAR" property="remarks" />
+    <result column="del_flag" jdbcType="CHAR" property="delFlag" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, companyId, filedName, filedLabel, isFixed, tips, defaultValue, isRequired, isHide, 
+    create_by, create_date, update_by, update_date, remarks, del_flag
+  </sql>
+  <select id="selectByExample" parameterType="com.entity.ProFiledCtrlExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from pro_filed_ctrl
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.entity.ProFiledCtrlExample">
+    delete from pro_filed_ctrl
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.entity.ProFiledCtrl">
+    insert into pro_filed_ctrl (id, companyId, filedName, 
+      filedLabel, isFixed, tips, 
+      defaultValue, isRequired, isHide, 
+      create_by, create_date, update_by, 
+      update_date, remarks, del_flag
+      )
+    values (#{id,jdbcType=VARCHAR}, #{companyid,jdbcType=VARCHAR}, #{filedname,jdbcType=VARCHAR}, 
+      #{filedlabel,jdbcType=VARCHAR}, #{isfixed,jdbcType=CHAR}, #{tips,jdbcType=VARCHAR}, 
+      #{defaultvalue,jdbcType=VARCHAR}, #{isrequired,jdbcType=CHAR}, #{ishide,jdbcType=CHAR}, 
+      #{createBy,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}, #{updateBy,jdbcType=VARCHAR}, 
+      #{updateDate,jdbcType=TIMESTAMP}, #{remarks,jdbcType=VARCHAR}, #{delFlag,jdbcType=CHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.entity.ProFiledCtrl">
+    insert into pro_filed_ctrl
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="companyid != null">
+        companyId,
+      </if>
+      <if test="filedname != null">
+        filedName,
+      </if>
+      <if test="filedlabel != null">
+        filedLabel,
+      </if>
+      <if test="isfixed != null">
+        isFixed,
+      </if>
+      <if test="tips != null">
+        tips,
+      </if>
+      <if test="defaultvalue != null">
+        defaultValue,
+      </if>
+      <if test="isrequired != null">
+        isRequired,
+      </if>
+      <if test="ishide != null">
+        isHide,
+      </if>
+      <if test="createBy != null">
+        create_by,
+      </if>
+      <if test="createDate != null">
+        create_date,
+      </if>
+      <if test="updateBy != null">
+        update_by,
+      </if>
+      <if test="updateDate != null">
+        update_date,
+      </if>
+      <if test="remarks != null">
+        remarks,
+      </if>
+      <if test="delFlag != null">
+        del_flag,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="companyid != null">
+        #{companyid,jdbcType=VARCHAR},
+      </if>
+      <if test="filedname != null">
+        #{filedname,jdbcType=VARCHAR},
+      </if>
+      <if test="filedlabel != null">
+        #{filedlabel,jdbcType=VARCHAR},
+      </if>
+      <if test="isfixed != null">
+        #{isfixed,jdbcType=CHAR},
+      </if>
+      <if test="tips != null">
+        #{tips,jdbcType=VARCHAR},
+      </if>
+      <if test="defaultvalue != null">
+        #{defaultvalue,jdbcType=VARCHAR},
+      </if>
+      <if test="isrequired != null">
+        #{isrequired,jdbcType=CHAR},
+      </if>
+      <if test="ishide != null">
+        #{ishide,jdbcType=CHAR},
+      </if>
+      <if test="createBy != null">
+        #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null">
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateBy != null">
+        #{updateBy,jdbcType=VARCHAR},
+      </if>
+      <if test="updateDate != null">
+        #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="remarks != null">
+        #{remarks,jdbcType=VARCHAR},
+      </if>
+      <if test="delFlag != null">
+        #{delFlag,jdbcType=CHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.entity.ProFiledCtrlExample" resultType="java.lang.Long">
+    select count(*) from pro_filed_ctrl
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update pro_filed_ctrl
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.companyid != null">
+        companyId = #{record.companyid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.filedname != null">
+        filedName = #{record.filedname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.filedlabel != null">
+        filedLabel = #{record.filedlabel,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isfixed != null">
+        isFixed = #{record.isfixed,jdbcType=CHAR},
+      </if>
+      <if test="record.tips != null">
+        tips = #{record.tips,jdbcType=VARCHAR},
+      </if>
+      <if test="record.defaultvalue != null">
+        defaultValue = #{record.defaultvalue,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isrequired != null">
+        isRequired = #{record.isrequired,jdbcType=CHAR},
+      </if>
+      <if test="record.ishide != null">
+        isHide = #{record.ishide,jdbcType=CHAR},
+      </if>
+      <if test="record.createBy != null">
+        create_by = #{record.createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createDate != null">
+        create_date = #{record.createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updateBy != null">
+        update_by = #{record.updateBy,jdbcType=VARCHAR},
+      </if>
+      <if test="record.updateDate != null">
+        update_date = #{record.updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.remarks != null">
+        remarks = #{record.remarks,jdbcType=VARCHAR},
+      </if>
+      <if test="record.delFlag != null">
+        del_flag = #{record.delFlag,jdbcType=CHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update pro_filed_ctrl
+    set id = #{record.id,jdbcType=VARCHAR},
+      companyId = #{record.companyid,jdbcType=VARCHAR},
+      filedName = #{record.filedname,jdbcType=VARCHAR},
+      filedLabel = #{record.filedlabel,jdbcType=VARCHAR},
+      isFixed = #{record.isfixed,jdbcType=CHAR},
+      tips = #{record.tips,jdbcType=VARCHAR},
+      defaultValue = #{record.defaultvalue,jdbcType=VARCHAR},
+      isRequired = #{record.isrequired,jdbcType=CHAR},
+      isHide = #{record.ishide,jdbcType=CHAR},
+      create_by = #{record.createBy,jdbcType=VARCHAR},
+      create_date = #{record.createDate,jdbcType=TIMESTAMP},
+      update_by = #{record.updateBy,jdbcType=VARCHAR},
+      update_date = #{record.updateDate,jdbcType=TIMESTAMP},
+      remarks = #{record.remarks,jdbcType=VARCHAR},
+      del_flag = #{record.delFlag,jdbcType=CHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+</mapper>
